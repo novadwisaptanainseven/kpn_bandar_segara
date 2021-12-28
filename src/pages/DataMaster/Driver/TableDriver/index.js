@@ -15,8 +15,21 @@ import {
 } from "@windmill/react-ui";
 
 import { EditIcon, TrashIcon } from "../../../../icons";
+import swal2 from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useHistory, useRouteMatch } from "react-router-dom";
+const Swal = withReactContent(swal2);
 
-const TableDriver = ({ resultsPerPage, response }) => {
+const TableDriver = ({ resultsPerPage, response, filterText }) => {
+  const match = useRouteMatch();
+  const history = useHistory();
+  const { path } = match;
+
+  // Go To Edit
+  const goToEdit = (id) => {
+    history.push(`${path}/edit/${id}`);
+  };
+
   // Setup pages control for every table
   const [pageTable, setPageTable] = useState(1);
 
@@ -34,13 +47,45 @@ const TableDriver = ({ resultsPerPage, response }) => {
   // On page change, load new sliced data
   // Here you would make another server request for new data
   useEffect(() => {
-    setDataTable(
-      response.slice(
+    let response2 = null;
+    if (!filterText) {
+      response2 = response.slice(
         (pageTable - 1) * resultsPerPage,
         pageTable * resultsPerPage
-      )
-    );
-  }, [pageTable]);
+      );
+    } else {
+      response2 = response.filter(
+        (item) =>
+          item.name.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.job.toLowerCase().includes(filterText.toLowerCase())
+      );
+    }
+
+    setDataTable(response2);
+  }, [pageTable, filterText]);
+
+  // Menangani tombol hapus
+  const handleDelete = (id) => {
+    Swal.fire({
+      icon: "warning",
+      title: "Anda yakin ingin menghapus data ini ?",
+      text: "Jika yakin, klik YA",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "YA",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        // deleteAgama(id, agamaDispatch);
+        Swal.fire({
+          icon: "success",
+          title: "Terhapus",
+          text: "Data berhasil dihapus",
+        });
+      }
+    });
+  };
 
   return (
     <TableContainer className="mb-8">
@@ -68,10 +113,20 @@ const TableDriver = ({ resultsPerPage, response }) => {
 
               <TableCell>
                 <div className="flex items-center space-x-4">
-                  <Button layout="link" size="icon" aria-label="Edit">
+                  <Button
+                    layout="link"
+                    size="icon"
+                    aria-label="Edit"
+                    onClick={(e) => goToEdit(i + 1)}
+                  >
                     <EditIcon className="w-5 h-5" aria-hidden="true" />
                   </Button>
-                  <Button layout="link" size="icon" aria-label="Delete">
+                  <Button
+                    layout="link"
+                    size="icon"
+                    aria-label="Delete"
+                    onClick={() => handleDelete(i + 1)}
+                  >
                     <TrashIcon className="w-5 h-5" aria-hidden="true" />
                   </Button>
                 </div>
@@ -81,12 +136,14 @@ const TableDriver = ({ resultsPerPage, response }) => {
         </TableBody>
       </Table>
       <TableFooter>
-        <Pagination
-          totalResults={totalResults}
-          resultsPerPage={resultsPerPage}
-          onChange={onPageChangeTable}
-          label="Table navigation"
-        />
+        {!filterText && (
+          <Pagination
+            totalResults={totalResults}
+            resultsPerPage={resultsPerPage}
+            onChange={onPageChangeTable}
+            label="Table navigation"
+          />
+        )}
       </TableFooter>
     </TableContainer>
   );

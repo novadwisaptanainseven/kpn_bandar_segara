@@ -39,7 +39,7 @@ const routes = [
     ],
   },
   {
-    path: "/app/cards",
+    path: "/app/spt",
     icon: "MailIcon",
     name: "SPT",
   },

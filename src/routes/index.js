@@ -21,6 +21,9 @@ const Marine = lazy(() => import("../pages/DataMaster/Marine"));
 const TambahMarine = lazy(() => import("../pages/DataMaster/Marine/Tambah"));
 const EditMarine = lazy(() => import("../pages/DataMaster/Marine/Edit"));
 const Driver = lazy(() => import("../pages/DataMaster/Driver"));
+const TambahDriver = lazy(() => import("../pages/DataMaster/Driver/Tambah"));
+const EditDriver = lazy(() => import("../pages/DataMaster/Driver/Edit"));
+const SPT = lazy(() => import("../pages/SPT"));
 const Charts = lazy(() => import("../pages/Charts"));
 const Buttons = lazy(() => import("../pages/Buttons"));
 const Modals = lazy(() => import("../pages/Modals"));
@@ -96,13 +99,23 @@ const routes = [
     path: "/marine/edit/:id",
     component: EditMarine,
   },
+  // Route Driver
   {
     path: "/driver",
     component: Driver,
   },
   {
-    path: "/tables",
-    component: Tables,
+    path: "/driver/tambah",
+    component: TambahDriver,
+  },
+  {
+    path: "/driver/edit/:id",
+    component: EditDriver,
+  },
+  // Route SPT
+  {
+    path: "/spt",
+    component: SPT,
   },
   {
     path: "/404",

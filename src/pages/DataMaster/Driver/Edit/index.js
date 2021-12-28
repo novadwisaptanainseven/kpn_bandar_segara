@@ -12,23 +12,15 @@ import {
 const Edit = () => {
   return (
     <>
-      <PageTitle backButton={true}>Edit Perusahaan</PageTitle>
+      <PageTitle backButton={true}>Edit Driver</PageTitle>
 
       <Card className="overflow-visible">
         <CardBody>
           <div className="grid md:grid-cols-2">
             <div>
               <Label>
-                <span>Nama Perusahaan</span>
-                <Input className="mt-1" placeholder="Nama Perusahaan" />
-              </Label>
-              <Label className="mt-4">
-                <span>Alamat Perusahaan</span>
-                <Textarea
-                  className="mt-1"
-                  rows="3"
-                  placeholder="Alamat Perusahaan"
-                />
+                <span>Nama Driver</span>
+                <Input className="mt-1" placeholder="Nama Driver" />
               </Label>
 
               <div className="mt-5 flex justify-end gap-2">
