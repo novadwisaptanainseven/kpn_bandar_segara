@@ -17,6 +17,9 @@ import {
 const Swal = withReactContent(swal2);
 
 const DataTable = ({ resultsPerPage, response, filterText }) => {
+  const history = useHistory();
+  const match = useRouteMatch();
+  const { path } = match;
   // Setup pages control for every table
   const [pageTable, setPageTable] = useState(1);
 
@@ -74,6 +77,11 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     });
   };
 
+  // Menuju halaman detail
+  const goToDetail = (id) => {
+    history.push(`${path}/detail/${id}`);
+  };
+
   return (
     <>
       <TableContainer className="mb-8">
@@ -105,7 +113,10 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
 
                 <TableCell>
                   <div className="flex items-center gap-1">
-                    <button className="bg-teal-400 text-white px-3 py-1 text-sm rounded-md">
+                    <button
+                      className="bg-teal-400 text-white px-3 py-1 text-sm rounded-md"
+                      onClick={() => goToDetail(i + 1)}
+                    >
                       Detail
                     </button>
                     <button className="bg-lime-500 text-white px-3 py-1 text-sm rounded-md">

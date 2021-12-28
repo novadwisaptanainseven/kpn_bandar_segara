@@ -24,6 +24,8 @@ const Driver = lazy(() => import("../pages/DataMaster/Driver"));
 const TambahDriver = lazy(() => import("../pages/DataMaster/Driver/Tambah"));
 const EditDriver = lazy(() => import("../pages/DataMaster/Driver/Edit"));
 const SPT = lazy(() => import("../pages/SPT"));
+const TambahSPT = lazy(() => import("../pages/SPT/Tambah"));
+const DetailSPT = lazy(() => import("../pages/SPT/Detail"));
 const Charts = lazy(() => import("../pages/Charts"));
 const Buttons = lazy(() => import("../pages/Buttons"));
 const Modals = lazy(() => import("../pages/Modals"));
@@ -116,6 +118,14 @@ const routes = [
   {
     path: "/spt",
     component: SPT,
+  },
+  {
+    path: "/spt/buat",
+    component: TambahSPT,
+  },
+  {
+    path: "/spt/detail/:id",
+    component: DetailSPT,
   },
   {
     path: "/404",

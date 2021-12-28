@@ -24,7 +24,7 @@ const SPT = () => {
 
   // Menuju halaman tambah
   const goToTambah = () => {
-    history.push(`${path}/tambah`);
+    history.push(`${path}/buat`);
   };
 
   return (
@@ -58,7 +58,7 @@ const SPT = () => {
 
           <div className="flex flex-wrap justify-between flex-col md:flex-row mb-5 mt-4">
             <div className="flex flex-wrap flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-1">
-              <Button>Buat SPT</Button>
+              <Button onClick={goToTambah}>Buat SPT</Button>
               <ButtonExcel onClick={openModal} />
             </div>
 

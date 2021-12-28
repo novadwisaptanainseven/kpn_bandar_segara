@@ -21,7 +21,7 @@ function PageTitle({ children, backButton }) {
             width="32"
             height="32"
             fill="currentColor"
-            class="bi bi-arrow-left"
+            className="bi bi-arrow-left"
             viewBox="0 0 16 16"
           >
             <path

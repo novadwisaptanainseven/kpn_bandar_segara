@@ -6,7 +6,6 @@ import {
   Button,
   Input,
   Label,
-  Select,
 } from "@windmill/react-ui";
 import SelectData from "react-select";
 
