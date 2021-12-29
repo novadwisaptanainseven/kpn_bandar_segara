@@ -98,10 +98,11 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
         <Table>
           <TableHeader>
             <tr>
-              <TableCell>Kode</TableCell>
-              <TableCell>Pelanggan</TableCell>
-              <TableCell>Tujuan</TableCell>
-              <TableCell>Tanggal</TableCell>
+              <TableCell>Kode Nota</TableCell>
+              <TableCell>Kode SPT</TableCell>
+              <TableCell>Diskon (%)</TableCell>
+              <TableCell>Total Harga</TableCell>
+              <TableCell>Status Pembayaran</TableCell>
               <TableCell>Aksi</TableCell>
             </tr>
           </TableHeader>
@@ -109,48 +110,64 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
             {dataTable.map((item, i) => (
               <TableRow key={i}>
                 <TableCell>
-                  <span className="text-sm">SPT000</span>
+                  <span className="text-sm">{item.id_nota}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.name}</span>
+                  <span className="text-sm">{item.id_spt}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.name}</span>
+                  <span className="text-sm">{item.diskon}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.name}</span>
+                  <span className="text-sm">
+                    {item.harga.toLocaleString("id", {
+                      style: "currency",
+                      currency: "IDR",
+                    })}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  {item.id_status_nota === 1 && (
+                    <span className="text-sm bg-red-500 px-5 py-2 font-semibold rounded-sm">
+                      Belum Bayar
+                    </span>
+                  )}
+                  {item.id_status_nota === 2 && (
+                    <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm">
+                      Belum Lunas
+                    </span>
+                  )}
+                  {item.id_status_nota === 3 && (
+                    <span className="text-sm bg-lime-500 px-5 py-2 font-semibold rounded-sm">
+                      Lunas
+                    </span>
+                  )}
                 </TableCell>
 
                 <TableCell>
                   <div className="flex items-center gap-1">
                     <button
-                      className="bg-teal-400 text-white px-3 py-1 text-sm rounded-md"
+                      className="flex-1 bg-teal-400 text-white px-3 py-1 text-sm rounded-md"
                       onClick={() => goToDetail(i + 1)}
                     >
                       Detail
                     </button>
                     <button
-                      className="bg-lime-500 text-white px-3 py-1 text-sm rounded-md"
+                      className="flex-1 bg-lime-500 text-white px-3 py-1 text-sm rounded-md"
                       onClick={() => goToEdit(i + 1)}
                     >
                       Edit
                     </button>
                     <button
-                      className="bg-red-400 text-white px-3 py-1 text-sm rounded-md"
+                      className="flex-1 bg-red-400 text-white px-3 py-1 text-sm rounded-md"
                       onClick={() => handleDelete(i + 1)}
                     >
                       Hapus
                     </button>
                   </div>
-                  <div className="flex items-center gap-1 mt-1">
-                    <button
-                      className="bg-yellow-300 text-black px-3 py-1 text-sm rounded-md"
-                      onClick={() => goToBuatNota(i + 1)}
-                    >
-                      Buat Nota
-                    </button>
-                    <button className="bg-gray-500 text-white px-3 py-1 text-sm rounded-md">
-                      Cetak SPT
+                  <div className="flex items-center mt-1">
+                    <button className="w-full bg-gray-500 text-white px-3 py-1 text-sm rounded-md">
+                      Cetak Nota
                     </button>
                   </div>
                 </TableCell>

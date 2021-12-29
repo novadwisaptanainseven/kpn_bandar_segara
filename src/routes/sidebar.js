@@ -44,7 +44,7 @@ const routes = [
     name: "SPT",
   },
   {
-    path: "/app/buttons",
+    path: "/app/nota",
     icon: "MoneyIcon",
     name: "Nota Transaksi",
   },

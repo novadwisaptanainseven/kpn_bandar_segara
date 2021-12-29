@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import PageTitle from "../../components/Typography/PageTitle";
 import { Card, CardBody, Button, Input, Label } from "@windmill/react-ui";
 import ButtonExcel from "../../components/Buttons/ButtonExcel";
-import response from "../../utils/demo/tableData";
 import DataTable from "./DataTable";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import response from "../../utils/demo/notaData";
 import ModalExcel from "../../components/Modals/ModalExcel";
 
-const SPT = () => {
+const Nota = () => {
   const history = useHistory();
   const match = useRouteMatch();
   const { path } = match;
@@ -29,7 +29,7 @@ const SPT = () => {
 
   return (
     <>
-      <PageTitle>SPT (Surat Perintah Tugas)</PageTitle>
+      <PageTitle>Nota Transaksi</PageTitle>
 
       <Card className="mb-8 shadow-md">
         <CardBody>
@@ -58,7 +58,6 @@ const SPT = () => {
 
           <div className="flex flex-wrap justify-between flex-col md:flex-row mb-5 mt-4">
             <div className="flex flex-wrap flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-1">
-              <Button onClick={goToTambah}>Buat SPT</Button>
               <ButtonExcel onClick={openModal} />
             </div>
 
@@ -88,4 +87,4 @@ const SPT = () => {
   );
 };
 
-export default SPT;
+export default Nota;

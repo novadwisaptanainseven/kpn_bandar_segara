@@ -1,6 +1,14 @@
 import React from "react";
-import { Card, CardBody, Button, Input, Label } from "@windmill/react-ui";
+import { Card, CardBody } from "@windmill/react-ui";
 import PageTitle from "../../../components/Typography/PageTitle";
+
+import {
+  Table,
+  TableCell,
+  TableBody,
+  TableRow,
+  TableContainer,
+} from "@windmill/react-ui";
 
 const Detail = () => {
   return (
@@ -8,9 +16,40 @@ const Detail = () => {
       <PageTitle backButton={true}>Detail SPT</PageTitle>
       <Card>
         <CardBody>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur ipsa
-          amet, minima totam modi et ducimus quam, suscipit deserunt quos quia
-          quae dolorem temporibus in quasi perspiciatis facere itaque iure?
+          <TableContainer>
+            <Table>
+              <TableBody>
+                <TableRow className="bg-gray-200">
+                  <TableCell className="font-semibold">Pelanggan</TableCell>
+                  <TableCell>Nova Dwi Sapta</TableCell>
+                </TableRow>
+                <TableRow className="bg-gray-100">
+                  <TableCell className="font-semibold">Perusahaan</TableCell>
+                  <TableCell>PT. Lintas Samudera</TableCell>
+                </TableRow>
+                <TableRow className="bg-gray-200">
+                  <TableCell className="font-semibold">Marine</TableCell>
+                  <TableCell>Marine</TableCell>
+                </TableRow>
+                <TableRow className="bg-gray-100">
+                  <TableCell className="font-semibold">Driver</TableCell>
+                  <TableCell>Lyntom Irfan Darmawan</TableCell>
+                </TableRow>
+                <TableRow className="bg-gray-200">
+                  <TableCell className="font-semibold">Nama Kapal</TableCell>
+                  <TableCell>Speed Boat XX1</TableCell>
+                </TableRow>
+                <TableRow className="bg-gray-100">
+                  <TableCell className="font-semibold">Tujuan</TableCell>
+                  <TableCell>Samarinda - Palu</TableCell>
+                </TableRow>
+                <TableRow className="bg-gray-200">
+                  <TableCell className="font-semibold">Tanggal</TableCell>
+                  <TableCell>10/12/2021</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
         </CardBody>
       </Card>
     </>
