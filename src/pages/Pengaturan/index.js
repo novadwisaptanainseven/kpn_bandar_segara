@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
-import PageTitle from "../../../components/Typography/PageTitle";
+import PageTitle from "../../components/Typography/PageTitle";
 import {
   Card,
   CardBody,
   Button,
   Input,
   Label,
-  Select,
+  Textarea,
 } from "@windmill/react-ui";
 
-const Edit = () => {
+const Pengaturan = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
 
@@ -29,10 +29,6 @@ const Edit = () => {
     };
   }, [selectedFile]);
 
-  useEffect(() => {
-    handleSelectedFile();
-  }, [handleSelectedFile]);
-
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile(undefined);
@@ -42,63 +38,46 @@ const Edit = () => {
     setSelectedFile(e.target.files[0]);
   };
 
+  useEffect(() => {
+    handleSelectedFile();
+  }, [handleSelectedFile]);
+
   return (
     <>
-      <PageTitle backButton={true}>Edit Users</PageTitle>
+      <PageTitle>Pengaturan</PageTitle>
 
-      <Card className="overflow-visible mb-32">
+      <Card className="mb-32">
         <CardBody>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2">
             <div>
-              <Label>
-                <span>Nama Lengkap</span>
-                <Input className="mt-1" placeholder="Nama Users" />
+              <Label className="mt-4">
+                <span>Nama Aplikasi</span>
+                <Input
+                  type="text"
+                  className="mt-1"
+                  placeholder="Nama Aplikasi"
+                />
               </Label>
               <Label className="mt-4">
-                <span>Username</span>
-                <Input className="mt-1" placeholder="Username" />
-              </Label>
-            </div>
-          </div>
-          <p className="mt-4 text-red-500 italic mb-1 text-sm">
-            Kosongkan password jika tidak ingin mengubah password!
-          </p>
-          <div className="grid md:grid-cols-3 gap-4">
-            <Label>
-              <span>Password Lama</span>
-              <Input className="mt-1" placeholder="********" />
-            </Label>
-            <Label>
-              <span>Password</span>
-              <Input className="mt-1" placeholder="********" />
-            </Label>
-            <Label>
-              <span>Konfirmasi Password</span>
-              <Input className="mt-1" placeholder="********" />
-            </Label>
-          </div>
-
-          <div className="grid md:grid-cols-2 mt-4 gap-4">
-            <div>
-              <Label>
-                <span>Level</span>
-                <Select className="mt-1">
-                  <option>Super Administrator</option>
-                  <option>Administrator</option>
-                </Select>
+                <span>Deskripsi Aplikasi</span>
+                <Textarea
+                  className="mt-1"
+                  rows={3}
+                  placeholder="Deskripsi Aplikasi"
+                />
               </Label>
               <Label className="mt-4">
-                <span>Foto</span>
+                <span>Logo</span>
                 <Input
                   type="file"
-                  className="mt-1"
+                  className="mt-1 mb-2"
                   onChange={(e) => onSelectFile(e)}
                 />
                 {preview && (
                   <img
                     src={preview}
                     alt={preview}
-                    className="w-48 mt-2"
+                    classname="w-48"
                     width={200}
                   />
                 )}
@@ -119,4 +98,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default Pengaturan;

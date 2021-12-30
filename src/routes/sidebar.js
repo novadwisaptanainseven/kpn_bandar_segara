@@ -54,7 +54,7 @@ const routes = [
     name: "Data Users",
   },
   {
-    path: "/app/tables",
+    path: "/app/pengaturan",
     icon: "OutlineCogIcon",
     name: "Pengaturan",
   },

@@ -22,11 +22,6 @@ const Nota = () => {
     setIsModalOpen(false);
   };
 
-  // Menuju halaman tambah
-  const goToTambah = () => {
-    history.push(`${path}/buat`);
-  };
-
   return (
     <>
       <PageTitle>Nota Transaksi</PageTitle>
