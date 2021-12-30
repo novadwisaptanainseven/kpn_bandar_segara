@@ -11,7 +11,7 @@ import {
   Select,
 } from "@windmill/react-ui";
 
-const BuatNota = () => {
+const Edit = () => {
   const [statusBayar, setStatusBayar] = useState("belum");
   const [statusDiskon, setStatusDiskon] = useState("0");
 
@@ -21,7 +21,7 @@ const BuatNota = () => {
 
   return (
     <>
-      <PageTitle backButton>Pembuatan Nota Transaksi</PageTitle>
+      <PageTitle backButton>Edit Nota Transaksi</PageTitle>
 
       <Card className="overflow-visible mb-32">
         <CardBody>
@@ -132,4 +132,4 @@ const BuatNota = () => {
   );
 };
 
-export default BuatNota;
+export default Edit;

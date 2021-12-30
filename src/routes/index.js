@@ -30,9 +30,11 @@ const EditSPT = lazy(() => import("../pages/SPT/Edit"));
 const BuatNotaSPT = lazy(() => import("../pages/SPT/BuatNota"));
 const Nota = lazy(() => import("../pages/Nota"));
 const DetailNota = lazy(() => import("../pages/Nota/Detail"));
-const Buttons = lazy(() => import("../pages/Buttons"));
-const Modals = lazy(() => import("../pages/Modals"));
-const Tables = lazy(() => import("../pages/Tables"));
+const EditNota = lazy(() => import("../pages/Nota/Edit"));
+const Users = lazy(() => import("../pages/Users"));
+const TambahUsers = lazy(() => import("../pages/Users/Tambah"));
+const EditUsers = lazy(() => import("../pages/Users/Edit"));
+
 const Page404 = lazy(() => import("../pages/404"));
 const Blank = lazy(() => import("../pages/Blank"));
 
@@ -146,6 +148,23 @@ const routes = [
   {
     path: "/nota/detail/:id",
     component: DetailNota,
+  },
+  {
+    path: "/nota/edit/:id",
+    component: EditNota,
+  },
+  // Route Users
+  {
+    path: "/users",
+    component: Users,
+  },
+  {
+    path: "/users/tambah",
+    component: TambahUsers,
+  },
+  {
+    path: "/users/edit/:id",
+    component: EditUsers,
   },
   {
     path: "/404",

@@ -49,7 +49,7 @@ const routes = [
     name: "Nota Transaksi",
   },
   {
-    path: "/app/modals",
+    path: "/app/users",
     icon: "PeopleIcon",
     name: "Data Users",
   },

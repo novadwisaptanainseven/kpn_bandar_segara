@@ -46,8 +46,8 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.name.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.job.toLowerCase().includes(filterText.toLowerCase())
+          item.id_nota.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.id_spt.toLowerCase().includes(filterText.toLowerCase())
       );
     }
 
@@ -86,12 +86,6 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
   const goToEdit = (id) => {
     history.push(`${path}/edit/${id}`);
   };
-
-  // Menuju halaman pembuatan nota
-  const goToBuatNota = (id) => {
-    history.push(`${path}/${id}/buat-nota`);
-  };
-
   return (
     <>
       <TableContainer className="mb-8">
@@ -102,7 +96,8 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
               <TableCell>Kode SPT</TableCell>
               <TableCell>Diskon (%)</TableCell>
               <TableCell>Total Harga</TableCell>
-              <TableCell>Status Pembayaran</TableCell>
+              <TableCell>Jml. Yg Dibayar</TableCell>
+              <TableCell>Status</TableCell>
               <TableCell>Aksi</TableCell>
             </tr>
           </TableHeader>
@@ -127,6 +122,14 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   </span>
                 </TableCell>
                 <TableCell>
+                  <span className="text-sm">
+                    {item.bayar.toLocaleString("id", {
+                      style: "currency",
+                      currency: "IDR",
+                    })}
+                  </span>
+                </TableCell>
+                <TableCell>
                   {item.id_status_nota === 1 && (
                     <span className="text-sm bg-red-500 px-5 py-2 font-semibold rounded-sm">
                       Belum Bayar
@@ -144,29 +147,29 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   )}
                 </TableCell>
 
-                <TableCell>
+                <TableCell className="text-xs">
                   <div className="flex items-center gap-1">
                     <button
-                      className="flex-1 bg-teal-400 text-white px-3 py-1 text-sm rounded-md"
+                      className="flex-1 bg-teal-400 text-white px-3 py-1 rounded-md"
                       onClick={() => goToDetail(i + 1)}
                     >
                       Detail
                     </button>
                     <button
-                      className="flex-1 bg-lime-500 text-white px-3 py-1 text-sm rounded-md"
+                      className="flex-1 bg-lime-500 text-white px-3 py-1 rounded-md"
                       onClick={() => goToEdit(i + 1)}
                     >
                       Edit
                     </button>
                     <button
-                      className="flex-1 bg-red-400 text-white px-3 py-1 text-sm rounded-md"
+                      className="flex-1 bg-red-400 text-white px-3 py-1 rounded-md"
                       onClick={() => handleDelete(i + 1)}
                     >
                       Hapus
                     </button>
                   </div>
                   <div className="flex items-center mt-1">
-                    <button className="w-full bg-gray-500 text-white px-3 py-1 text-sm rounded-md">
+                    <button className="w-full bg-gray-500 text-white px-3 py-1 rounded-md">
                       Cetak Nota
                     </button>
                   </div>

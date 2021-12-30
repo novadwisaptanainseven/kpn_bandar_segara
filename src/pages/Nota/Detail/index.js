@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardBody } from "@windmill/react-ui";
 import PageTitle from "../../../components/Typography/PageTitle";
 
@@ -66,6 +66,18 @@ const Detail = () => {
                 <TableRow className="bg-gray-100 dark:bg-gray-800">
                   <TableCell className="font-semibold">Total Harga</TableCell>
                   <TableCell>Rp 1.100.000,00</TableCell>
+                </TableRow>
+                <TableRow className="bg-gray-200 dark:bg-gray-700">
+                  <TableCell className="font-semibold">
+                    Jumlah Yg Dibayar
+                  </TableCell>
+                  <TableCell>Rp 1.100.000,00</TableCell>
+                </TableRow>
+                <TableRow className="bg-gray-100 dark:bg-gray-800">
+                  <TableCell className="font-semibold">
+                    Sisa Yg Belum Dibayar
+                  </TableCell>
+                  <TableCell>0</TableCell>
                 </TableRow>
                 <TableRow className="bg-gray-200 dark:bg-gray-700">
                   <TableCell className="font-semibold">
