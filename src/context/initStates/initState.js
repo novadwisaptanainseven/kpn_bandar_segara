@@ -1,7 +1,7 @@
 const initState = {
   loading: false,
   data: "",
-  error: null,
+  error: "",
 };
 
 export default initState;

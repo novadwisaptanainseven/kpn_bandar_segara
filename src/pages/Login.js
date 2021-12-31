@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import ImageLight from "../assets/img/login-office.jpeg";
 import ImageDark from "../assets/img/login-office-dark.jpeg";
-import { Label, Input, Button } from "@windmill/react-ui";
+import { Label, Input, Button, Alert } from "@windmill/react-ui";
 import { useHistory } from "react-router-dom";
 import { GlobalContext } from "../context/Provider";
 import { CLEAN_UP } from "../context/actionTypes";
@@ -66,6 +66,13 @@ function Login() {
               <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                 Bandar Segara
               </h1>
+
+              {error.pesan && (
+                <div className="p-4 text-sm text-gray-100 bg-red-500 rounded-lg shadow-md">
+                  {error.pesan}
+                </div>
+              )}
+
               <Label>
                 <span>Username</span>
                 <Input
@@ -90,8 +97,13 @@ function Login() {
                 />
               </Label>
 
-              <Button className="mt-4" block onClick={handleFormSubmit}>
-                Masuk
+              <Button
+                className="mt-4"
+                block
+                onClick={handleFormSubmit}
+                disabled={loading ? true : false}
+              >
+                {loading ? "Loading..." : "Masuk"}
               </Button>
 
               <hr className="my-8" />
