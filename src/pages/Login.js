@@ -1,11 +1,48 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import ImageLight from "../assets/img/login-office.jpeg";
 import ImageDark from "../assets/img/login-office-dark.jpeg";
 import { Label, Input, Button } from "@windmill/react-ui";
+import { useHistory } from "react-router-dom";
+import { GlobalContext } from "../context/Provider";
+import { CLEAN_UP } from "../context/actionTypes";
+import { checkToken, login } from "../context/actions/Auth";
 
 function Login() {
+  const history = useHistory();
+  const { loginState, loginDispatch } = useContext(GlobalContext);
+  const { loading, error } = loginState;
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    // Untuk menampilkan alert ketika user belum logout
+    checkToken();
+
+    return () => {
+      loginDispatch({
+        type: CLEAN_UP,
+      });
+    };
+  }, [history, loginDispatch]);
+
+  const handleFormSubmit = () => {
+    // Lakukan proses login
+
+    login(values, loginDispatch);
+    console.log(values);
+  };
+
+  const handleChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -34,7 +71,10 @@ function Login() {
                 <Input
                   className="mt-1"
                   type="username"
+                  name="username"
                   placeholder="Username"
+                  value={values.username}
+                  onChange={(e) => handleChange(e)}
                 />
               </Label>
 
@@ -43,11 +83,14 @@ function Login() {
                 <Input
                   className="mt-1"
                   type="password"
+                  name="password"
                   placeholder="***************"
+                  value={values.password}
+                  onChange={(e) => handleChange(e)}
                 />
               </Label>
 
-              <Button className="mt-4" block tag={Link} to="/app">
+              <Button className="mt-4" block onClick={handleFormSubmit}>
                 Masuk
               </Button>
 
