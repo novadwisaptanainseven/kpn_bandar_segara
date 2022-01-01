@@ -3,11 +3,16 @@ import { Link } from "react-router-dom";
 
 import ImageLight from "../assets/img/login-office.jpeg";
 import ImageDark from "../assets/img/login-office-dark.jpeg";
-import { Label, Input, Button, Alert } from "@windmill/react-ui";
+import { Label, Input, Button, HelperText } from "@windmill/react-ui";
 import { useHistory } from "react-router-dom";
 import { GlobalContext } from "../context/Provider";
 import { CLEAN_UP } from "../context/actionTypes";
 import { checkToken, login } from "../context/actions/Auth";
+
+import swal2 from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const Swal = withReactContent(swal2);
 
 function Login() {
   const history = useHistory();
@@ -20,14 +25,14 @@ function Login() {
 
   useEffect(() => {
     // Untuk menampilkan alert ketika user belum logout
-    checkToken();
+    checkToken(history, Swal);
 
     return () => {
       loginDispatch({
         type: CLEAN_UP,
       });
     };
-  }, [history, loginDispatch]);
+  }, [loginDispatch]);
 
   const handleFormSubmit = () => {
     // Lakukan proses login
@@ -68,8 +73,15 @@ function Login() {
               </h1>
 
               {error.pesan && (
-                <div className="p-4 text-sm text-gray-100 bg-red-500 rounded-lg shadow-md">
+                <div className="mb-2 p-4 text-sm text-gray-100 bg-red-500 rounded-lg shadow-md">
                   {error.pesan}
+                </div>
+              )}
+
+              {error.validation_errors && (
+                <div className="mb-2 p-4 text-sm text-gray-100 bg-red-500 rounded-lg shadow-md">
+                  <span className="block">{error.validation_errors.username}</span>
+                  <span>{error.validation_errors.password}</span>
                 </div>
               )}
 

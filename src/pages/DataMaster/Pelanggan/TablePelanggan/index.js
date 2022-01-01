@@ -55,13 +55,14 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.name.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.job.toLowerCase().includes(filterText.toLowerCase())
+          item.id_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.nm_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.nm_perusahaan.toLowerCase().includes(filterText.toLowerCase())
       );
     }
 
     setDataTable(response2);
-  }, [pageTable, filterText]);
+  }, [pageTable, filterText, response]);
 
   // Menangani tombol hapus
   const handleDelete = (id) => {
@@ -101,13 +102,13 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
           {dataTable.map((item, i) => (
             <TableRow key={i}>
               <TableCell>
-                <span className="text-sm">PLG000</span>
+                <span className="text-sm">{item.id_pelanggan}</span>
               </TableCell>
               <TableCell>
-                <span className="text-sm">{item.name}</span>
+                <span className="text-sm">{item.nm_pelanggan}</span>
               </TableCell>
               <TableCell>
-                <span className="text-sm">{item.job}</span>
+                <span className="text-sm">{item.nm_perusahaan}</span>
               </TableCell>
 
               <TableCell>

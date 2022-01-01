@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PageTitle from "../../../components/Typography/PageTitle";
 import { Card, CardBody, Button, Input } from "@windmill/react-ui";
 
-import response from "../../../utils/demo/tableData";
 import TablePelanggan from "./TablePelanggan";
 import ButtonExcel from "../../../components/Buttons/ButtonExcel";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import ModalExcel from "./ModalExcel";
+import { GlobalContext } from "../../../context/Provider";
+import { getPelanggan } from "../../../context/actions/Pelanggan";
+
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Pelanggan = () => {
   const history = useHistory();
@@ -14,6 +18,13 @@ const Pelanggan = () => {
   const { path } = match;
   const [filterText, setFilterText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { pelangganState, pelangganDispatch } = useContext(GlobalContext);
+  const { loading, data: dataPelanggan } = pelangganState;
+
+  // Get data pelanggan
+  useEffect(() => {
+    getPelanggan(pelangganDispatch);
+  }, [pelangganDispatch]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -51,12 +62,39 @@ const Pelanggan = () => {
             </div>
           </div>
 
+          {/* Loading Skeleton Light Theme */}
+          {localStorage.theme === "light" && (
+            <>
+              {!dataPelanggan && loading && (
+                <>
+                  <Skeleton height={40} className="mb-3" />
+                  <Skeleton count={5} />
+                </>
+              )}
+            </>
+          )}
+          {/* Loading Skeleton Dark Theme */}
+          {localStorage.theme === "dark" && (
+            <>
+              {!dataPelanggan && loading && (
+                <>
+                  <SkeletonTheme baseColor="#1f2937" highlightColor="#374151">
+                    <Skeleton height={40} className="mb-3" />
+                    <Skeleton count={5} />
+                  </SkeletonTheme>
+                </>
+              )}
+            </>
+          )}
+
           {/* Table */}
-          <TablePelanggan
-            response={response}
-            filterText={filterText}
-            resultsPerPage={10}
-          />
+          {dataPelanggan && (
+            <TablePelanggan
+              response={dataPelanggan}
+              filterText={filterText}
+              resultsPerPage={10}
+            />
+          )}
         </CardBody>
       </Card>
 

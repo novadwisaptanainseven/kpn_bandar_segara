@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const baseURL = "http://localhost/kpn_bandar_segara_api/api/";
+const baseUrlImg = "http://localhost/public/images/";
 localStorage.baseURL = baseURL;
+localStorage.baseUrlImg = baseUrlImg;
 let headers = {};
 
 console.log("Base URL: ", baseURL);

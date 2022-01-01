@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageTitle from "../../../../components/Typography/PageTitle";
-import {
-  Card,
-  CardBody,
-  Button,
-  Input,
-  Label,
-} from "@windmill/react-ui";
+import { Card, CardBody, Button, Input, Label } from "@windmill/react-ui";
 import SelectData from "react-select";
+import { selectPerusahaan } from "../../../../context/actions/Perusahaan";
 
 const Tambah = () => {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  const [dataPerusahaan, setDataPerusahaan] = useState([]);
+  const [formValue, setFormValue] = useState({
+    nm_perusahaan: "",
+    id_perusahaan: "",
+  });
+
+  // Get Select Perusahaan
+  useEffect(() => {
+    selectPerusahaan(setDataPerusahaan);
+  }, []);
+
+  const options = dataPerusahaan.map((item) => ({
+    value: item.id_perusahaan,
+    label: item.nm_perusahaan,
+  }));
 
   return (
     <>
