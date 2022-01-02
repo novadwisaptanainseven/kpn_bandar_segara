@@ -1,7 +1,14 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
+
+// Bootstrap Datatable
+// import "@fortawesome/fontawesome-free/css/all.min.css";
+// import "bootstrap-css-only/css/bootstrap.min.css";
+// import "mdbreact/dist/css/mdb.css";
+
 import "./assets/css/tailwind.output.css";
 // import './assets/css/my-tailwind.css'
+
 import App from "./App";
 import { SidebarProvider } from "./context/SidebarContext";
 import ThemedSuspense from "./components/ThemedSuspense";

@@ -17,7 +17,52 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
+// Bootstrap Datatable
+// import "@fortawesome/fontawesome-free/css/all.min.css";
+// import "bootstrap-css-only/css/bootstrap.min.css";
+// import "mdbreact/dist/css/mdb.css";
+
+import { MDBDataTableV5 } from "mdbreact";
+import ArrowUp from "../../../../components/DataTableIcons/ArrowUp";
+import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
+
 const Swal = withReactContent(swal2);
+
+const useSortableData = (items, config = null) => {
+  const [sortConfig, setSortConfig] = React.useState(config);
+
+  const sortedItems = React.useMemo(() => {
+    let sortableItems = [...items];
+
+    if (sortConfig !== null) {
+      console.log(sortConfig);
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableItems;
+  }, [items, sortConfig]);
+
+  const requestSort = (key) => {
+    let direction = "ascending";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "ascending"
+    ) {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  return { sortedDatatable: sortedItems, requestSort, sortConfig };
+};
 
 const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
   const match = useRouteMatch();
@@ -87,65 +132,139 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
     });
   };
 
-  return (
-    <TableContainer className="mb-8">
-      <Table>
-        <TableHeader>
-          <tr>
-            <TableCell>ID</TableCell>
-            <TableCell>Nama</TableCell>
-            <TableCell>Perusahaan</TableCell>
-            <TableCell>Aksi</TableCell>
-          </tr>
-        </TableHeader>
-        <TableBody>
-          {dataTable.map((item, i) => (
-            <TableRow key={i}>
-              <TableCell>
-                <span className="text-sm">{item.id_pelanggan}</span>
-              </TableCell>
-              <TableCell>
-                <span className="text-sm">{item.nm_pelanggan}</span>
-              </TableCell>
-              <TableCell>
-                <span className="text-sm">{item.nm_perusahaan}</span>
-              </TableCell>
+  const { sortedDatatable, requestSort, sortConfig } =
+    useSortableData(dataTable);
 
+  const handleSorting = (e, key) => {
+    e.preventDefault();
+
+    requestSort(key);
+  };
+
+  return (
+    <>
+      <TableContainer className="mb-8">
+        <Table>
+          <TableHeader>
+            <tr>
               <TableCell>
-                <div className="flex items-center space-x-4">
-                  <Button
-                    layout="link"
-                    size="icon"
-                    aria-label="Edit"
-                    onClick={(e) => goToEdit(i + 1)}
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "id_pelanggan"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "id_pelanggan")}
                   >
-                    <EditIcon className="w-5 h-5" aria-hidden="true" />
-                  </Button>
-                  <Button
-                    layout="link"
-                    size="icon"
-                    aria-label="Delete"
-                    onClick={() => handleDelete(i + 1)}
-                  >
-                    <TrashIcon className="w-5 h-5" aria-hidden="true" />
-                  </Button>
+                    ID
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "id_pelanggan" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
                 </div>
               </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <TableFooter>
-        {!filterText && (
-          <Pagination
-            totalResults={totalResults}
-            resultsPerPage={resultsPerPage}
-            onChange={onPageChangeTable}
-            label="Table navigation"
-          />
-        )}
-      </TableFooter>
-    </TableContainer>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "nm_pelanggan"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "nm_pelanggan")}
+                  >
+                    Nama
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "nm_pelanggan" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "nm_perusahaan"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "nm_perusahaan")}
+                  >
+                    Perusahaan
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "nm_perusahaan" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
+              <TableCell>Aksi</TableCell>
+            </tr>
+          </TableHeader>
+          <TableBody>
+            {sortedDatatable.map((item, i) => (
+              <TableRow key={i}>
+                <TableCell>
+                  <span className="text-sm">{item.id_pelanggan}</span>
+                </TableCell>
+                <TableCell>
+                  <span className="text-sm">{item.nm_pelanggan}</span>
+                </TableCell>
+                <TableCell>
+                  <span className="text-sm">{item.nm_perusahaan}</span>
+                </TableCell>
+
+                <TableCell>
+                  <div className="flex items-center space-x-4">
+                    <Button
+                      layout="link"
+                      size="icon"
+                      aria-label="Edit"
+                      onClick={(e) => goToEdit(i + 1)}
+                    >
+                      <EditIcon className="w-5 h-5" aria-hidden="true" />
+                    </Button>
+                    <Button
+                      layout="link"
+                      size="icon"
+                      aria-label="Delete"
+                      onClick={() => handleDelete(i + 1)}
+                    >
+                      <TrashIcon className="w-5 h-5" aria-hidden="true" />
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <TableFooter>
+          {!filterText && (
+            <Pagination
+              totalResults={totalResults}
+              resultsPerPage={resultsPerPage}
+              onChange={onPageChangeTable}
+              label="Table navigation"
+            />
+          )}
+        </TableFooter>
+      </TableContainer>
+    </>
   );
 };
 
