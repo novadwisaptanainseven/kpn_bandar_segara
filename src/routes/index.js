@@ -7,6 +7,7 @@ const TambahPelanggan = lazy(() =>
   import("../pages/DataMaster/Pelanggan/Tambah")
 );
 const EditPelanggan = lazy(() => import("../pages/DataMaster/Pelanggan/Edit"));
+const DetailPelanggan = lazy(() => import("../pages/DataMaster/Pelanggan/Detail"));
 const Perusahaan = lazy(() => import("../pages/DataMaster/Perusahaan"));
 const TambahPerusahaan = lazy(() =>
   import("../pages/DataMaster/Perusahaan/Tambah")
@@ -66,6 +67,10 @@ const routes = [
   {
     path: "/pelanggan/edit/:id",
     component: EditPelanggan,
+  },
+  {
+    path: "/pelanggan/detail/:id",
+    component: DetailPelanggan,
   },
   // Route Perusahaan
   {

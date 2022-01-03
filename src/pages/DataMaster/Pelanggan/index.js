@@ -11,6 +11,8 @@ import { getPelanggan } from "../../../context/actions/Pelanggan";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { TableSkeletonLoading } from "../../../components/SkeletonLoading";
+import { exportExcel } from "../../../context/actions/Export/exportExcel";
 
 const Pelanggan = () => {
   const history = useHistory();
@@ -48,7 +50,7 @@ const Pelanggan = () => {
           <div className="flex flex-wrap justify-between flex-col md:flex-row mb-5">
             <div className="flex flex-wrap flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-1">
               <Button onClick={goToTambah}>Tambah</Button>
-              <ButtonExcel onClick={openModal} />
+              <ButtonExcel onClick={() => exportExcel("pelanggan")} />
             </div>
 
             <div className="mt-2 md:w-64 md:mt-0">
@@ -62,30 +64,7 @@ const Pelanggan = () => {
             </div>
           </div>
 
-          {/* Loading Skeleton Light Theme */}
-          {localStorage.theme === "light" && (
-            <>
-              {!dataPelanggan && loading && (
-                <>
-                  <Skeleton height={40} className="mb-3" />
-                  <Skeleton count={5} />
-                </>
-              )}
-            </>
-          )}
-          {/* Loading Skeleton Dark Theme */}
-          {localStorage.theme === "dark" && (
-            <>
-              {!dataPelanggan && loading && (
-                <>
-                  <SkeletonTheme baseColor="#1f2937" highlightColor="#374151">
-                    <Skeleton height={40} className="mb-3" />
-                    <Skeleton count={5} />
-                  </SkeletonTheme>
-                </>
-              )}
-            </>
-          )}
+          {!dataPelanggan && loading && <TableSkeletonLoading />}
 
           {/* Table */}
           {dataPelanggan && (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   Table,
@@ -12,66 +12,33 @@ import {
   TableContainer,
 } from "@windmill/react-ui";
 
-import { EditIcon, TrashIcon } from "../../../../icons";
+import { EditIcon, TrashIcon, MenuIcon } from "../../../../icons";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-// Bootstrap Datatable
-// import "@fortawesome/fontawesome-free/css/all.min.css";
-// import "bootstrap-css-only/css/bootstrap.min.css";
-// import "mdbreact/dist/css/mdb.css";
-
-import { MDBDataTableV5 } from "mdbreact";
 import ArrowUp from "../../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
+import useSortableData from "../../../../helpers/useSortableData";
+import { deletePelanggan } from "../../../../context/actions/Pelanggan";
+import { GlobalContext } from "../../../../context/Provider";
 
 const Swal = withReactContent(swal2);
-
-const useSortableData = (items, config = null) => {
-  const [sortConfig, setSortConfig] = React.useState(config);
-
-  const sortedItems = React.useMemo(() => {
-    let sortableItems = [...items];
-
-    if (sortConfig !== null) {
-      console.log(sortConfig);
-      sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return sortableItems;
-  }, [items, sortConfig]);
-
-  const requestSort = (key) => {
-    let direction = "ascending";
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "ascending"
-    ) {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
-  };
-
-  return { sortedDatatable: sortedItems, requestSort, sortConfig };
-};
 
 const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
   const match = useRouteMatch();
   const history = useHistory();
   const { path } = match;
+  const { pelangganDispatch } = useContext(GlobalContext);
 
   // Go To Edit
   const goToEdit = (id) => {
     history.push(`${path}/edit/${id}`);
+  };
+
+  // Go To Detail
+  const goToDetail = (id) => {
+    history.push(`${path}/detail/${id}`);
   };
 
   // Setup pages control for every table
@@ -123,11 +90,7 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
     }).then((res) => {
       if (res.isConfirmed) {
         // deleteAgama(id, agamaDispatch);
-        Swal.fire({
-          icon: "success",
-          title: "Terhapus",
-          text: "Data berhasil dihapus",
-        });
+        deletePelanggan(id, pelangganDispatch, Swal);
       }
     });
   };
@@ -234,8 +197,16 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
                     <Button
                       layout="link"
                       size="icon"
+                      aria-label="Detail"
+                      onClick={(e) => goToDetail(item.id_pelanggan)}
+                    >
+                      <MenuIcon className="w-5 h-5" aria-hidden="true" />
+                    </Button>
+                    <Button
+                      layout="link"
+                      size="icon"
                       aria-label="Edit"
-                      onClick={(e) => goToEdit(i + 1)}
+                      onClick={(e) => goToEdit(item.id_pelanggan)}
                     >
                       <EditIcon className="w-5 h-5" aria-hidden="true" />
                     </Button>
@@ -243,7 +214,7 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
                       layout="link"
                       size="icon"
                       aria-label="Delete"
-                      onClick={() => handleDelete(i + 1)}
+                      onClick={() => handleDelete(item.id_pelanggan)}
                     >
                       <TrashIcon className="w-5 h-5" aria-hidden="true" />
                     </Button>

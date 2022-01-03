@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageTitle from "../../../../components/Typography/PageTitle";
 import {
   Card,
@@ -6,16 +6,88 @@ import {
   Button,
   Input,
   Label,
-  Select,
+  HelperText,
 } from "@windmill/react-ui";
 import SelectData from "react-select";
 
+import validationSchema from "../Formik/validationSchema";
+import initState from "../Formik/initState";
+
+import { Formik } from "formik";
+
+import swal2 from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useHistory, useRouteMatch } from "react-router-dom";
+import { selectPerusahaan } from "../../../../context/actions/Perusahaan";
+import {
+  editPelanggan,
+  getPelangganById,
+} from "../../../../context/actions/Pelanggan";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { FormSkeletonLoading } from "../../../../components/SkeletonLoading";
+
+const Swal = withReactContent(swal2);
+
 const Edit = () => {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  const match = useRouteMatch();
+  const { params } = match;
+  const history = useHistory();
+  const [dataPerusahaan, setDataPerusahaan] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [pelanggan, setPelanggan] = useState("");
+
+  // Get select perusahaan
+  useEffect(() => {
+    selectPerusahaan(setDataPerusahaan);
+  }, []);
+
+  // Get pelanggan by id pelanggan
+  useEffect(() => {
+    getPelangganById(params.id, setPelanggan);
+  }, [params]);
+
+  const options = dataPerusahaan.map((item) => ({
+    value: item.id_perusahaan,
+    label: item.nm_perusahaan,
+  }));
+
+  // Fungsi untuk menampilkan alert success tambah data
+  const showAlertSuccess = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Edit Data Berhasil",
+      showConfirmButton: false,
+      timer: 1500,
+    }).then((res) => {
+      history.push("/app/pelanggan");
+    });
+  };
+
+  // Fungsi untuk menampilkan alert error tambah data
+  const showAlertError = (message) => {
+    let err_message = "";
+
+    for (const key in message) {
+      err_message += `${message[key]}, `;
+    }
+
+    Swal.fire({
+      icon: "error",
+      title: "Edit Data Gagal",
+      text: err_message,
+    }).then((result) => {});
+  };
+
+  const handleFormSubmit = (values) => {
+    editPelanggan(
+      params.id,
+      values,
+      setLoading,
+      showAlertSuccess,
+      showAlertError
+    );
+  };
 
   return (
     <>
@@ -23,27 +95,82 @@ const Edit = () => {
 
       <Card className="overflow-visible">
         <CardBody>
-          <div className="grid md:grid-cols-2">
-            <div>
-              <Label>
-                <span>Nama</span>
-                <Input className="mt-1" placeholder="Nama Pelanggan" />
-              </Label>
-              <Label className="mt-4 space-y-1">
-                <span>Perusahaan</span>
-                {/* <Select className="mt-1">
-                  <option>Perusahaan 1</option>
-                  <option>Perusahaan 2</option>
-                  <option>Perusahaan 3</option>
-                </Select> */}
-                <SelectData options={options} />
-              </Label>
-              <div className="mt-5 flex justify-end gap-2">
-                <Button layout="outline">Reset</Button>
-                <Button>Simpan</Button>
-              </div>
-            </div>
-          </div>
+          {!pelanggan ? (
+            <FormSkeletonLoading jumlahInput={2} />
+          ) : (
+            <Formik
+              initialValues={initState(pelanggan)}
+              enableReinitialize={true}
+              validationSchema={validationSchema}
+              onSubmit={handleFormSubmit}
+            >
+              {({
+                values,
+                errors,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                handleReset,
+                setFieldValue,
+              }) => (
+                <form className="grid md:grid-cols-2" onSubmit={handleSubmit}>
+                  <div>
+                    <Label>
+                      <span>Nama</span>
+                      <Input
+                        className={`mt-1 ${
+                          errors.nm_pelanggan ? "border-red-500" : null
+                        }`}
+                        name="nm_pelanggan"
+                        placeholder="Nama Pelanggan"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.nm_pelanggan || ""}
+                      />
+                      {errors.nm_pelanggan && (
+                        <HelperText valid={false}>
+                          {errors.nm_pelanggan}
+                        </HelperText>
+                      )}
+                    </Label>
+                    <Label className="mt-4 space-y-1">
+                      <span>Perusahaan</span>
+                      <SelectData
+                        options={options}
+                        name="id_perusahaan"
+                        onChange={(opt) =>
+                          setFieldValue("id_perusahaan", opt ? opt.value : "")
+                        }
+                        onBlur={handleBlur}
+                        isClearable
+                        defaultValue={{
+                          label: pelanggan.nm_perusahaan,
+                          value: pelanggan.id_perusahaan,
+                        }}
+                      />
+                      {errors.id_perusahaan && (
+                        <HelperText valid={false}>
+                          {errors.id_perusahaan}
+                        </HelperText>
+                      )}
+                    </Label>
+                    <div className="mt-5 flex justify-end gap-2">
+                      <Button
+                        type="button"
+                        layout="outline"
+                        onClick={handleReset}
+                      >
+                        Reset
+                      </Button>
+                      <Button type="submit" disabled={loading ? true : false}>
+                        {loading ? "Loading..." : "Simpan"}
+                      </Button>
+                    </div>
+                  </div>
+                </form>
+              )}
+            </Formik>
+          )}
         </CardBody>
       </Card>
     </>
