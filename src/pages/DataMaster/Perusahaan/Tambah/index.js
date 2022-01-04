@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import PageTitle from "../../../../components/Typography/PageTitle";
 import {
   Card,
@@ -7,36 +7,101 @@ import {
   Input,
   Label,
   Textarea,
+  HelperText,
 } from "@windmill/react-ui";
 
+import validationSchema from "../Formik/validationSchema";
+import initState from "../Formik/initState";
+import swal2 from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useHistory } from "react-router-dom";
+import { insertPerusahaan } from "../../../../context/actions/Perusahaan";
+import { Formik } from "formik";
+import { GlobalContext } from "../../../../context/Provider";
+const Swal = withReactContent(swal2);
+
 const Tambah = () => {
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const { perusahaanDispatch } = useContext(GlobalContext);
+
+  const handleFormSubmit = (values) => {
+    console.log(values);
+
+    insertPerusahaan(values, setLoading, history, perusahaanDispatch);
+  };
+
   return (
     <>
       <PageTitle backButton={true}>Tambah Perusahaan</PageTitle>
 
       <Card className="overflow-visible">
         <CardBody>
-          <div className="grid md:grid-cols-2">
-            <div>
-              <Label>
-                <span>Nama Perusahaan</span>
-                <Input className="mt-1" placeholder="Nama Perusahaan" />
-              </Label>
-              <Label className="mt-4">
-                <span>Alamat Perusahaan</span>
-                <Textarea
-                  className="mt-1"
-                  rows="3"
-                  placeholder="Alamat Perusahaan"
-                />
-              </Label>
+          <Formik
+            initialValues={initState}
+            validationSchema={validationSchema}
+            onSubmit={handleFormSubmit}
+          >
+            {({
+              values,
+              errors,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              handleReset,
+            }) => (
+              <form className="grid md:grid-cols-2" onSubmit={handleSubmit}>
+                <div>
+                  <Label>
+                    <span>Nama Perusahaan</span>
+                    <Input
+                      className={`mt-1 ${
+                        errors.nm_perusahaan ? "border-red-500" : null
+                      }`}
+                      placeholder="Nama Perusahaan"
+                      name="nm_perusahaan"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.nm_perusahaan || ""}
+                    />
+                    {errors.nm_perusahaan && (
+                      <HelperText valid={false}>
+                        {errors.nm_perusahaan}
+                      </HelperText>
+                    )}
+                  </Label>
+                  <Label className="mt-4">
+                    <span>Alamat Perusahaan</span>
+                    <Textarea
+                      className={`mt-1 ${
+                        errors.almt_perusahaan ? "border-red-500" : null
+                      }`}
+                      rows="3"
+                      placeholder="Alamat Perusahaan"
+                      name="almt_perusahaan"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.almt_perusahaan || ""}
+                    />
+                    {errors.almt_perusahaan && (
+                      <HelperText valid={false}>
+                        {errors.almt_perusahaan}
+                      </HelperText>
+                    )}
+                  </Label>
 
-              <div className="mt-5 flex justify-end gap-2">
-                <Button layout="outline">Reset</Button>
-                <Button>Simpan</Button>
-              </div>
-            </div>
-          </div>
+                  <div className="mt-5 flex justify-end gap-2">
+                    <Button layout="outline" onClick={handleReset}>
+                      Reset
+                    </Button>
+                    <Button type="submit" disabled={loading ? true : false}>
+                      {loading ? "Loading..." : "Simpan"}
+                    </Button>
+                  </div>
+                </div>
+              </form>
+            )}
+          </Formik>
         </CardBody>
       </Card>
     </>

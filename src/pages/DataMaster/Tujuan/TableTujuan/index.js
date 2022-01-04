@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   Table,
@@ -10,14 +10,17 @@ import {
   TableFooter,
   Pagination,
   TableContainer,
-  Badge,
-  Avatar,
 } from "@windmill/react-ui";
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-import { EditIcon, TrashIcon } from "../../../../icons";
+import { EditIcon, MenuIcon, TrashIcon } from "../../../../icons";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import { GlobalContext } from "../../../../context/Provider";
+import { deleteTujuan } from "../../../../context/actions/Tujuan";
+import useSortableData from "../../../../helpers/useSortableData";
+import ArrowUp from "../../../../components/DataTableIcons/ArrowUp";
+import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
 
 const Swal = withReactContent(swal2);
 
@@ -25,10 +28,16 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
   const match = useRouteMatch();
   const history = useHistory();
   const { path } = match;
+  const { tujuanDispatch } = useContext(GlobalContext);
 
   // Go To Edit
   const goToEdit = (id) => {
     history.push(`${path}/edit/${id}`);
+  };
+
+  // Go To Detail
+  const goToDetail = (id) => {
+    history.push(`${path}/detail/${id}`);
   };
 
   // Setup pages control for every table
@@ -57,13 +66,14 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.name.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.job.toLowerCase().includes(filterText.toLowerCase())
+          item.nm_tujuan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.id_tujuan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.harga.toString().includes(filterText)
       );
     }
 
     setDataTable(response2);
-  }, [pageTable, filterText]);
+  }, [pageTable, filterText, response]);
 
   // Menangani tombol hapus
   const handleDelete = (id) => {
@@ -78,14 +88,18 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
       confirmButtonText: "YA",
     }).then((res) => {
       if (res.isConfirmed) {
-        // deleteAgama(id, agamaDispatch);
-        Swal.fire({
-          icon: "success",
-          title: "Terhapus",
-          text: "Data berhasil dihapus",
-        });
+        deleteTujuan(id, tujuanDispatch, Swal);
       }
     });
+  };
+
+  const { sortedDatatable, requestSort, sortConfig } =
+    useSortableData(dataTable);
+
+  const handleSorting = (e, key) => {
+    e.preventDefault();
+
+    requestSort(key);
   };
 
   return (
@@ -93,32 +107,110 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
       <Table>
         <TableHeader>
           <tr>
-            <TableCell>ID</TableCell>
-            <TableCell>Tujuan</TableCell>
-            <TableCell>Harga</TableCell>
+            <TableCell>
+              <div className="flex gap-1 items-center">
+                <a
+                  className={`${
+                    sortConfig && sortConfig.key === "id_tujuan"
+                      ? "text-gray-900 dark:text-gray-100"
+                      : ""
+                  }`}
+                  href="."
+                  onClick={(e) => handleSorting(e, "id_tujuan")}
+                >
+                  ID
+                </a>
+                {sortConfig &&
+                  sortConfig.key === "id_tujuan" &&
+                  (sortConfig.direction === "ascending" ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  ))}
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="flex gap-1 items-center">
+                <a
+                  className={`${
+                    sortConfig && sortConfig.key === "nm_tujuan"
+                      ? "text-gray-900 dark:text-gray-100"
+                      : ""
+                  }`}
+                  href="."
+                  onClick={(e) => handleSorting(e, "nm_tujuan")}
+                >
+                  Nama Tujuan
+                </a>
+                {sortConfig &&
+                  sortConfig.key === "nm_tujuan" &&
+                  (sortConfig.direction === "ascending" ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  ))}
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="flex gap-1 items-center">
+                <a
+                  className={`${
+                    sortConfig && sortConfig.key === "harga"
+                      ? "text-gray-900 dark:text-gray-100"
+                      : ""
+                  }`}
+                  href="."
+                  onClick={(e) => handleSorting(e, "harga")}
+                >
+                  Harga
+                </a>
+                {sortConfig &&
+                  sortConfig.key === "harga" &&
+                  (sortConfig.direction === "ascending" ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  ))}
+              </div>
+            </TableCell>
             <TableCell>Aksi</TableCell>
           </tr>
         </TableHeader>
         <TableBody>
-          {dataTable.map((item, i) => (
+          {sortedDatatable.map((item, i) => (
             <TableRow key={i}>
               <TableCell>
-                <span className="text-sm">PLG000</span>
+                <span className="text-sm">{item.id_tujuan}</span>
               </TableCell>
               <TableCell>
-                <span className="text-sm">{item.name}</span>
+                <span className="text-sm">{item.nm_tujuan}</span>
               </TableCell>
               <TableCell>
-                <span className="text-sm">$ {item.amount}</span>
+                <span className="text-sm">
+                  {item.harga.toLocaleString("id", {
+                    style: "currency",
+                    currency: "IDR",
+                  })}
+                </span>
               </TableCell>
 
               <TableCell>
                 <div className="flex items-center space-x-4">
+                  {localStorage.level === "1" && (
+                    <Button
+                      layout="link"
+                      size="icon"
+                      aria-label="Detail"
+                      onClick={(e) => goToDetail(item.id_tujuan)}
+                    >
+                      <MenuIcon className="w-5 h-5" aria-hidden="true" />
+                    </Button>
+                  )}
                   <Button
                     layout="link"
                     size="icon"
                     aria-label="Edit"
-                    onClick={(e) => goToEdit(i + 1)}
+                    onClick={(e) => goToEdit(item.id_tujuan)}
                   >
                     <EditIcon className="w-5 h-5" aria-hidden="true" />
                   </Button>
@@ -126,7 +218,7 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
                     layout="link"
                     size="icon"
                     aria-label="Delete"
-                    onClick={() => handleDelete(i + 1)}
+                    onClick={() => handleDelete(item.id_tujuan)}
                   >
                     <TrashIcon className="w-5 h-5" aria-hidden="true" />
                   </Button>

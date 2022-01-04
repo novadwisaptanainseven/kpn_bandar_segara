@@ -17,7 +17,7 @@ const deleteMarine = (id, dispatch, Swal) => {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Data gagal dihapus. Terjadi kesalahan server",
+        text: `"Data gagal dihapus. ${err.response.data.pesan}"`,
       });
       console.log(err.response.data);
     });

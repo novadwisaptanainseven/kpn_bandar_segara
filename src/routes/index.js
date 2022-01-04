@@ -7,7 +7,9 @@ const TambahPelanggan = lazy(() =>
   import("../pages/DataMaster/Pelanggan/Tambah")
 );
 const EditPelanggan = lazy(() => import("../pages/DataMaster/Pelanggan/Edit"));
-const DetailPelanggan = lazy(() => import("../pages/DataMaster/Pelanggan/Detail"));
+const DetailPelanggan = lazy(() =>
+  import("../pages/DataMaster/Pelanggan/Detail")
+);
 const Perusahaan = lazy(() => import("../pages/DataMaster/Perusahaan"));
 const TambahPerusahaan = lazy(() =>
   import("../pages/DataMaster/Perusahaan/Tambah")
@@ -15,12 +17,17 @@ const TambahPerusahaan = lazy(() =>
 const EditPerusahaan = lazy(() =>
   import("../pages/DataMaster/Perusahaan/Edit")
 );
+const DetailPerusahaan = lazy(() =>
+  import("../pages/DataMaster/Perusahaan/Detail")
+);
 const Tujuan = lazy(() => import("../pages/DataMaster/Tujuan"));
 const TambahTujuan = lazy(() => import("../pages/DataMaster/Tujuan/Tambah"));
 const EditTujuan = lazy(() => import("../pages/DataMaster/Tujuan/Edit"));
+const DetailTujuan = lazy(() => import("../pages/DataMaster/Tujuan/Detail"));
 const Marine = lazy(() => import("../pages/DataMaster/Marine"));
 const TambahMarine = lazy(() => import("../pages/DataMaster/Marine/Tambah"));
 const EditMarine = lazy(() => import("../pages/DataMaster/Marine/Edit"));
+const DetailMarine = lazy(() => import("../pages/DataMaster/Marine/Detail"));
 const Driver = lazy(() => import("../pages/DataMaster/Driver"));
 const TambahDriver = lazy(() => import("../pages/DataMaster/Driver/Tambah"));
 const EditDriver = lazy(() => import("../pages/DataMaster/Driver/Edit"));
@@ -85,6 +92,10 @@ const routes = [
     path: "/perusahaan/edit/:id",
     component: EditPerusahaan,
   },
+  {
+    path: "/perusahaan/detail/:id",
+    component: DetailPerusahaan,
+  },
   // Route Tujuan
   {
     path: "/tujuan",
@@ -97,6 +108,10 @@ const routes = [
   {
     path: "/tujuan/edit/:id",
     component: EditTujuan,
+  },
+  {
+    path: "/tujuan/detail/:id",
+    component: DetailTujuan,
   },
 
   // Route Marine
@@ -111,6 +126,10 @@ const routes = [
   {
     path: "/marine/edit/:id",
     component: EditMarine,
+  },
+  {
+    path: "/marine/detail/:id",
+    component: DetailMarine,
   },
   // Route Driver
   {

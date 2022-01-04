@@ -65,7 +65,7 @@ const Tambah = () => {
   };
 
   const handleFormSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
 
     insertPelanggan(values, setLoading, showAlertSuccess, showAlertError);
   };
@@ -84,7 +84,6 @@ const Tambah = () => {
             {({
               values,
               errors,
-              touched,
               handleChange,
               handleBlur,
               handleSubmit,

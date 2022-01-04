@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PageTitle from "../../../components/Typography/PageTitle";
 import { Card, CardBody, Button, Input } from "@windmill/react-ui";
 
@@ -7,6 +7,10 @@ import TableMarine from "./TableMarine";
 import ButtonExcel from "../../../components/Buttons/ButtonExcel";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import ModalExcel from "../../../components/Modals/ModalExcel";
+import { GlobalContext } from "../../../context/Provider";
+import { getMarine } from "../../../context/actions/Marine";
+import { exportExcel } from "../../../context/actions/Export/exportExcel";
+import { TableSkeletonLoading } from "../../../components/SkeletonLoading";
 
 const Marine = () => {
   const history = useHistory();
@@ -14,6 +18,13 @@ const Marine = () => {
   const { path } = match;
   const [filterText, setFilterText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { marineState, marineDispatch } = useContext(GlobalContext);
+  const { loading, data: dataMarine } = marineState;
+
+  // Get data marine
+  useEffect(() => {
+    getMarine(marineDispatch);
+  }, [marineDispatch]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -37,7 +48,7 @@ const Marine = () => {
           <div className="flex flex-wrap justify-between flex-col md:flex-row mb-5">
             <div className="flex flex-wrap flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-1">
               <Button onClick={goToTambah}>Tambah</Button>
-              <ButtonExcel onClick={openModal} />
+              <ButtonExcel onClick={() => exportExcel("marine")} />
             </div>
 
             <div className="mt-2 md:w-64 md:mt-0">
@@ -51,12 +62,16 @@ const Marine = () => {
             </div>
           </div>
 
+          {!dataMarine && loading && <TableSkeletonLoading />}
+
           {/* Table */}
-          <TableMarine
-            response={response}
-            resultsPerPage={10}
-            filterText={filterText}
-          />
+          {dataMarine && (
+            <TableMarine
+              response={dataMarine}
+              resultsPerPage={10}
+              filterText={filterText}
+            />
+          )}
         </CardBody>
       </Card>
 

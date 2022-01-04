@@ -89,7 +89,6 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
       confirmButtonText: "YA",
     }).then((res) => {
       if (res.isConfirmed) {
-        // deleteAgama(id, agamaDispatch);
         deletePelanggan(id, pelangganDispatch, Swal);
       }
     });

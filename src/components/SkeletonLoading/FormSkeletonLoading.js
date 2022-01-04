@@ -9,9 +9,9 @@ const FormSkeletonLoading = ({ jumlahInput = 3 }) => {
       {/* Loading Skeleton Light Theme */}
       {localStorage.theme === "light" && (
         <>
-          {Array.from(new Array(jumlahInput)).map((item) => (
+          {Array.from(new Array(jumlahInput)).map((item, index) => (
             <>
-              <div className="grid grid-cols-3 gap-2">
+              <div key={index} className="grid grid-cols-3 gap-2">
                 <Skeleton height={30} className="mb-1" />
               </div>
               <div className="grid grid-cols-2">
@@ -33,9 +33,9 @@ const FormSkeletonLoading = ({ jumlahInput = 3 }) => {
       {/* Loading Skeleton Dark Theme */}
       {localStorage.theme === "dark" && (
         <>
-          {Array.from(new Array(jumlahInput)).map((item) => (
+          {Array.from(new Array(jumlahInput)).map((item, index) => (
             <>
-              <div className="grid grid-cols-3 gap-2">
+              <div key={index} className="grid grid-cols-3 gap-2">
                 <Skeleton
                   height={30}
                   className="mb-1"

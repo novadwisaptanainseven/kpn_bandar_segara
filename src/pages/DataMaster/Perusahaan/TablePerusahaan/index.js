@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   Table,
@@ -12,10 +12,15 @@ import {
   TableContainer,
 } from "@windmill/react-ui";
 
-import { EditIcon, TrashIcon } from "../../../../icons";
+import { EditIcon, MenuIcon, TrashIcon } from "../../../../icons";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { GlobalContext } from "../../../../context/Provider";
+import { deletePerusahaan } from "../../../../context/actions/Perusahaan";
+import useSortableData from "../../../../helpers/useSortableData";
+import ArrowUp from "../../../../components/DataTableIcons/ArrowUp";
+import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
 
 const Swal = withReactContent(swal2);
 
@@ -23,10 +28,16 @@ const TablePerusahaan = ({ resultsPerPage, response, filterText }) => {
   const match = useRouteMatch();
   const history = useHistory();
   const { path } = match;
+  const { perusahaanDispatch } = useContext(GlobalContext);
 
   // Go To Edit
   const goToEdit = (id) => {
     history.push(`${path}/edit/${id}`);
+  };
+
+  // Go To Detail
+  const goToDetail = (id) => {
+    history.push(`${path}/detail/${id}`);
   };
 
   // Setup pages control for every table
@@ -55,13 +66,14 @@ const TablePerusahaan = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.name.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.job.toLowerCase().includes(filterText.toLowerCase())
+          item.id_perusahaan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.nm_perusahaan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.almt_perusahaan.toLowerCase().includes(filterText.toLowerCase())
       );
     }
 
     setDataTable(response2);
-  }, [pageTable, filterText]);
+  }, [pageTable, filterText, response]);
 
   // Menangani tombol hapus
   const handleDelete = (id) => {
@@ -76,14 +88,18 @@ const TablePerusahaan = ({ resultsPerPage, response, filterText }) => {
       confirmButtonText: "YA",
     }).then((res) => {
       if (res.isConfirmed) {
-        // deleteAgama(id, agamaDispatch);
-        Swal.fire({
-          icon: "success",
-          title: "Terhapus",
-          text: "Data berhasil dihapus",
-        });
+        deletePerusahaan(id, perusahaanDispatch, Swal);
       }
     });
+  };
+
+  const { sortedDatatable, requestSort, sortConfig } =
+    useSortableData(dataTable);
+
+  const handleSorting = (e, key) => {
+    e.preventDefault();
+
+    requestSort(key);
   };
 
   return (
@@ -91,32 +107,105 @@ const TablePerusahaan = ({ resultsPerPage, response, filterText }) => {
       <Table>
         <TableHeader>
           <tr>
-            <TableCell>ID</TableCell>
-            <TableCell>Nama Perusahaan</TableCell>
-            <TableCell>Alamat</TableCell>
+            <TableCell>
+              <div className="flex gap-1 items-center">
+                <a
+                  className={`${
+                    sortConfig && sortConfig.key === "id_perusahaan"
+                      ? "text-gray-900 dark:text-gray-100"
+                      : ""
+                  }`}
+                  href="."
+                  onClick={(e) => handleSorting(e, "id_perusahaan")}
+                >
+                  ID
+                </a>
+                {sortConfig &&
+                  sortConfig.key === "id_perusahaan" &&
+                  (sortConfig.direction === "ascending" ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  ))}
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="flex gap-1 items-center">
+                <a
+                  className={`${
+                    sortConfig && sortConfig.key === "nm_perusahaan"
+                      ? "text-gray-900 dark:text-gray-100"
+                      : ""
+                  }`}
+                  href="."
+                  onClick={(e) => handleSorting(e, "nm_perusahaan")}
+                >
+                  Nama Perusahaan
+                </a>
+                {sortConfig &&
+                  sortConfig.key === "nm_perusahaan" &&
+                  (sortConfig.direction === "ascending" ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  ))}
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="flex gap-1 items-center">
+                <a
+                  className={`${
+                    sortConfig && sortConfig.key === "almt_perusahaan"
+                      ? "text-gray-900 dark:text-gray-100"
+                      : ""
+                  }`}
+                  href="."
+                  onClick={(e) => handleSorting(e, "almt_perusahaan")}
+                >
+                  Alamat
+                </a>
+                {sortConfig &&
+                  sortConfig.key === "almt_perusahaan" &&
+                  (sortConfig.direction === "ascending" ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  ))}
+              </div>
+            </TableCell>
             <TableCell>Aksi</TableCell>
           </tr>
         </TableHeader>
         <TableBody>
-          {dataTable.map((item, i) => (
+          {sortedDatatable.map((item, i) => (
             <TableRow key={i}>
               <TableCell>
-                <span className="text-sm">PLG000</span>
+                <span className="text-sm">{item.id_perusahaan}</span>
               </TableCell>
               <TableCell>
-                <span className="text-sm">{item.name}</span>
+                <span className="text-sm">{item.nm_perusahaan}</span>
               </TableCell>
               <TableCell>
-                <span className="text-sm">{item.job}</span>
+                <span className="text-sm">{item.almt_perusahaan}</span>
               </TableCell>
 
               <TableCell>
                 <div className="flex items-center space-x-4">
+                  {localStorage.level === "1" && (
+                    <Button
+                      layout="link"
+                      size="icon"
+                      aria-label="Detail"
+                      onClick={(e) => goToDetail(item.id_perusahaan)}
+                    >
+                      <MenuIcon className="w-5 h-5" aria-hidden="true" />
+                    </Button>
+                  )}
                   <Button
                     layout="link"
                     size="icon"
                     aria-label="Edit"
-                    onClick={(e) => goToEdit(i + 1)}
+                    onClick={(e) => goToEdit(item.id_perusahaan)}
                   >
                     <EditIcon className="w-5 h-5" aria-hidden="true" />
                   </Button>
@@ -124,7 +213,7 @@ const TablePerusahaan = ({ resultsPerPage, response, filterText }) => {
                     layout="link"
                     size="icon"
                     aria-label="Delete"
-                    onClick={() => handleDelete(i + 1)}
+                    onClick={() => handleDelete(item.id_perusahaan)}
                   >
                     <TrashIcon className="w-5 h-5" aria-hidden="true" />
                   </Button>
