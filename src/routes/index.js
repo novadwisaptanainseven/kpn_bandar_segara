@@ -31,6 +31,7 @@ const DetailMarine = lazy(() => import("../pages/DataMaster/Marine/Detail"));
 const Driver = lazy(() => import("../pages/DataMaster/Driver"));
 const TambahDriver = lazy(() => import("../pages/DataMaster/Driver/Tambah"));
 const EditDriver = lazy(() => import("../pages/DataMaster/Driver/Edit"));
+const DetailDriver = lazy(() => import("../pages/DataMaster/Driver/Detail"));
 const SPT = lazy(() => import("../pages/SPT"));
 const TambahSPT = lazy(() => import("../pages/SPT/Tambah"));
 const DetailSPT = lazy(() => import("../pages/SPT/Detail"));
@@ -143,6 +144,10 @@ const routes = [
   {
     path: "/driver/edit/:id",
     component: EditDriver,
+  },
+  {
+    path: "/driver/detail/:id",
+    component: DetailDriver,
   },
   // Route SPT
   {

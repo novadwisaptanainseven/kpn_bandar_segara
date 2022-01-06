@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalHeader,
@@ -8,19 +8,51 @@ import {
   Label,
   Input,
 } from "@windmill/react-ui";
+import { exportFilterExcel } from "../../../context/actions/Export/exportFilterExcel";
 
 const ModalExcel = ({ isModalOpen, closeModal }) => {
+  const [filterTgl, setFilterTgl] = useState({
+    dari_tgl: "",
+    error_dari_tgl: false,
+    sampai_tgl: "",
+    error_sampai_tgl: false,
+  });
+
+  // Handle filter tanggal change
+  const handleFilterTglChange = (e) => {
+    setFilterTgl({
+      ...filterTgl,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Handle filter tombol pencarian
+  const handleFilterCari = () => {
+    console.log(filterTgl);
+
+    exportFilterExcel("spt", filterTgl);
+    closeModal();
+  };
+
   return (
     <Modal isOpen={isModalOpen} onClose={closeModal}>
       <ModalHeader>Filter Export Excel</ModalHeader>
       <ModalBody>
         <Label className="mt-5">
           <span>Dari Tanggal</span>
-          <Input type="date" className="mt-1" />
+          <Input
+            type="date"
+            name="dari_tgl"
+            onChange={(e) => handleFilterTglChange(e)}
+          />
         </Label>
         <Label className="mt-3">
           <span>Sampai Tanggal</span>
-          <Input type="date" className="mt-1" />
+          <Input
+            type="date"
+            name="sampai_tgl"
+            onChange={(e) => handleFilterTglChange(e)}
+          />
         </Label>
       </ModalBody>
       <ModalFooter>
@@ -30,7 +62,14 @@ const ModalExcel = ({ isModalOpen, closeModal }) => {
           </Button>
         </div>
         <div className="hidden sm:block">
-          <Button>Export</Button>
+          <Button
+            onClick={handleFilterCari}
+            disabled={
+              !filterTgl.dari_tgl || !filterTgl.sampai_tgl ? true : false
+            }
+          >
+            Export
+          </Button>
         </div>
         <div className="block w-full sm:hidden">
           <Button block size="large" layout="outline" onClick={closeModal}>
@@ -38,7 +77,14 @@ const ModalExcel = ({ isModalOpen, closeModal }) => {
           </Button>
         </div>
         <div className="block w-full sm:hidden">
-          <Button block size="large">
+          <Button
+            block
+            size="large"
+            onClick={handleFilterCari}
+            disabled={
+              !filterTgl.dari_tgl || !filterTgl.sampai_tgl ? true : false
+            }
+          >
             Export
           </Button>
         </div>

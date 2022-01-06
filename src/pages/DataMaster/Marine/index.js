@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import PageTitle from "../../../components/Typography/PageTitle";
 import { Card, CardBody, Button, Input } from "@windmill/react-ui";
 
-import response from "../../../utils/demo/tableData";
 import TableMarine from "./TableMarine";
 import ButtonExcel from "../../../components/Buttons/ButtonExcel";
 import { useHistory, useRouteMatch } from "react-router-dom";

@@ -1,17 +1,26 @@
+import { getDriver } from ".";
+import {
+  showAlertError,
+  showAlertSuccess,
+} from "../../../components/AlertMessages";
 import axiosInstance from "../../../helpers/axios";
 
-const insertDriver = (values, setLoading, showAlertSuccess, showAlertError) => {
+const insertDriver = (values, setLoading, history, dispatch) => {
+  const messageSuccess = "Tambah Data Berhasil";
+  const messageError = "Tambah Data Gagal. Terjadi Kesalahan Server";
+
   setLoading(true);
 
   axiosInstance
     .post(`driver/insert`, values)
     .then((res) => {
       setLoading(false);
-      showAlertSuccess();
+      showAlertSuccess(messageSuccess, "driver", history);
+      getDriver(dispatch);
     })
     .catch((err) => {
       setLoading(false);
-      showAlertError();
+      showAlertError(err.response.data, messageError);
       console.log(err.response.data);
     });
 };

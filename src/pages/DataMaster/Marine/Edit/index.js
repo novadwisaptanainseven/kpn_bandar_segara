@@ -46,6 +46,7 @@ const Edit = () => {
             <Formik
               initialValues={initState(marine)}
               validationSchema={validationSchema}
+              enableReinitialize
               onSubmit={handleFormSubmit}
             >
               {({

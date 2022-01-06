@@ -51,7 +51,6 @@ const Tambah = () => {
                   <Label>
                     <span>Nama Marine</span>
                     <Input
-                      className="mt-1"
                       placeholder="Nama Marine"
                       name="nm_marine"
                       onChange={handleChange}

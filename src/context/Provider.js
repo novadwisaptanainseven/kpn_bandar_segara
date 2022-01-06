@@ -22,6 +22,10 @@ export const GlobalProvider = ({ children }) => {
   const [tujuanState, tujuanDispatch] = useReducer(reducer, initState);
   // Marine State
   const [marineState, marineDispatch] = useReducer(reducer, initState);
+  // Driver State
+  const [driverState, driverDispatch] = useReducer(reducer, initState);
+  // SPT State
+  const [sptState, sptDispatch] = useReducer(reducer, initState);
 
   const dataGlobal = {
     loginState,
@@ -38,6 +42,10 @@ export const GlobalProvider = ({ children }) => {
     tujuanDispatch,
     marineState,
     marineDispatch,
+    driverState,
+    driverDispatch,
+    sptState,
+    sptDispatch,
   };
 
   return (

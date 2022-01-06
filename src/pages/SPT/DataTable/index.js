@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -13,6 +13,11 @@ import {
   Pagination,
   TableContainer,
 } from "@windmill/react-ui";
+import { GlobalContext } from "../../../context/Provider";
+import { deleteSpt } from "../../../context/actions/SPT";
+import useSortableData from "../../../helpers/useSortableData";
+import ArrowUp from "../../../components/DataTableIcons/ArrowUp";
+import ArrowDown from "../../../components/DataTableIcons/ArrowDown";
 
 const Swal = withReactContent(swal2);
 
@@ -20,6 +25,8 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
   const history = useHistory();
   const match = useRouteMatch();
   const { path } = match;
+  const { sptDispatch } = useContext(GlobalContext);
+
   // Setup pages control for every table
   const [pageTable, setPageTable] = useState(1);
 
@@ -46,13 +53,15 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.name.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.job.toLowerCase().includes(filterText.toLowerCase())
+          item.id_spt.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.nm_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.waktu_buat.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.nm_tujuan.toLowerCase().includes(filterText.toLowerCase())
       );
     }
 
     setDataTable(response2);
-  }, [pageTable, filterText]);
+  }, [pageTable, filterText, response]);
 
   // Menangani tombol hapus
   const handleDelete = (id) => {
@@ -67,12 +76,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
       confirmButtonText: "YA",
     }).then((res) => {
       if (res.isConfirmed) {
-        // deleteAgama(id, agamaDispatch);
-        Swal.fire({
-          icon: "success",
-          title: "Terhapus",
-          text: "Data berhasil dihapus",
-        });
+        deleteSpt(id, sptDispatch, Swal);
       }
     });
   };
@@ -92,16 +96,109 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     history.push(`${path}/${id}/buat-nota`);
   };
 
+  const { sortedDatatable, requestSort, sortConfig } =
+    useSortableData(dataTable);
+
+  const handleSorting = (e, key) => {
+    e.preventDefault();
+
+    requestSort(key);
+  };
+
   return (
     <>
       <TableContainer className="mb-8">
         <Table>
           <TableHeader>
             <tr>
-              <TableCell>Kode</TableCell>
-              <TableCell>Pelanggan</TableCell>
-              <TableCell>Tujuan</TableCell>
-              <TableCell>Tanggal</TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "id_spt"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "id_spt")}
+                  >
+                    ID SPT
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "id_spt" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "nm_pelanggan"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "nm_pelanggan")}
+                  >
+                    Nama Pelanggan
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "nm_pelanggan" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "nm_tujuan"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "nm_tujuan")}
+                  >
+                    Tujuan
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "nm_tujuan" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "waktu_buat"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "waktu_buat")}
+                  >
+                    Tanggal SPT
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "waktu_buat" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
               <TableCell>Aksi</TableCell>
             </tr>
           </TableHeader>
@@ -109,35 +206,35 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
             {dataTable.map((item, i) => (
               <TableRow key={i}>
                 <TableCell>
-                  <span className="text-sm">SPT000</span>
+                  <span className="text-sm">{item.id_spt}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.name}</span>
+                  <span className="text-sm">{item.nm_pelanggan}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.name}</span>
+                  <span className="text-sm">{item.nm_tujuan}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.name}</span>
+                  <span className="text-sm">{item.waktu_buat}</span>
                 </TableCell>
 
                 <TableCell>
                   <div className="flex items-center gap-1">
                     <button
                       className="bg-teal-400 text-white px-3 py-1 text-sm rounded-md"
-                      onClick={() => goToDetail(i + 1)}
+                      onClick={() => goToDetail(item.id_spt)}
                     >
                       Detail
                     </button>
                     <button
                       className="bg-lime-500 text-white px-3 py-1 text-sm rounded-md"
-                      onClick={() => goToEdit(i + 1)}
+                      onClick={() => goToEdit(item.id_spt)}
                     >
                       Edit
                     </button>
                     <button
                       className="bg-red-400 text-white px-3 py-1 text-sm rounded-md"
-                      onClick={() => handleDelete(i + 1)}
+                      onClick={() => handleDelete(item.id_spt)}
                     >
                       Hapus
                     </button>
@@ -145,7 +242,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   <div className="flex items-center gap-1 mt-1">
                     <button
                       className="bg-yellow-300 text-black px-3 py-1 text-sm rounded-md"
-                      onClick={() => goToBuatNota(i + 1)}
+                      onClick={() => goToBuatNota(item.id_spt)}
                     >
                       Buat Nota
                     </button>
