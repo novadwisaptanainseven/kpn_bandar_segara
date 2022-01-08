@@ -18,6 +18,7 @@ import { deleteSpt } from "../../../context/actions/SPT";
 import useSortableData from "../../../helpers/useSortableData";
 import ArrowUp from "../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../components/DataTableIcons/ArrowDown";
+import { format } from "date-fns";
 
 const Swal = withReactContent(swal2);
 
@@ -55,7 +56,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
         (item) =>
           item.id_spt.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.waktu_buat.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.tgl_spt.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_tujuan.toLowerCase().includes(filterText.toLowerCase())
       );
     }
@@ -203,7 +204,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
             </tr>
           </TableHeader>
           <TableBody>
-            {dataTable.map((item, i) => (
+            {sortedDatatable.map((item, i) => (
               <TableRow key={i}>
                 <TableCell>
                   <span className="text-sm">{item.id_spt}</span>
@@ -215,7 +216,9 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   <span className="text-sm">{item.nm_tujuan}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.waktu_buat}</span>
+                  <span className="text-sm">
+                    {format(new Date(item.tgl_spt), "dd-MM-y")}
+                  </span>
                 </TableCell>
 
                 <TableCell>

@@ -10,14 +10,14 @@ const FormSkeletonLoading = ({ jumlahInput = 3 }) => {
       {localStorage.theme === "light" && (
         <>
           {Array.from(new Array(jumlahInput)).map((item, index) => (
-            <>
-              <div key={index} className="grid grid-cols-3 gap-2">
+            <div key={index}>
+              <div className="grid grid-cols-3 gap-2">
                 <Skeleton height={30} className="mb-1" />
               </div>
               <div className="grid grid-cols-2">
                 <Skeleton height={30} className="mb-3" />
               </div>
-            </>
+            </div>
           ))}
 
           <div className="grid grid-cols-6 gap-2">
@@ -34,8 +34,8 @@ const FormSkeletonLoading = ({ jumlahInput = 3 }) => {
       {localStorage.theme === "dark" && (
         <>
           {Array.from(new Array(jumlahInput)).map((item, index) => (
-            <>
-              <div key={index} className="grid grid-cols-3 gap-2">
+            <div key={index}>
+              <div className="grid grid-cols-3 gap-2">
                 <Skeleton
                   height={30}
                   className="mb-1"
@@ -51,7 +51,7 @@ const FormSkeletonLoading = ({ jumlahInput = 3 }) => {
                   highlightColor="#374151"
                 />
               </div>
-            </>
+            </div>
           ))}
 
           <div className="grid grid-cols-6 gap-2">

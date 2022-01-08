@@ -26,6 +26,8 @@ export const GlobalProvider = ({ children }) => {
   const [driverState, driverDispatch] = useReducer(reducer, initState);
   // SPT State
   const [sptState, sptDispatch] = useReducer(reducer, initState);
+  // Nota State
+  const [notaState, notaDispatch] = useReducer(reducer, initState);
 
   const dataGlobal = {
     loginState,
@@ -46,6 +48,8 @@ export const GlobalProvider = ({ children }) => {
     driverDispatch,
     sptState,
     sptDispatch,
+    notaState,
+    notaDispatch,
   };
 
   return (
