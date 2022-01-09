@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PageTitle from "../../../components/Typography/PageTitle";
 import { Card, CardBody, Button, Input, Label } from "@windmill/react-ui";
 
@@ -18,6 +18,8 @@ import { format } from "date-fns";
 import { Formik } from "formik";
 import initState from "./Formik/initState";
 import validationSchema from "./Formik/validationSchema";
+import { GlobalContext } from "../../../context/Provider";
+import { insertNota } from "../../../context/actions/Nota";
 
 const BuatNota = () => {
   const match = useRouteMatch();
@@ -25,7 +27,7 @@ const BuatNota = () => {
   const history = useHistory();
   const [buatNota, setBuatNota] = useState("");
   const [loading, setLoading] = useState(false);
-  const [totalHarga, setTotalHarga] = useState(0);
+  const { notaDispatch } = useContext(GlobalContext);
 
   const [statusBayar, setStatusBayar] = useState("2");
   const [statusDiskon, setStatusDiskon] = useState("0");
@@ -34,9 +36,16 @@ const BuatNota = () => {
     const totHargaAwal = buatNota.data_spt.harga;
     const potonganHarga = (diskon / 100) * totHargaAwal;
 
+    const previewPotonganHarga = document.getElementById(
+      "previewPotonganHarga"
+    );
     const inputPotongan = document.getElementById("potongan");
     const hargaSetelahDiskon = totHargaAwal - potonganHarga;
     inputPotongan.value = potonganHarga;
+    previewPotonganHarga.innerHTML = potonganHarga.toLocaleString("id", {
+      style: "currency",
+      currency: "IDR",
+    });
 
     console.log(potonganHarga);
 
@@ -48,7 +57,20 @@ const BuatNota = () => {
   }, [params]);
 
   const handleFormSubmit = (values) => {
+    values.id_spt = params.id;
+
     alert(JSON.stringify(values, null, 2));
+    insertNota(values, setLoading, history, notaDispatch);
+  };
+
+  const hitungKembalian = (totHarga, bayar) => {
+    const totKembalian = bayar - totHarga;
+
+    if (totKembalian < 0) {
+      return 0;
+    } else {
+      return totKembalian;
+    }
   };
 
   return (
@@ -186,6 +208,11 @@ const BuatNota = () => {
                               name="potongan"
                               readOnly="readOnly"
                             />
+                            <HelperText>
+                              <span id="previewPotonganHarga">
+                                Potongan Harga
+                              </span>
+                            </HelperText>
                           </Label>
                         </>
                       )}
@@ -212,6 +239,11 @@ const BuatNota = () => {
                             {errors.harga} <br />
                           </HelperText>
                         )}
+                        {values.harga.toLocaleString("id", {
+                          style: "currency",
+                          currency: "IDR",
+                        })}
+                        <br />
                         <HelperText>
                           Total harga bisa diubah jika tidak ada diskon
                         </HelperText>
@@ -230,9 +262,31 @@ const BuatNota = () => {
                             errors.bayar ? "border-red-500" : null
                           }`}
                         />
+                        {values.bayar.toLocaleString("id", {
+                          style: "currency",
+                          currency: "IDR",
+                        })}
                         {errors.bayar && (
                           <HelperText valid={false}>{errors.bayar}</HelperText>
                         )}
+                      </Label>
+                      <Label className="mt-4">
+                        <span>Uang Kembalian</span>
+                        <Input
+                          type="number"
+                          className="mt-1"
+                          placeholder="Masukkan jumlah uang kembalian"
+                          name="kembalian"
+                          value={hitungKembalian(values.harga, values.bayar)}
+                          readOnly="readOnly"
+                        />
+                        {hitungKembalian(
+                          values.harga,
+                          values.bayar
+                        ).toLocaleString("id", {
+                          style: "currency",
+                          currency: "IDR",
+                        })}
                       </Label>
                       <Label className="mt-4">
                         <span>
@@ -275,6 +329,24 @@ const BuatNota = () => {
                         {errors.id_status_nota && (
                           <HelperText valid={false}>
                             {errors.id_status_nota}
+                          </HelperText>
+                        )}
+                      </Label>
+                      <Label className="mt-4">
+                        <span>Tanggal</span>
+                        <Input
+                          name="tgl_nota"
+                          type="date"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.tgl_nota || ""}
+                          className={`mt-1 ${
+                            errors.tgl_nota ? "border-red-500" : null
+                          }`}
+                        />
+                        {errors.tgl_nota && (
+                          <HelperText valid={false}>
+                            {errors.tgl_nota}
                           </HelperText>
                         )}
                       </Label>

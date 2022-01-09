@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import PageTitle from "../../components/Typography/PageTitle";
 import { Card, CardBody, Button, Input, Label } from "@windmill/react-ui";
 import ButtonExcel from "../../components/Buttons/ButtonExcel";
-import response from "../../utils/demo/tableData";
 import DataTable from "./DataTable";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import ModalExcel from "../../components/Modals/ModalExcel";
@@ -148,7 +147,11 @@ const SPT = () => {
           )}
 
           {/* Modal Excel */}
-          <ModalExcel isModalOpen={isModalOpen} closeModal={closeModal} />
+          <ModalExcel
+            isModalOpen={isModalOpen}
+            closeModal={closeModal}
+            path={"spt"}
+          />
         </CardBody>
       </Card>
     </>

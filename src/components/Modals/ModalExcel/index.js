@@ -10,7 +10,7 @@ import {
 } from "@windmill/react-ui";
 import { exportFilterExcel } from "../../../context/actions/Export/exportFilterExcel";
 
-const ModalExcel = ({ isModalOpen, closeModal }) => {
+const ModalExcel = ({ isModalOpen, closeModal, path }) => {
   const [filterTgl, setFilterTgl] = useState({
     dari_tgl: "",
     error_dari_tgl: false,
@@ -30,7 +30,7 @@ const ModalExcel = ({ isModalOpen, closeModal }) => {
   const handleFilterCari = () => {
     console.log(filterTgl);
 
-    exportFilterExcel("spt", filterTgl);
+    exportFilterExcel(path, filterTgl);
     closeModal();
   };
 
