@@ -59,7 +59,7 @@ const BuatNota = () => {
   const handleFormSubmit = (values) => {
     values.id_spt = params.id;
 
-    alert(JSON.stringify(values, null, 2));
+    // alert(JSON.stringify(values, null, 2));
     insertNota(values, setLoading, history, notaDispatch);
   };
 
@@ -148,7 +148,6 @@ const BuatNota = () => {
                 {({
                   values,
                   errors,
-                  touched,
                   handleChange,
                   handleBlur,
                   handleSubmit,
@@ -270,7 +269,7 @@ const BuatNota = () => {
                           <HelperText valid={false}>{errors.bayar}</HelperText>
                         )}
                       </Label>
-                      <Label className="mt-4">
+                      {/* <Label className="mt-4">
                         <span>Uang Kembalian</span>
                         <Input
                           type="number"
@@ -287,7 +286,7 @@ const BuatNota = () => {
                           style: "currency",
                           currency: "IDR",
                         })}
-                      </Label>
+                      </Label> */}
                       <Label className="mt-4">
                         <span>
                           Status Bayar{" "}

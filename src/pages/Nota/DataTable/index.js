@@ -300,7 +300,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   </span>
                 </TableCell>
                 <TableCell>
-                  {item.id_status_nota === 1 && (
+                  {item.id_status_nota === 2 && (
                     <span className="text-sm text-white bg-red-500 px-5 py-2 font-semibold rounded-sm">
                       Belum Bayar
                     </span>
@@ -310,7 +310,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                       Belum Lunas
                     </span>
                   )}
-                  {item.id_status_nota === 2 && (
+                  {item.id_status_nota === 1 && (
                     <span className="text-sm bg-lime-400 px-5 py-2 font-semibold rounded-sm">
                       Lunas
                     </span>
