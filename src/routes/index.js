@@ -43,6 +43,7 @@ const EditNota = lazy(() => import("../pages/Nota/Edit"));
 const Users = lazy(() => import("../pages/Users"));
 const TambahUsers = lazy(() => import("../pages/Users/Tambah"));
 const EditUsers = lazy(() => import("../pages/Users/Edit"));
+const DetailUsers = lazy(() => import("../pages/Users/Detail"));
 const Pengaturan = lazy(() => import("../pages/Pengaturan"));
 
 const Page404 = lazy(() => import("../pages/404"));
@@ -195,6 +196,10 @@ const routes = [
   {
     path: "/users/edit/:id",
     component: EditUsers,
+  },
+  {
+    path: "/users/detail/:id",
+    component: DetailUsers,
   },
   // Route Pengaturan
   {
