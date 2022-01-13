@@ -12,10 +12,14 @@ const editPengguna = (id, values, setLoading, history, dispatch) => {
   setLoading(true);
 
   axiosInstance
-    .post(`pengguna/update/${id}`, values)
+    .post(`pengguna/update/${id}`, values, {
+      header: {
+        "Content-Type": `multipart/form-data; boundary=${values._boundary}`,
+      },
+    })
     .then((res) => {
       setLoading(false);
-      showAlertSuccess(messageSuccess, "pengguna", history);
+      showAlertSuccess(messageSuccess, "users", history);
       getPengguna(dispatch);
     })
     .catch((err) => {
