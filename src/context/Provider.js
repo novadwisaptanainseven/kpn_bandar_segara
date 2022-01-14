@@ -30,6 +30,8 @@ export const GlobalProvider = ({ children }) => {
   const [notaState, notaDispatch] = useReducer(reducer, initState);
   // Pengguna State
   const [penggunaState, penggunaDispatch] = useReducer(reducer, initState);
+  // Konten State
+  const [kontenState, kontenDispatch] = useReducer(reducer, initState);
 
   const dataGlobal = {
     loginState,
@@ -54,6 +56,8 @@ export const GlobalProvider = ({ children }) => {
     notaDispatch,
     penggunaState,
     penggunaDispatch,
+    kontenState,
+    kontenDispatch,
   };
 
   return (
