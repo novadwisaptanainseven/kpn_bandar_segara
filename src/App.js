@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useContext, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,14 +6,12 @@ import {
   Redirect,
 } from "react-router-dom";
 import AccessibleNavigationAnnouncer from "./components/AccessibleNavigationAnnouncer";
-import { GlobalProvider } from "./context/Provider";
+import { GlobalContext, GlobalProvider } from "./context/Provider";
 
 const Layout = lazy(() => import("./containers/Layout"));
 const Login = lazy(() => import("./pages/Login"));
 const CreateAccount = lazy(() => import("./pages/CreateAccount"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
-
-
 
 function App() {
   return (

@@ -20,6 +20,7 @@ import withReactContent from "sweetalert2-react-content";
 import { logout } from "../context/actions/Auth";
 import { GlobalContext } from "../context/Provider";
 import getImage from "../context/actions/Files/getImage";
+import { useHistory } from "react-router-dom";
 
 const Swal = withReactContent(swal2);
 
@@ -28,8 +29,17 @@ function Header() {
   const { toggleSidebar } = useContext(SidebarContext);
   const { profileUserState } = useContext(GlobalContext);
   const { data: dataUser } = profileUserState;
+  const history = useHistory();
 
-  console.log(dataUser);
+  // Go to pengaturan page
+  const goToPengaturan = () => {
+    history.push("/app/pengaturan");
+  };
+
+  // Go to edit user
+  const goToEditUser = (id) => {
+    history.push("/app/users/edit/" + id);
+  };
 
   const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -112,14 +122,17 @@ function Header() {
               isOpen={isProfileMenuOpen}
               onClose={() => setIsProfileMenuOpen(false)}
             >
-              <DropdownItem tag="a" href="#">
+              <DropdownItem
+                tag="a"
+                onClick={() => goToEditUser(localStorage.id_user)}
+              >
                 <OutlinePersonIcon
                   className="w-4 h-4 mr-3"
                   aria-hidden="true"
                 />
                 <span>Profile</span>
               </DropdownItem>
-              <DropdownItem tag="a" href="#">
+              <DropdownItem tag="a" onClick={goToPengaturan}>
                 <OutlineCogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                 <span>Settings</span>
               </DropdownItem>

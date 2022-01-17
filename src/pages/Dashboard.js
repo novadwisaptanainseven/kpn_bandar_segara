@@ -8,14 +8,10 @@ import { MoneyIcon, PeopleIcon, MailIcon, FormsIcon } from "../icons";
 import RoundIcon from "../components/RoundIcon";
 import { GlobalContext } from "../context/Provider";
 import { getDashboard } from "../context/actions/Dashboard";
-import { getKonten } from "../context/actions/Konten";
 
 function Dashboard() {
-  const {
-    profileUserState,
-    dashboardState,
-    dashboardDispatch,
-  } = useContext(GlobalContext);
+  const { profileUserState, dashboardState, dashboardDispatch } =
+    useContext(GlobalContext);
   const { data: dataUser } = profileUserState;
   const { data: dataDashboard } = dashboardState;
 

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import ImageLight from "../assets/img/login-office.jpeg";
 import ImageDark from "../assets/img/login-office-dark.jpeg";
@@ -11,17 +10,24 @@ import { checkToken, login } from "../context/actions/Auth";
 
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { getKonten } from "../context/actions/Konten";
 
 const Swal = withReactContent(swal2);
 
 function Login() {
   const history = useHistory();
-  const { loginState, loginDispatch } = useContext(GlobalContext);
+  const { loginState, loginDispatch, kontenState, kontenDispatch } =
+    useContext(GlobalContext);
   const { loading, error } = loginState;
+  const { data: dataKonten } = kontenState;
   const [values, setValues] = useState({
     username: "",
     password: "",
   });
+
+  useEffect(() => {
+    getKonten(kontenDispatch);
+  }, [kontenDispatch]);
 
   useEffect(() => {
     // Untuk menampilkan alert ketika user belum logout
@@ -69,7 +75,7 @@ function Login() {
           <main className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div className="w-full">
               <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
-                Bandar Segara
+                {dataKonten.title_website}
               </h1>
 
               {error.pesan && (
@@ -80,7 +86,9 @@ function Login() {
 
               {error.validation_errors && (
                 <div className="mb-2 p-4 text-sm text-gray-100 bg-red-500 rounded-lg shadow-md">
-                  <span className="block">{error.validation_errors.username}</span>
+                  <span className="block">
+                    {error.validation_errors.username}
+                  </span>
                   <span>{error.validation_errors.password}</span>
                 </div>
               )}
