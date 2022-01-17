@@ -17,7 +17,7 @@ const insertPelanggan = (
     .catch((err) => {
       setLoading(false);
       showAlertError();
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

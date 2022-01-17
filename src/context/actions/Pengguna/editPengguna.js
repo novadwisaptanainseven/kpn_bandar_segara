@@ -27,7 +27,7 @@ const editPengguna = (id, values, setLoading, history, dispatch) => {
       setLoading(false);
       showAlertError(err.response.data, messageError);
 
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

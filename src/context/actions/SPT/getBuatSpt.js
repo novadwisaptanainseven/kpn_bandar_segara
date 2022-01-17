@@ -5,10 +5,10 @@ const getBuatSpt = (setData) => {
     .get(`spt/tambah`)
     .then((res) => {
       setData(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

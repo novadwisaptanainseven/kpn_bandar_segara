@@ -17,12 +17,12 @@ const routes = [
     routes: [
       // submenu
       {
-        path: "/app/pelanggan",
-        name: "Pelanggan",
-      },
-      {
         path: "/app/perusahaan",
         name: "Perusahaan",
+      },
+      {
+        path: "/app/pelanggan",
+        name: "Pelanggan",
       },
       {
         path: "/app/tujuan",

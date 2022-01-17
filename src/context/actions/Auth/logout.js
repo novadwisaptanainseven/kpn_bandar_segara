@@ -4,13 +4,13 @@ const logout = () => {
   axiosInstance
     .post(`logout`)
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
 
       localStorage.clear();
       window.location.href = "/login";
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

@@ -59,7 +59,7 @@ const Tambah = () => {
       formData.append(key, values[key]);
     }
     for (const pair of formData.entries()) {
-      console.log(pair);
+      // console.log(pair);
     }
     insertPengguna(formData, setLoading, history, penggunaDispatch);
   };

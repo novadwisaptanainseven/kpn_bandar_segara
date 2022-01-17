@@ -5,10 +5,10 @@ const getBuatNota = (id, setData) => {
     .get(`nota/tambah/${id}`)
     .then((res) => {
       setData(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

@@ -5,10 +5,10 @@ const getDriverById = (id, setData) => {
     .get(`driver/detail/${id}`)
     .then((res) => {
       setData(res.data.data_driver);
-      console.log(res.data.data_driver);
+      // console.log(res.data.data_driver);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

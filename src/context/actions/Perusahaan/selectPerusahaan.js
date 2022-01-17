@@ -5,10 +5,10 @@ const selectPerusahaan = (setData) => {
     .get(`perusahaan`)
     .then((res) => {
       setData(res.data.data_perusahaan);
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 
