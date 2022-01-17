@@ -18,13 +18,18 @@ import {
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { logout } from "../context/actions/Auth";
+import { GlobalContext } from "../context/Provider";
+import getImage from "../context/actions/Files/getImage";
 
 const Swal = withReactContent(swal2);
 
 function Header() {
   const { mode, toggleMode } = useContext(WindmillContext);
   const { toggleSidebar } = useContext(SidebarContext);
-  
+  const { profileUserState } = useContext(GlobalContext);
+  const { data: dataUser } = profileUserState;
+
+  console.log(dataUser);
 
   const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -93,8 +98,12 @@ function Header() {
             >
               <Avatar
                 className="align-middle"
-                src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
-                alt=""
+                src={
+                  dataUser
+                    ? getImage("foto_pengguna", dataUser.user.foto)
+                    : "https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
+                }
+                alt="foto-profil"
                 aria-hidden="true"
               />
             </button>

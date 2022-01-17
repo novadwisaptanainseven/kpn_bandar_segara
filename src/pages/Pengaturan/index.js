@@ -97,7 +97,7 @@ const Pengaturan = () => {
               dirty,
               isValid,
             }) => (
-              <form onSubmit={handleFormSubmit} className="grid md:grid-cols-2">
+              <form onSubmit={handleSubmit} className="grid md:grid-cols-2">
                 <div>
                   <Label className="mt-4">
                     <span>Nama Aplikasi</span>

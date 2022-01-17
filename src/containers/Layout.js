@@ -13,6 +13,7 @@ import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { checkSession } from "../context/actions/Auth";
 import { GlobalContext } from "../context/Provider";
+import { getKonten } from "../context/actions/Konten";
 
 const Swal = withReactContent(swal2);
 
@@ -23,7 +24,8 @@ function Layout() {
   const [isLogin, setIsLogin] = useState(false);
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
   let location = useLocation();
-  const { profileUserDispatch } = useContext(GlobalContext);
+  const { profileUserDispatch, kontenState, kontenDispatch } =
+    useContext(GlobalContext);
 
   useEffect(() => {
     closeSidebar();
@@ -33,6 +35,11 @@ function Layout() {
   useEffect(() => {
     checkSession(history, Swal, setIsLogin, profileUserDispatch);
   }, [history, Swal, profileUserDispatch]);
+
+  // Get data konten
+  useEffect(() => {
+    getKonten(kontenDispatch);
+  }, [kontenDispatch]);
 
   return (
     <>

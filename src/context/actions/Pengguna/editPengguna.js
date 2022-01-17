@@ -21,6 +21,7 @@ const editPengguna = (id, values, setLoading, history, dispatch) => {
       setLoading(false);
       showAlertSuccess(messageSuccess, "users", history);
       getPengguna(dispatch);
+      document.location.href = "/app/users";
     })
     .catch((err) => {
       setLoading(false);

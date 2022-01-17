@@ -19,7 +19,7 @@ const editKonten = (values, setLoading, history, dispatch) => {
     })
     .then((res) => {
       setLoading(false);
-      showAlertSuccess(messageSuccess, "konten", history);
+      showAlertSuccess(messageSuccess, "pengaturan", history);
       getKonten(dispatch);
     })
     .catch((err) => {

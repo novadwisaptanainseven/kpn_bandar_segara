@@ -8,10 +8,14 @@ import { MoneyIcon, PeopleIcon, MailIcon, FormsIcon } from "../icons";
 import RoundIcon from "../components/RoundIcon";
 import { GlobalContext } from "../context/Provider";
 import { getDashboard } from "../context/actions/Dashboard";
+import { getKonten } from "../context/actions/Konten";
 
 function Dashboard() {
-  const { profileUserState, dashboardState, dashboardDispatch } =
-    useContext(GlobalContext);
+  const {
+    profileUserState,
+    dashboardState,
+    dashboardDispatch,
+  } = useContext(GlobalContext);
   const { data: dataUser } = profileUserState;
   const { data: dataDashboard } = dashboardState;
 
@@ -51,7 +55,10 @@ function Dashboard() {
           />
         </InfoCard>
 
-        <InfoCard title="Jumlah Pelanggan" value={dataDashboard.jumlah_pelanggan}>
+        <InfoCard
+          title="Jumlah Pelanggan"
+          value={dataDashboard.jumlah_pelanggan}
+        >
           <RoundIcon
             icon={PeopleIcon}
             iconColorClass="text-blue-500 dark:text-blue-100"
@@ -60,7 +67,10 @@ function Dashboard() {
           />
         </InfoCard>
 
-        <InfoCard title="Jumlah Perusahaan" value={dataDashboard.jumlah_perusahaan}>
+        <InfoCard
+          title="Jumlah Perusahaan"
+          value={dataDashboard.jumlah_perusahaan}
+        >
           <RoundIcon
             icon={PeopleIcon}
             iconColorClass="text-teal-500 dark:text-teal-100"
