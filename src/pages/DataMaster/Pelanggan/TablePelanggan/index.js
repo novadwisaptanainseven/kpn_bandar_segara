@@ -200,7 +200,7 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
                         layout="link"
                         size="icon"
                         aria-label="Detail"
-                        onClick={(e) => goToDetail(item.id_perusahaan)}
+                        onClick={(e) => goToDetail(item.id_pelanggan)}
                       >
                         <MenuIcon className="w-5 h-5" aria-hidden="true" />
                       </Button>

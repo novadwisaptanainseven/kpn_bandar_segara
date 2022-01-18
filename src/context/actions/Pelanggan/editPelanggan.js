@@ -18,7 +18,7 @@ const editPelanggan = (
     .catch((err) => {
       setLoading(false);
       showAlertError(err.response.data);
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

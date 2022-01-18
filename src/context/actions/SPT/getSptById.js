@@ -5,10 +5,10 @@ const getSptById = (id, setData) => {
     .get(`spt/detail/${id}`)
     .then((res) => {
       setData(res.data.data_spt);
-      console.log(res.data.data_spt);
+      // console.log(res.data.data_spt);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

@@ -5,10 +5,10 @@ const getMarineById = (id, setData) => {
     .get(`marine/detail/${id}`)
     .then((res) => {
       setData(res.data.data_marine);
-      console.log(res.data.data_marine);
+      // console.log(res.data.data_marine);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

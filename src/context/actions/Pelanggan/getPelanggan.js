@@ -13,10 +13,10 @@ const getPelanggan = (dispatch) => {
         type: SUCCESS,
         payload: res.data.data_pelanggan,
       });
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

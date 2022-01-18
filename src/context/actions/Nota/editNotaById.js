@@ -21,7 +21,7 @@ const editNotaById = (id, values, setLoading, history, dispatch) => {
     .catch((err) => {
       setLoading(false);
       showAlertError(err.response.data, messageError);
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

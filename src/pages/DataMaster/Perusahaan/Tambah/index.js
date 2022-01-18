@@ -26,7 +26,7 @@ const Tambah = () => {
   const { perusahaanDispatch } = useContext(GlobalContext);
 
   const handleFormSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
 
     insertPerusahaan(values, setLoading, history, perusahaanDispatch);
   };

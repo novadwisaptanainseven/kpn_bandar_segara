@@ -15,7 +15,7 @@ const getDashboard = (dispatch) => {
         type: ERROR,
         payload: err.response.data,
       });
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

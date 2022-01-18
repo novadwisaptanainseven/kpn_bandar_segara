@@ -5,10 +5,10 @@ const getPerusahaanById = (id, setData) => {
     .get(`perusahaan/detail/${id}`)
     .then((res) => {
       setData(res.data.data_perusahaan);
-      console.log(res.data.data_perusahaan);
+      // console.log(res.data.data_perusahaan);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

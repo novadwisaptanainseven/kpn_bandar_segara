@@ -5,10 +5,10 @@ const getPenggunaById = (id, setData) => {
     .get(`pengguna/detail/${id}`)
     .then((res) => {
       setData(res.data.data_pengguna);
-      console.log(res.data.data_pengguna);
+      // console.log(res.data.data_pengguna);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

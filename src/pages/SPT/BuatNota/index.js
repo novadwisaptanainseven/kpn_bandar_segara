@@ -47,7 +47,7 @@ const BuatNota = () => {
       currency: "IDR",
     });
 
-    console.log(potonganHarga);
+    // console.log(potonganHarga);
 
     return hargaSetelahDiskon;
   };

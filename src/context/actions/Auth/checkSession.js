@@ -5,7 +5,7 @@ const checkSession = (history, Swal, setIsLogin, profileUserDispatch) => {
   axiosInstance
     .get(`${localStorage.baseURL}ceklogin`)
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setIsLogin(true);
       profileUserDispatch({
         type: SUCCESS,

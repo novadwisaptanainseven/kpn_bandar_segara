@@ -44,7 +44,7 @@ function Login() {
     // Lakukan proses login
 
     login(values, loginDispatch);
-    console.log(values);
+    // console.log(values);
   };
 
   const handleChange = (e) => {

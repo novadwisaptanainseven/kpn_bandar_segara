@@ -28,7 +28,7 @@ const ModalExcel = ({ isModalOpen, closeModal, path }) => {
 
   // Handle filter tombol pencarian
   const handleFilterCari = () => {
-    console.log(filterTgl);
+    // console.log(filterTgl);
 
     exportFilterExcel(path, filterTgl);
     closeModal();

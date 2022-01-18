@@ -22,7 +22,7 @@ const Tambah = () => {
   const { marineDispatch } = useContext(GlobalContext);
 
   const handleFormSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
 
     insertMarine(values, setLoading, history, marineDispatch);
   };

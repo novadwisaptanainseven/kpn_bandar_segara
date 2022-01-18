@@ -5,10 +5,10 @@ const getPelangganById = (id, setData) => {
     .get(`pelanggan/detail/${id}`)
     .then((res) => {
       setData(res.data.data_pelanggan);
-      console.log(res.data.data_pelanggan);
+      // console.log(res.data.data_pelanggan);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

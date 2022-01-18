@@ -15,13 +15,13 @@ const getKonten = (dispatch) => {
         type: SUCCESS,
         payload: res.data,
       });
-      console.log(res.data);
+      // console.log(res.data);
       document.title = res.data.title_website;
       logoApp.setAttribute("href", localStorage.baseUrlImg + res.data.logo);
-      console.log(logoApp);
+      // console.log(logoApp);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

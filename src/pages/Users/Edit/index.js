@@ -78,7 +78,7 @@ const Edit = () => {
       formData.append("foto", values.foto);
     }
     for (const pair of formData.entries()) {
-      console.log(pair);
+      // console.log(pair);
     }
     editPengguna(params.id, formData, setLoading, history, penggunaDispatch);
   };

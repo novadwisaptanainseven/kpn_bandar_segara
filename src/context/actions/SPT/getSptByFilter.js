@@ -16,10 +16,10 @@ const getSptByFilter = (dispatch, filterTgl) => {
         type: SUCCESS,
         payload: res.data.data_spt,
       });
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

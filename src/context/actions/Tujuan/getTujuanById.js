@@ -5,10 +5,10 @@ const getTujuanById = (id, setData) => {
     .get(`tujuan/detail/${id}`)
     .then((res) => {
       setData(res.data.data_tujuan);
-      console.log(res.data.data_tujuan);
+      // console.log(res.data.data_tujuan);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

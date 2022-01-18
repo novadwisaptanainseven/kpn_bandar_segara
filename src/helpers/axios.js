@@ -6,7 +6,7 @@ localStorage.baseURL = baseURL;
 localStorage.baseUrlImg = baseUrlImg;
 let headers = {};
 
-console.log("Base URL: ", baseURL);
+// console.log("Base URL: ", baseURL);
 
 if (localStorage.token) {
   headers.Authorization = `Bearer ${localStorage.token}`;

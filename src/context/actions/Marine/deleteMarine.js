@@ -19,7 +19,7 @@ const deleteMarine = (id, dispatch, Swal) => {
         title: "Error",
         text: `"Data gagal dihapus. ${err.response.data.pesan}"`,
       });
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 
