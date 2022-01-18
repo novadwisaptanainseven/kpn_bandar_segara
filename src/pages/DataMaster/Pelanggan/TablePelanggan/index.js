@@ -31,6 +31,8 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
   const { path } = match;
   const { pelangganDispatch } = useContext(GlobalContext);
 
+  
+
   // Go To Edit
   const goToEdit = (id) => {
     history.push(`${path}/edit/${id}`);

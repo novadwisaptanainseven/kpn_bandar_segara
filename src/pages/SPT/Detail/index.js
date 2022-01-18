@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardBody } from "@windmill/react-ui";
 import PageTitle from "../../../components/Typography/PageTitle";
 
 import {
@@ -8,6 +7,8 @@ import {
   TableBody,
   TableRow,
   TableContainer,
+  Card,
+  CardBody,
 } from "@windmill/react-ui";
 import { useRouteMatch } from "react-router-dom";
 import { getSptById } from "../../../context/actions/SPT";

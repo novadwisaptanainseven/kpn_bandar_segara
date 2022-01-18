@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -8,7 +8,6 @@ import {
   TableCell,
   TableBody,
   TableRow,
-  Button,
   TableFooter,
   Pagination,
   TableContainer,
@@ -80,6 +79,11 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
         deleteSpt(id, sptDispatch, Swal);
       }
     });
+  };
+
+  // Menuju halaman cetak
+  const goToCetak = (id) => {
+    history.push(`${path}/cetak/${id}`);
   };
 
   // Menuju halaman detail
@@ -249,7 +253,10 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                     >
                       Buat Nota
                     </button>
-                    <button className="bg-gray-500 text-white px-3 py-1 text-sm rounded-md">
+                    <button
+                      className="bg-gray-500 text-white px-3 py-1 text-sm rounded-md"
+                      onClick={() => goToCetak(item.id_spt)}
+                    >
                       Cetak SPT
                     </button>
                   </div>
