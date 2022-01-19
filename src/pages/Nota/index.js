@@ -4,7 +4,6 @@ import PageTitle from "../../components/Typography/PageTitle";
 import { Card, CardBody, Button, Input, Label } from "@windmill/react-ui";
 import ButtonExcel from "../../components/Buttons/ButtonExcel";
 import DataTable from "./DataTable";
-import response from "../../utils/demo/notaData";
 import ModalExcel from "../../components/Modals/ModalExcel";
 import { GlobalContext } from "../../context/Provider";
 import { getNota, getNotaByFilter } from "../../context/actions/Nota";
@@ -56,6 +55,11 @@ const Nota = () => {
       sampai_tgl: "",
     });
     getNota(notaDispatch);
+  };
+
+  // Halaman tambah transaksi
+  const goToTambah = () => {
+    history.push(`${path}/transaksi`);
   };
 
   return (
@@ -116,6 +120,7 @@ const Nota = () => {
 
           <div className="flex flex-wrap justify-between flex-col md:flex-row mb-5 mt-4">
             <div className="flex flex-wrap flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-1">
+              <Button onClick={goToTambah}>Buat Transaksi</Button>
               <ButtonExcel onClick={openModal} />
             </div>
 

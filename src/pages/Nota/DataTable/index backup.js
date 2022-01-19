@@ -194,7 +194,50 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                     ))}
                 </div>
               </TableCell>
-
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "bayar"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "bayar")}
+                  >
+                    Jml. Yg Dibayar
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "bayar" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "tgl_nota"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "tgl_nota")}
+                  >
+                    Tanggal Nota
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "tgl_nota" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
               <TableCell>
                 <div className="flex gap-1 items-center">
                   <a
@@ -227,13 +270,10 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   <span className="text-sm">{item.id_nota}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">
-                    {item.tgl_nota &&
-                      format(new Date(item.tgl_nota), "dd-MM-y")}
-                  </span>
+                  <span className="text-sm">{item.id_spt}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.nm_pelanggan}</span>
+                  <span className="text-sm">{item.diskon}</span>
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">
@@ -244,7 +284,21 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                       })}
                   </span>
                 </TableCell>
-
+                <TableCell>
+                  <span className="text-sm">
+                    {item.bayar &&
+                      item.bayar.toLocaleString("id", {
+                        style: "currency",
+                        currency: "IDR",
+                      })}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <span className="text-sm">
+                    {item.tgl_nota &&
+                      format(new Date(item.tgl_nota), "dd-MM-y")}
+                  </span>
+                </TableCell>
                 <TableCell>
                   {item.id_status_nota === 2 && (
                     <span className="text-sm text-white bg-red-500 px-5 py-2 font-semibold rounded-sm">

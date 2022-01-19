@@ -33,15 +33,18 @@ const TambahDriver = lazy(() => import("../pages/DataMaster/Driver/Tambah"));
 const EditDriver = lazy(() => import("../pages/DataMaster/Driver/Edit"));
 const DetailDriver = lazy(() => import("../pages/DataMaster/Driver/Detail"));
 
+// Transaksi
+const Transaksi = lazy(() => import("../pages/Transaksi"));
+
 // SPT
 const SPT = lazy(() => import("../pages/SPT"));
 const TambahSPT = lazy(() => import("../pages/SPT/Tambah"));
 const DetailSPT = lazy(() => import("../pages/SPT/Detail"));
 const EditSPT = lazy(() => import("../pages/SPT/Edit"));
-const BuatNotaSPT = lazy(() => import("../pages/SPT/BuatNota"));
 const CetakSPT = lazy(() => import("../pages/SPT/Cetak"));
 
 // Nota
+const BuatNota = lazy(() => import("../pages/Nota/BuatNota"));
 const Nota = lazy(() => import("../pages/Nota"));
 const DetailNota = lazy(() => import("../pages/Nota/Detail"));
 const EditNota = lazy(() => import("../pages/Nota/Edit"));
@@ -155,6 +158,13 @@ const routes = [
     path: "/driver/detail/:id",
     component: DetailDriver,
   },
+
+  // Route Transaksi
+  {
+    path: "/transaksi",
+    component: Transaksi,
+  },
+
   // Route SPT
   {
     path: "/spt",
@@ -178,7 +188,7 @@ const routes = [
   },
   {
     path: "/spt/:id/buat-nota",
-    component: BuatNotaSPT,
+    component: BuatNota,
   },
   // Route Nota
   {
@@ -193,6 +203,11 @@ const routes = [
     path: "/nota/edit/:id",
     component: EditNota,
   },
+  {
+    path: "/nota/transaksi",
+    component: BuatNota,
+  },
+
   // Route Users
   {
     path: "/users",

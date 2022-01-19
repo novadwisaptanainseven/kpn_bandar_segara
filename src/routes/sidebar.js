@@ -39,14 +39,19 @@ const routes = [
     ],
   },
   {
+    path: "/app/nota",
+    icon: "MoneyIcon",
+    name: "Nota Transaksi",
+  },
+  {
     path: "/app/spt",
     icon: "MailIcon",
     name: "SPT",
   },
   {
-    path: "/app/nota",
+    path: "/app/transaksi",
     icon: "MoneyIcon",
-    name: "Nota Transaksi",
+    name: "Riwayat Transaksi",
   },
   {
     path: "/app/users",
