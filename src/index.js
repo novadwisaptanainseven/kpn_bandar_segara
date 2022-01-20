@@ -7,7 +7,7 @@ import ReactDOM from "react-dom";
 // import "mdbreact/dist/css/mdb.css";
 
 import "./assets/css/tailwind.output.css";
-// import './assets/css/my-tailwind.css'
+import './assets/css/my-tailwind.css'
 
 import App from "./App";
 import { SidebarProvider } from "./context/SidebarContext";

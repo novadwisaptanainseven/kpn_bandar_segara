@@ -4,6 +4,7 @@ import { Card, CardBody } from "@windmill/react-ui";
 import { useRouteMatch } from "react-router-dom";
 import { getPerusahaanById } from "../../../../context/actions/Perusahaan";
 import { DetailSkeletonLoading } from "../../../../components/SkeletonLoading";
+import Interweave from "interweave";
 
 const Detail = () => {
   const match = useRouteMatch();
@@ -34,8 +35,10 @@ const Detail = () => {
                 <div className="col-span-2">{perusahaan.nm_perusahaan}</div>
               </div>
               <div className="grid grid-cols-3 mb-2">
-                <div className="font-semibold">Alamat Perusahaan</div>
-                <div className="col-span-2">{perusahaan.almt_perusahaan}</div>
+                <div className="font-semibold">Keterangan Perusahaan</div>
+                <div className="col-span-2">
+                  <Interweave content={perusahaan.keterangan} />
+                </div>
               </div>
               <div className="grid grid-cols-3 mb-2">
                 <div className="font-semibold">Pembuat</div>

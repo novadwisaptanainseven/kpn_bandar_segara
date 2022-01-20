@@ -28,6 +28,7 @@ import ModalTambahItem from "./ModalTambahItem";
 const BuatNota = () => {
   const [pelanggan, setPelanggan] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+ 
 
   const openModal = () => {
     setIsModalOpen(true);

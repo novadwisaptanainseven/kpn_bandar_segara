@@ -47,7 +47,7 @@ const Tujuan = () => {
           <div className="flex flex-wrap justify-between flex-col md:flex-row mb-5">
             <div className="flex flex-wrap flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-1">
               <Button onClick={goToTambah}>Tambah</Button>
-              <ButtonExcel onClick={() => exportExcel("tujuan")} />
+              {/* <ButtonExcel onClick={() => exportExcel("tujuan")} /> */}
             </div>
 
             <div className="mt-2 md:w-64 md:mt-0">

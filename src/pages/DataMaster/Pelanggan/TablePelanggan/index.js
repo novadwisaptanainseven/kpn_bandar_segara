@@ -22,6 +22,7 @@ import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
 import useSortableData from "../../../../helpers/useSortableData";
 import { deletePelanggan } from "../../../../context/actions/Pelanggan";
 import { GlobalContext } from "../../../../context/Provider";
+import Interweave from "interweave";
 
 const Swal = withReactContent(swal2);
 
@@ -30,8 +31,6 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
   const history = useHistory();
   const { path } = match;
   const { pelangganDispatch } = useContext(GlobalContext);
-
-  
 
   // Go To Edit
   const goToEdit = (id) => {
@@ -69,7 +68,7 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.id_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.keterangan.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_perusahaan.toLowerCase().includes(filterText.toLowerCase())
       );
@@ -115,28 +114,6 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
                 <div className="flex gap-1 items-center">
                   <a
                     className={`${
-                      sortConfig && sortConfig.key === "id_pelanggan"
-                        ? "text-gray-900 dark:text-gray-100"
-                        : ""
-                    }`}
-                    href="."
-                    onClick={(e) => handleSorting(e, "id_pelanggan")}
-                  >
-                    ID
-                  </a>
-                  {sortConfig &&
-                    sortConfig.key === "id_pelanggan" &&
-                    (sortConfig.direction === "ascending" ? (
-                      <ArrowUp />
-                    ) : (
-                      <ArrowDown />
-                    ))}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex gap-1 items-center">
-                  <a
-                    className={`${
                       sortConfig && sortConfig.key === "nm_pelanggan"
                         ? "text-gray-900 dark:text-gray-100"
                         : ""
@@ -177,6 +154,28 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
                     ))}
                 </div>
               </TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "keterangan"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "keterangan")}
+                  >
+                    Keterangan
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "keterangan" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
               <TableCell>Aksi</TableCell>
             </tr>
           </TableHeader>
@@ -184,13 +183,15 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
             {sortedDatatable.map((item, i) => (
               <TableRow key={i}>
                 <TableCell>
-                  <span className="text-sm">{item.id_pelanggan}</span>
-                </TableCell>
-                <TableCell>
                   <span className="text-sm">{item.nm_pelanggan}</span>
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">{item.nm_perusahaan}</span>
+                </TableCell>
+                <TableCell>
+                  <span className="text-sm">
+                    <Interweave content={item.keterangan} />
+                  </span>
                 </TableCell>
 
                 <TableCell>

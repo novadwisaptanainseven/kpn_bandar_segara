@@ -7,6 +7,7 @@ import {
   Input,
   Label,
   HelperText,
+  Textarea
 } from "@windmill/react-ui";
 import SelectData from "react-select";
 import { selectPerusahaan } from "../../../../context/actions/Perusahaan";
@@ -125,6 +126,23 @@ const Tambah = () => {
                       <HelperText valid={false}>
                         {errors.id_perusahaan}
                       </HelperText>
+                    )}
+                  </Label>
+                  <Label className="mt-4">
+                    <span>Keterangan</span>
+                    <Textarea
+                      className={`mt-1 ${
+                        errors.keterangan ? "border-red-500" : null
+                      }`}
+                      rows="3"
+                      placeholder="Keterangan Pelanggan"
+                      name="keterangan"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.keterangan || ""}
+                    />
+                    {errors.keterangan && (
+                      <HelperText valid={false}>{errors.keterangan}</HelperText>
                     )}
                   </Label>
                   <div className="mt-5 flex justify-end gap-2">

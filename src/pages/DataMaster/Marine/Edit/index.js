@@ -7,6 +7,7 @@ import {
   Input,
   Label,
   HelperText,
+  Textarea,
 } from "@windmill/react-ui";
 import { useHistory } from "react-router-dom";
 import { useRouteMatch } from "react-router-dom";
@@ -84,6 +85,25 @@ const Edit = () => {
                       {errors.nm_marine && (
                         <HelperText valid={false}>
                           {errors.nm_marine}
+                        </HelperText>
+                      )}
+                    </Label>
+                    <Label className="mt-4">
+                      <span>Keterangan</span>
+                      <Textarea
+                        placeholder="Keterangan"
+                        name="keterangan"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.keterangan || ""}
+                        rows={3}
+                        className={`mt-1 ${
+                          errors.keterangan ? "border-red-500" : null
+                        }`}
+                      />
+                      {errors.keterangan && (
+                        <HelperText valid={false}>
+                          {errors.keterangan}
                         </HelperText>
                       )}
                     </Label>

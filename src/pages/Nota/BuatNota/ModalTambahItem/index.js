@@ -17,9 +17,11 @@ import { Formik } from "formik";
 import initState from "../Formik/initState";
 import validationSchema from "../Formik/validationSchema";
 import SelectData from "react-select";
+import TimePicker from "react-time-picker-input";
 
 const ModalTambahItem = ({ isModalOpen, closeModal }) => {
   const [pelanggan, setPelanggan] = useState([]);
+  const [value, setValue] = useState("10:00");
   const [marine, setMarine] = useState([]);
   const [driver, setDriver] = useState([]);
   const [tujuan, setTujuan] = useState([]);
@@ -175,7 +177,7 @@ const ModalTambahItem = ({ isModalOpen, closeModal }) => {
 
                   <Label className="mt-4">
                     <span>Jam Keberangkatan</span>
-                    <Input
+                    {/* <Input
                       name="jam"
                       type="time"
                       onChange={handleChange}
@@ -184,6 +186,14 @@ const ModalTambahItem = ({ isModalOpen, closeModal }) => {
                       className={`mt-1 ${
                         errors.jam && touched.jam ? "border-red-500" : null
                       }`}
+                    />
+                    {errors.jam && touched.jam && (
+                      <HelperText valid={false}>{errors.jam}</HelperText>
+                    )} */}
+                    <TimePicker
+                      onChange={(newValue) => setFieldValue("jam", newValue)}
+                      value={values.jam}
+                      eachInputDropdown={true}
                     />
                     {errors.jam && touched.jam && (
                       <HelperText valid={false}>{errors.jam}</HelperText>

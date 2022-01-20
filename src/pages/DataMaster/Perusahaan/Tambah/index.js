@@ -71,22 +71,20 @@ const Tambah = () => {
                     )}
                   </Label>
                   <Label className="mt-4">
-                    <span>Alamat Perusahaan</span>
+                    <span>Keterangan Perusahaan</span>
                     <Textarea
                       className={`mt-1 ${
-                        errors.almt_perusahaan ? "border-red-500" : null
+                        errors.keterangan ? "border-red-500" : null
                       }`}
                       rows="3"
-                      placeholder="Alamat Perusahaan"
-                      name="almt_perusahaan"
+                      placeholder="Keterangan Perusahaan"
+                      name="keterangan"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.almt_perusahaan || ""}
+                      value={values.keterangan || ""}
                     />
-                    {errors.almt_perusahaan && (
-                      <HelperText valid={false}>
-                        {errors.almt_perusahaan}
-                      </HelperText>
+                    {errors.keterangan && (
+                      <HelperText valid={false}>{errors.keterangan}</HelperText>
                     )}
                   </Label>
 

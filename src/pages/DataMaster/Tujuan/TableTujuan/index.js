@@ -21,6 +21,7 @@ import { deleteTujuan } from "../../../../context/actions/Tujuan";
 import useSortableData from "../../../../helpers/useSortableData";
 import ArrowUp from "../../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
+import Interweave from "interweave";
 
 const Swal = withReactContent(swal2);
 
@@ -67,7 +68,7 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
       response2 = response.filter(
         (item) =>
           item.nm_tujuan.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.id_tujuan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.keterangan.toLowerCase().includes(filterText.toLowerCase()) ||
           item.harga.toString().includes(filterText)
       );
     }
@@ -107,28 +108,6 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
       <Table>
         <TableHeader>
           <tr>
-            <TableCell>
-              <div className="flex gap-1 items-center">
-                <a
-                  className={`${
-                    sortConfig && sortConfig.key === "id_tujuan"
-                      ? "text-gray-900 dark:text-gray-100"
-                      : ""
-                  }`}
-                  href="."
-                  onClick={(e) => handleSorting(e, "id_tujuan")}
-                >
-                  ID
-                </a>
-                {sortConfig &&
-                  sortConfig.key === "id_tujuan" &&
-                  (sortConfig.direction === "ascending" ? (
-                    <ArrowUp />
-                  ) : (
-                    <ArrowDown />
-                  ))}
-              </div>
-            </TableCell>
             <TableCell>
               <div className="flex gap-1 items-center">
                 <a
@@ -173,15 +152,34 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
                   ))}
               </div>
             </TableCell>
+            <TableCell>
+              <div className="flex gap-1 items-center">
+                <a
+                  className={`${
+                    sortConfig && sortConfig.key === "keterangan"
+                      ? "text-gray-900 dark:text-gray-100"
+                      : ""
+                  }`}
+                  href="."
+                  onClick={(e) => handleSorting(e, "keterangan")}
+                >
+                  Keterangan
+                </a>
+                {sortConfig &&
+                  sortConfig.key === "keterangan" &&
+                  (sortConfig.direction === "ascending" ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  ))}
+              </div>
+            </TableCell>
             <TableCell>Aksi</TableCell>
           </tr>
         </TableHeader>
         <TableBody>
           {sortedDatatable.map((item, i) => (
             <TableRow key={i}>
-              <TableCell>
-                <span className="text-sm">{item.id_tujuan}</span>
-              </TableCell>
               <TableCell>
                 <span className="text-sm">{item.nm_tujuan}</span>
               </TableCell>
@@ -191,6 +189,11 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
                     style: "currency",
                     currency: "IDR",
                   })}
+                </span>
+              </TableCell>
+              <TableCell>
+                <span className="text-sm">
+                  <Interweave content={item.keterangan} />
                 </span>
               </TableCell>
 

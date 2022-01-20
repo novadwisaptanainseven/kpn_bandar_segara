@@ -21,6 +21,7 @@ import { deleteDriver } from "../../../../context/actions/Driver";
 import useSortableData from "../../../../helpers/useSortableData";
 import ArrowUp from "../../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
+import Interweave from "interweave";
 const Swal = withReactContent(swal2);
 
 const TableDriver = ({ resultsPerPage, response, filterText }) => {
@@ -65,7 +66,7 @@ const TableDriver = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.id_driver.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.keterangan.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_driver.toLowerCase().includes(filterText.toLowerCase())
       );
     }
@@ -109,28 +110,6 @@ const TableDriver = ({ resultsPerPage, response, filterText }) => {
               <div className="flex gap-1 items-center">
                 <a
                   className={`${
-                    sortConfig && sortConfig.key === "id_driver"
-                      ? "text-gray-900 dark:text-gray-100"
-                      : ""
-                  }`}
-                  href="."
-                  onClick={(e) => handleSorting(e, "id_driver")}
-                >
-                  ID Driver
-                </a>
-                {sortConfig &&
-                  sortConfig.key === "id_driver" &&
-                  (sortConfig.direction === "ascending" ? (
-                    <ArrowUp />
-                  ) : (
-                    <ArrowDown />
-                  ))}
-              </div>
-            </TableCell>
-            <TableCell>
-              <div className="flex gap-1 items-center">
-                <a
-                  className={`${
                     sortConfig && sortConfig.key === "nm_driver"
                       ? "text-gray-900 dark:text-gray-100"
                       : ""
@@ -149,6 +128,28 @@ const TableDriver = ({ resultsPerPage, response, filterText }) => {
                   ))}
               </div>
             </TableCell>
+            <TableCell>
+              <div className="flex gap-1 items-center">
+                <a
+                  className={`${
+                    sortConfig && sortConfig.key === "keterangan"
+                      ? "text-gray-900 dark:text-gray-100"
+                      : ""
+                  }`}
+                  href="."
+                  onClick={(e) => handleSorting(e, "keterangan")}
+                >
+                  Keterangan
+                </a>
+                {sortConfig &&
+                  sortConfig.key === "keterangan" &&
+                  (sortConfig.direction === "ascending" ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  ))}
+              </div>
+            </TableCell>
             <TableCell>Aksi</TableCell>
           </tr>
         </TableHeader>
@@ -156,10 +157,12 @@ const TableDriver = ({ resultsPerPage, response, filterText }) => {
           {sortedDatatable.map((item, i) => (
             <TableRow key={i}>
               <TableCell>
-                <span className="text-sm">{item.id_driver}</span>
+                <span className="text-sm">{item.nm_driver}</span>
               </TableCell>
               <TableCell>
-                <span className="text-sm">{item.nm_driver}</span>
+                <span className="text-sm">
+                  <Interweave content={item.keterangan} />
+                </span>
               </TableCell>
 
               <TableCell>
