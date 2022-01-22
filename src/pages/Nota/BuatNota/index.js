@@ -21,14 +21,38 @@ import initState from "./Formik/initState";
 import validationSchema from "./Formik/validationSchema";
 import { GlobalContext } from "../../../context/Provider";
 import { insertNota } from "../../../context/actions/Nota";
+import { selectStatusSPT } from "../../../context/actions/SPT";
 import { selectPelanggan } from "../../../context/actions/Pelanggan";
 import SelectData from "react-select";
 import ModalTambahItem from "./ModalTambahItem";
+import { deleteSptTemp, getSptTemp } from "../../../context/actions/SPT_Temp";
+import { LoadingIcon } from "../../../assets";
+
+import swal2 from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import Interweave from "interweave";
+
+const Swal = withReactContent(swal2);
 
 const BuatNota = () => {
   const [pelanggan, setPelanggan] = useState([]);
+  const [idPelanggan, setIdPelanggan] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
- 
+  const [statusNota, setStatusNota] = useState([]);
+  const [sptTemp, setSptTemp] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [statusBayar, setStatusBayar] = useState("2");
+
+  useEffect(() => {
+    console.log(statusBayar);
+  }, [statusBayar]);
+
+  useEffect(() => {
+    // Get data status nota
+    selectStatusSPT(setStatusNota);
+    // Get data SPT Temporary by ID Pelanggan
+    if (idPelanggan) getSptTemp(idPelanggan, setLoading, setSptTemp);
+  }, [idPelanggan]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -47,6 +71,57 @@ const BuatNota = () => {
     label: `${item.nm_pelanggan} (${item.nm_perusahaan})`,
   }));
 
+  const hitungPotonganHarga = (diskon, hargaTujuan) => {
+    return ((diskon / 100) * hargaTujuan).toLocaleString("id", {
+      style: "currency",
+      currency: "IDR",
+    });
+  };
+
+  const hitungTotalHarga = () => {
+    const totHarga = sptTemp.reduce(add, 0);
+    function add(accumulator, a) {
+      return accumulator + a.harga;
+    }
+
+    return totHarga.toLocaleString("id", {
+      style: "currency",
+      currency: "IDR",
+    });
+  };
+
+  const hitungTotalPotongan = () => {
+    const totPotongan = sptTemp.reduce(add, 0);
+
+    function add(accumulator, a) {
+      const potonganHarga = (a.diskon / 100) * a.harga_tujuan;
+      return accumulator + potonganHarga;
+    }
+
+    return totPotongan.toLocaleString("id", {
+      style: "currency",
+      currency: "IDR",
+    });
+  };
+
+  // Menangani tombol hapus
+  const handleDelete = (id) => {
+    Swal.fire({
+      icon: "warning",
+      title: "Anda yakin ingin menghapus list item penyewaan ini ?",
+      text: "Jika yakin, klik YA",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "YA",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        deleteSptTemp(id, idPelanggan, setSptTemp, setLoading, Swal);
+      }
+    });
+  };
+
   return (
     <>
       <PageTitle backButton>Pembuatan Nota Transaksi</PageTitle>
@@ -60,8 +135,9 @@ const BuatNota = () => {
                 name="id_pelanggan"
                 inputId="id_pelanggan"
                 options={optionsPelanggan}
+                onChange={(opt) => setIdPelanggan(opt ? opt.value : "")}
                 placeholder="-- Pilih Pelanggan --"
-                isClearable
+                // isClearable
               />
             </Label>
           </form>
@@ -71,12 +147,21 @@ const BuatNota = () => {
               List Item Penyewaan Kapal
             </h1>
 
-            <button
-              className="bg-teal-400 text-white px-3 py-1 text-sm rounded-md mb-2"
-              onClick={openModal}
-            >
-              Tambah Item
-            </button>
+            <div className="flex justify-between">
+              <button
+                className={`bg-teal-400 text-white px-3 py-2 text-sm rounded-md mb-2  ${
+                  !idPelanggan ? "opacity-50 cursor-not-allowed" : " "
+                }`}
+                onClick={openModal}
+                disabled={!idPelanggan ? true : false}
+              >
+                Tambah Item
+              </button>
+
+              {loading && (
+                <img src={LoadingIcon} alt="loading-icon" className="w-10" />
+              )}
+            </div>
             <TableContainer className="text-sm mb-3">
               <Table>
                 <TableHeader>
@@ -87,108 +172,101 @@ const BuatNota = () => {
                     <TableCell>Marine</TableCell>
                     <TableCell>Tanggal</TableCell>
                     <TableCell>Jam</TableCell>
+                    <TableCell>Keterangan</TableCell>
                     <TableCell>Diskon</TableCell>
                     <TableCell>Potongan</TableCell>
                     <TableCell>Harga</TableCell>
+                    <TableCell>Status</TableCell>
                     <TableCell>Aksi</TableCell>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>1</TableCell>
-                    <TableCell>Palaran</TableCell>
-                    <TableCell>Egi</TableCell>
-                    <TableCell>Ranto</TableCell>
-                    <TableCell>21-10-2022</TableCell>
-                    <TableCell>10.00</TableCell>
-                    <TableCell>
-                      <Input
-                        id="diskon1"
-                        type="number"
-                        name="diskon1"
-                        placeholder="%"
-                        style={{ width: 80 }}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Input
-                        id="potongan1"
-                        type="number"
-                        name="potongan1"
-                        style={{ width: 150 }}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Input
-                        id="harga1"
-                        type="number"
-                        name="harga1"
-                        value={1000000}
-                        style={{ width: 150 }}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <button className="bg-red-400 text-white px-3 py-1 text-sm rounded-md">
-                        Hapus
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>2</TableCell>
-                    <TableCell>Anggana</TableCell>
-                    <TableCell>Egi</TableCell>
-                    <TableCell>Ranto</TableCell>
-                    <TableCell>21-10-2022</TableCell>
-                    <TableCell>14.00</TableCell>
-                    <TableCell>
-                      <Input
-                        id="diskon2"
-                        type="number"
-                        name="diskon2"
-                        placeholder="%"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Input id="potongan2" type="number" name="potongan2" />
-                    </TableCell>
-                    <TableCell>
-                      <Input
-                        id="harga2"
-                        type="number"
-                        name="harga2"
-                        value={1000000}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <button className="bg-red-400 text-white px-3 py-1 text-sm rounded-md">
-                        Hapus
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell
-                      className="font-semibold text-lg text-center"
-                      colSpan={7}
-                    >
-                      Total
-                    </TableCell>
-                    <TableCell>
-                      <Input
-                        id="totPotongan"
-                        type="number"
-                        name="totPotongan"
-                        value={1000000}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Input
-                        id="totHarga"
-                        type="number"
-                        name="totHarga"
-                        value={1000000}
-                      />
-                    </TableCell>
-                  </TableRow>
+                  {sptTemp.length === 0 && (
+                    <TableRow>
+                      <TableCell colSpan={10} className="text-center">
+                        Item Penyewaan Belum Ada
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  {sptTemp.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>{item.nm_tujuan}</TableCell>
+                      <TableCell>{item.nm_driver}</TableCell>
+                      <TableCell>{item.nm_marine}</TableCell>
+                      <TableCell>
+                        {format(new Date(item.tgl_keberangkatan), "dd/MM/y")}
+                      </TableCell>
+                      <TableCell>{item.waktu_keberangkatan}</TableCell>
+                      <TableCell>
+                        <Interweave content={item.keterangan} />
+                      </TableCell>
+                      <TableCell>{item.diskon} %</TableCell>
+
+                      <TableCell>
+                        <TableCell>
+                          {hitungPotonganHarga(item.diskon, item.harga_tujuan)}
+                        </TableCell>
+                      </TableCell>
+                      <TableCell>
+                        <TableCell>
+                          {item.harga.toLocaleString("id", {
+                            style: "currency",
+                            currency: "IDR",
+                          })}
+                        </TableCell>
+                      </TableCell>
+                      <TableCell>
+                        <Select
+                          style={{ width: 150 }}
+                          id="statusBayar"
+                          name="statusBayar"
+                          defaultValue={item.id_status_spt}
+                          onChange={(e) => setStatusBayar(e.target.value)}
+                        >
+                          {statusNota.map((item) => (
+                            <option
+                              key={item.id_status_spt}
+                              value={item.id_status_spt}
+                            >
+                              {item.nm_status_spt}
+                            </option>
+                          ))}
+                        </Select>
+                      </TableCell>
+
+                      <TableCell className="space-x-2">
+                        <button
+                          onClick={() => handleDelete(item.id_spt_temp)}
+                          className="bg-blue-500 text-white px-3 py-1 text-sm rounded-md"
+                        >
+                          Ubah
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item.id_spt_temp)}
+                          className="bg-red-400 text-white px-3 py-1 text-sm rounded-md"
+                        >
+                          Hapus
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  {sptTemp.length > 0 && (
+                    <TableRow>
+                      <TableCell
+                        colSpan={8}
+                        className="text-center font-semibold"
+                      >
+                        Total
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {hitungTotalPotongan()}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {hitungTotalHarga()}
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -197,9 +275,11 @@ const BuatNota = () => {
             <Label className="w-64">
               <span>Status Pembayaran</span>
               <Select className="mt-1" id="statusBayar" name="statusBayar">
-                <option value="1">Belum Bayar</option>
-                <option value="2">Belum Lunas</option>
-                <option value="3">Lunas</option>
+                {statusNota.map((item) => (
+                  <option key={item.id_status_spt} value={item.id_status_spt}>
+                    {item.nm_status_spt}
+                  </option>
+                ))}
               </Select>
             </Label>
             <Button className="h-10">Simpan Transaksi</Button>
@@ -208,7 +288,12 @@ const BuatNota = () => {
       </Card>
 
       {/* Modal Tambah Item Penyewaan */}
-      <ModalTambahItem isModalOpen={isModalOpen} closeModal={closeModal} />
+      <ModalTambahItem
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        setSptTemp={setSptTemp}
+        idPelanggan={idPelanggan}
+      />
     </>
   );
 };

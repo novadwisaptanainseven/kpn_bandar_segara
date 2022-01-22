@@ -1,21 +1,21 @@
-import getSpt from "./getSpt";
-import deleteSpt from "./deleteSpt";
+import getSptTemp from "./getSptTemp";
+import deleteSptTemp from "./deleteSptTemp";
 import getSptByFilter from "./getSptByFilter";
 import getSptById from "./getSptById";
 import getBuatSpt from "./getBuatSpt";
-import insertSpt from "./insertSpt";
+import insertSptTemp from "./insertSptTemp";
 import getEditSpt from "./getEditSpt";
 import editSpt from "./editSpt";
 import getBuatNota from "./getBuatNota";
 import selectStatusSPT from "./selectStatusSPT";
 
 export {
-  getSpt,
-  deleteSpt,
+  getSptTemp,
+  deleteSptTemp,
   getSptByFilter,
   getSptById,
   getBuatSpt,
-  insertSpt,
+  insertSptTemp,
   getEditSpt,
   editSpt,
   getBuatNota,
