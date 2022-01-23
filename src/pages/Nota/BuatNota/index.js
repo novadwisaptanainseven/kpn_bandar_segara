@@ -25,12 +25,17 @@ import { selectStatusSPT } from "../../../context/actions/SPT";
 import { selectPelanggan } from "../../../context/actions/Pelanggan";
 import SelectData from "react-select";
 import ModalTambahItem from "./ModalTambahItem";
-import { deleteSptTemp, getSptTemp } from "../../../context/actions/SPT_Temp";
+import {
+  deleteSptTemp,
+  getSptTemp,
+  updateStatusSptTemp,
+} from "../../../context/actions/SPT_Temp";
 import { LoadingIcon } from "../../../assets";
 
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Interweave from "interweave";
+import ModalEdit from "./ModalEdit";
 
 const Swal = withReactContent(swal2);
 
@@ -38,10 +43,15 @@ const BuatNota = () => {
   const [pelanggan, setPelanggan] = useState([]);
   const [idPelanggan, setIdPelanggan] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalEditOpen, setIsModalEditOpen] = useState({
+    id: "",
+    modal: false,
+  });
   const [statusNota, setStatusNota] = useState([]);
   const [sptTemp, setSptTemp] = useState([]);
   const [loading, setLoading] = useState(false);
   const [statusBayar, setStatusBayar] = useState("2");
+  const [idSptTempModal, setIdSptTempModal] = useState("");
 
   useEffect(() => {
     console.log(statusBayar);
@@ -60,6 +70,20 @@ const BuatNota = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openModalEdit = (id) => {
+    setIsModalEditOpen({
+      id: id,
+      modal: true,
+    });
+  };
+
+  const closeModalEdit = () => {
+    setIsModalEditOpen({
+      id: "",
+      modal: false,
+    });
   };
 
   useEffect(() => {
@@ -120,6 +144,13 @@ const BuatNota = () => {
         deleteSptTemp(id, idPelanggan, setSptTemp, setLoading, Swal);
       }
     });
+  };
+
+  const handleChangeStatusBayar = (idSptTemp, status) => {
+    const values = {
+      id_status_spt: status,
+    };
+    updateStatusSptTemp(idSptTemp, idPelanggan, values, setLoading, setSptTemp);
   };
 
   return (
@@ -222,7 +253,12 @@ const BuatNota = () => {
                           id="statusBayar"
                           name="statusBayar"
                           defaultValue={item.id_status_spt}
-                          onChange={(e) => setStatusBayar(e.target.value)}
+                          onChange={(e) =>
+                            handleChangeStatusBayar(
+                              item.id_spt_temp,
+                              e.target.value
+                            )
+                          }
                         >
                           {statusNota.map((item) => (
                             <option
@@ -237,7 +273,7 @@ const BuatNota = () => {
 
                       <TableCell className="space-x-2">
                         <button
-                          onClick={() => handleDelete(item.id_spt_temp)}
+                          onClick={() => openModalEdit(item.id_spt_temp)}
                           className="bg-blue-500 text-white px-3 py-1 text-sm rounded-md"
                         >
                           Ubah
@@ -293,6 +329,13 @@ const BuatNota = () => {
         closeModal={closeModal}
         setSptTemp={setSptTemp}
         idPelanggan={idPelanggan}
+      />
+
+      {/* Modal Edit Item Penyewaan */}
+      <ModalEdit
+        isModalOpen={isModalEditOpen}
+        closeModal={closeModalEdit}
+        setSptTemp={setSptTemp}
       />
     </>
   );

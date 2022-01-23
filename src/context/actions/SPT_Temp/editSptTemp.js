@@ -5,18 +5,25 @@ import {
 } from "../../../components/AlertMessages";
 import axiosInstance from "../../../helpers/axios";
 
-const editSpt = (id, values, setLoading, history, dispatch) => {
+const editSptTemp = (
+  idSptTemp,
+  idPelanggan,
+  values,
+  setLoading,
+  setData,
+  history
+) => {
   const messageSuccess = "Edit SPT Berhasil";
   const messageError = "Edit SPT Gagal. Terjadi Kesalahan Server";
 
   setLoading(true);
 
   axiosInstance
-    .post(`spt/update/${id}`, values)
+    .post(`spt/update/${idSptTemp}`, values)
     .then((res) => {
       setLoading(false);
       showAlertSuccess(messageSuccess, "spt", history);
-      getSptTemp(dispatch);
+      getSptTemp(idPelanggan, setLoading, setData);
     })
     .catch((err) => {
       setLoading(false);
@@ -25,4 +32,4 @@ const editSpt = (id, values, setLoading, history, dispatch) => {
     });
 };
 
-export default editSpt;
+export default editSptTemp;
