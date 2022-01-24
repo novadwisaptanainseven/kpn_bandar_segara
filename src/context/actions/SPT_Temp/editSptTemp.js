@@ -11,19 +11,20 @@ const editSptTemp = (
   values,
   setLoading,
   setData,
-  history
+  closeModal
 ) => {
   const messageSuccess = "Edit SPT Berhasil";
-  const messageError = "Edit SPT Gagal. Terjadi Kesalahan Server";
+  const messageError = "Edit SPT Temp Gagal. Terjadi Kesalahan Server";
 
   setLoading(true);
 
   axiosInstance
-    .post(`spt/update/${idSptTemp}`, values)
+    .post(`spt_temp/update/${idSptTemp}`, values)
     .then((res) => {
       setLoading(false);
-      showAlertSuccess(messageSuccess, "spt", history);
+
       getSptTemp(idPelanggan, setLoading, setData);
+      closeModal();
     })
     .catch((err) => {
       setLoading(false);

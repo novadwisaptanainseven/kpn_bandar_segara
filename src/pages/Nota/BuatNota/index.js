@@ -40,6 +40,7 @@ import ModalEdit from "./ModalEdit";
 const Swal = withReactContent(swal2);
 
 const BuatNota = () => {
+  const history = useHistory();
   const [pelanggan, setPelanggan] = useState([]);
   const [idPelanggan, setIdPelanggan] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,6 +48,7 @@ const BuatNota = () => {
     id: "",
     modal: false,
   });
+  const { notaDispatch } = useContext(GlobalContext);
   const [statusNota, setStatusNota] = useState([]);
   const [sptTemp, setSptTemp] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -151,6 +153,13 @@ const BuatNota = () => {
       id_status_spt: status,
     };
     updateStatusSptTemp(idSptTemp, idPelanggan, values, setLoading, setSptTemp);
+  };
+
+  const handleSimpanTransaksi = () => {
+    const values = {
+      id_status_nota: statusBayar,
+    };
+    insertNota(idPelanggan, values, setLoading, history, notaDispatch);
   };
 
   return (
@@ -310,7 +319,12 @@ const BuatNota = () => {
           <div className="flex justify-between">
             <Label className="w-64">
               <span>Status Pembayaran</span>
-              <Select className="mt-1" id="statusBayar" name="statusBayar">
+              <Select
+                className="mt-1"
+                id="statusBayar"
+                name="statusBayar"
+                onChange={(e) => setStatusBayar(e.target.value)}
+              >
                 {statusNota.map((item) => (
                   <option key={item.id_status_spt} value={item.id_status_spt}>
                     {item.nm_status_spt}
@@ -318,7 +332,15 @@ const BuatNota = () => {
                 ))}
               </Select>
             </Label>
-            <Button className="h-10">Simpan Transaksi</Button>
+            <Button
+              className="h-10"
+              disabled={
+                !idPelanggan || sptTemp.length === 0 || loading ? true : false
+              }
+              onClick={handleSimpanTransaksi}
+            >
+              {loading ? "Loading..." : "Simpan Transaksi"}
+            </Button>
           </div>
         </CardBody>
       </Card>

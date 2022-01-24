@@ -53,8 +53,9 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.id_nota.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.id_spt.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.no_nota.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.nm_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.waktu_buat.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_status_nota.toLowerCase().includes(filterText.toLowerCase())
       );
     }
@@ -109,17 +110,17 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 <div className="flex gap-1 items-center">
                   <a
                     className={`${
-                      sortConfig && sortConfig.key === "id_nota"
+                      sortConfig && sortConfig.key === "no_nota"
                         ? "text-gray-900 dark:text-gray-100"
                         : ""
                     }`}
                     href="."
-                    onClick={(e) => handleSorting(e, "id_nota")}
+                    onClick={(e) => handleSorting(e, "no_nota")}
                   >
                     No. Nota
                   </a>
                   {sortConfig &&
-                    sortConfig.key === "id_nota" &&
+                    sortConfig.key === "no_nota" &&
                     (sortConfig.direction === "ascending" ? (
                       <ArrowUp />
                     ) : (
@@ -131,17 +132,17 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 <div className="flex gap-1 items-center">
                   <a
                     className={`${
-                      sortConfig && sortConfig.key === "id_spt"
+                      sortConfig && sortConfig.key === "waktu_buat"
                         ? "text-gray-900 dark:text-gray-100"
                         : ""
                     }`}
                     href="."
-                    onClick={(e) => handleSorting(e, "id_spt")}
+                    onClick={(e) => handleSorting(e, "waktu_buat")}
                   >
                     Tgl. Nota
                   </a>
                   {sortConfig &&
-                    sortConfig.key === "id_spt" &&
+                    sortConfig.key === "waktu_buat" &&
                     (sortConfig.direction === "ascending" ? (
                       <ArrowUp />
                     ) : (
@@ -153,17 +154,17 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 <div className="flex gap-1 items-center">
                   <a
                     className={`${
-                      sortConfig && sortConfig.key === "diskon"
+                      sortConfig && sortConfig.key === "nm_pelanggan"
                         ? "text-gray-900 dark:text-gray-100"
                         : ""
                     }`}
                     href="."
-                    onClick={(e) => handleSorting(e, "diskon")}
+                    onClick={(e) => handleSorting(e, "nm_pelanggan")}
                   >
                     Pelanggan
                   </a>
                   {sortConfig &&
-                    sortConfig.key === "diskon" &&
+                    sortConfig.key === "nm_pelanggan" &&
                     (sortConfig.direction === "ascending" ? (
                       <ArrowUp />
                     ) : (
@@ -223,12 +224,12 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
             {sortedDatatable.map((item, i) => (
               <TableRow key={i}>
                 <TableCell>
-                  <span className="text-sm">{item.id_nota}</span>
+                  <span className="text-sm">{item.no_nota}</span>
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">
-                    {item.tgl_nota &&
-                      format(new Date(item.tgl_nota), "dd-MM-y")}
+                    {item.waktu_buat &&
+                      format(new Date(item.waktu_buat), "dd-MM-y")}
                   </span>
                 </TableCell>
                 <TableCell>
@@ -245,19 +246,19 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 </TableCell>
 
                 <TableCell>
-                  {item.id_status_nota === 2 && (
+                  {item.id_status_nota === 3 && (
                     <span className="text-sm text-white bg-red-500 px-5 py-2 font-semibold rounded-sm">
-                      Belum Bayar
+                      {item.nm_status_nota}
                     </span>
                   )}
-                  {item.id_status_nota === 3 && (
+                  {item.id_status_nota === 2 && (
                     <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm">
-                      Belum Lunas
+                      {item.nm_status_nota}
                     </span>
                   )}
                   {item.id_status_nota === 1 && (
                     <span className="text-sm bg-lime-400 px-5 py-2 font-semibold rounded-sm">
-                      Lunas
+                      {item.nm_status_nota}
                     </span>
                   )}
                 </TableCell>

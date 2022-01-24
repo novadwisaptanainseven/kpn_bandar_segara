@@ -5,7 +5,7 @@ const getSptTemp = (idPelanggan, setLoading, setData) => {
   setLoading(true);
 
   axiosInstance
-    .get(`spt_temp/ubah/${idPelanggan}`)
+    .get(`spt_temp/${idPelanggan}`)
     .then((res) => {
       setData(res.data.data_spt_temp);
       setLoading(false);

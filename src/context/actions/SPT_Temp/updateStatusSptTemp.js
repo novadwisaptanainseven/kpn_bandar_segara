@@ -11,7 +11,7 @@ const updateStatusSptTemp = (
   setLoading(true);
 
   axiosInstance
-    .post(`spt_temp/update/${idSptTemp}/status`, values)
+    .post(`spt_temp/update/status/${idSptTemp}`, values)
     .then((res) => {
       setLoading(false);
       getSptTemp(idPelanggan, setLoading, setData);

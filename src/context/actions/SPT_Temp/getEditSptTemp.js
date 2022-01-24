@@ -1,8 +1,8 @@
 import axiosInstance from "../../../helpers/axios";
 
-const getEditSpt = (id, setData) => {
+const getEditSptTemp = (id, setData) => {
   axiosInstance
-    .get(`spt/ubah/${id}`)
+    .get(`spt_temp/ubah/${id}`)
     .then((res) => {
       setData(res.data);
       // console.log(res.data);
@@ -12,4 +12,4 @@ const getEditSpt = (id, setData) => {
     });
 };
 
-export default getEditSpt;
+export default getEditSptTemp;

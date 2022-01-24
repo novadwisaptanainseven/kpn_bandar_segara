@@ -27,7 +27,6 @@ const ModalTambahItem = ({
   setSptTemp,
   idPelanggan,
 }) => {
-  const [pelanggan, setPelanggan] = useState([]);
   const [value, setValue] = useState("10:00");
   const [marine, setMarine] = useState([]);
   const [driver, setDriver] = useState([]);
@@ -36,17 +35,11 @@ const ModalTambahItem = ({
 
   useEffect(() => {
     if (isModalOpen) {
-      selectPelanggan(setPelanggan);
       selectMarine(setMarine);
       selectTujuan(setTujuan);
       selectDriver(setDriver);
     }
   }, [isModalOpen]);
-
-  const optionsPelanggan = pelanggan.map((item) => ({
-    value: item.id_pelanggan,
-    label: `${item.nm_pelanggan}`,
-  }));
 
   const optionsMarine = marine.map((item) => ({
     value: item.id_marine,

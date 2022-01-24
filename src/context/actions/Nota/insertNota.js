@@ -5,7 +5,7 @@ import {
 } from "../../../components/AlertMessages";
 import axiosInstance from "../../../helpers/axios";
 
-const insertNota = (values, setLoading, history, dispatch) => {
+const insertNota = (idPelanggan, values, setLoading, history, dispatch) => {
   const messageSuccess = "Pembuatan Nota Transaksi Berhasil";
   const messageError =
     "Pembuatan Nota Transaksi Gagal. Terjadi Kesalahan Server";
@@ -13,7 +13,7 @@ const insertNota = (values, setLoading, history, dispatch) => {
   setLoading(true);
 
   axiosInstance
-    .post(`nota/insert`, values)
+    .post(`nota/insert/${idPelanggan}`, values)
     .then((res) => {
       setLoading(false);
       showAlertSuccess(messageSuccess, "nota", history);
