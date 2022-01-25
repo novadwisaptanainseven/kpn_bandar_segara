@@ -8,6 +8,8 @@ import getEditSpt from "./getEditSpt";
 import editSpt from "./editSpt";
 import getBuatNota from "./getBuatNota";
 import selectStatusSPT from "./selectStatusSPT";
+import updateStatusSpt from "./updateStatusSpt";
+import editSptModal from "./editSptModal";
 
 export {
   getSpt,
@@ -20,4 +22,6 @@ export {
   editSpt,
   getBuatNota,
   selectStatusSPT,
+  updateStatusSpt,
+  editSptModal,
 };

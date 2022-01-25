@@ -22,6 +22,8 @@ import { format } from "date-fns";
 import Interweave from "interweave";
 import { selectStatusNota } from "../../../context/actions/StatusNota";
 import { LoadingIcon } from "../../../assets";
+import { updateStatusSpt } from "../../../context/actions/SPT";
+import ModalEdit from "./ModalEdit";
 
 const Edit = () => {
   const match = useRouteMatch();
@@ -29,8 +31,28 @@ const Edit = () => {
   const [nota, setNota] = useState("");
   const [statusNota, setStatusNota] = useState([]);
   const [values, setValues] = useState();
+  const [valuesChanged, setValuesChanged] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
+  const [isModalEditOpen, setIsModalEditOpen] = useState({
+    id: "",
+    modal: false,
+  });
+  const [totalHarga, setTotalHarga] = useState(0);
+
+  const openModalEdit = (id) => {
+    setIsModalEditOpen({
+      id: id,
+      modal: true,
+    });
+  };
+
+  const closeModalEdit = () => {
+    setIsModalEditOpen({
+      id: "",
+      modal: false,
+    });
+  };
 
   // Get detail Nota
   useEffect(() => {
@@ -48,11 +70,46 @@ const Edit = () => {
     }
   }, [nota]);
 
+  useEffect(() => {
+    const hitungTotalHargaNumber = () => {
+      const totHarga = nota.data_spt.reduce(add, 0);
+      function add(accumulator, a) {
+        return accumulator + a.harga;
+      }
+
+      return totHarga;
+    };
+
+    if (nota) {
+      setTotalHarga(hitungTotalHargaNumber());
+    }
+  }, [nota]);
+
+  // Update values apabila total harga berubah
+  useEffect(() => {
+    setValues({
+      ...values,
+      total_harga: totalHarga,
+    });
+  }, [totalHarga]);
+
+  // Cek apakah ada perubahan pada values, apabila ada perubahan maka tampilkan notifikasi peringatan bahwa user harus menyimpan perubahan
+  useEffect(() => {
+    if (valuesChanged) {
+      setValues({
+        ...values,
+        total_harga: totalHarga,
+      });
+    }
+  }, [valuesChanged]);
+
   const handleChange = (e) => {
     setValues({
       ...values,
       [e.target.name]: e.target.value,
     });
+
+    setValuesChanged(true);
   };
 
   const hitungSisa = (totHarga, totBayar) => {
@@ -99,11 +156,13 @@ const Edit = () => {
     const values = {
       id_status_spt: status,
     };
-    // updateStatusSpt(idSpt, idPelanggan, values, setLoading, setSpt);
+    updateStatusSpt(params.id, idSpt, values, setLoadingUpdate, setNota);
   };
 
   const handleFormSubmit = () => {
     editNotaById(params.id, values, setLoading);
+
+    setValuesChanged(false);
   };
 
   return (
@@ -115,7 +174,7 @@ const Edit = () => {
             <DetailSkeletonLoading jumlahInput={15} />
           ) : (
             <>
-              <form className="grid md:grid-cols-2">
+              <form className="grid md:grid-cols-2 mb-5">
                 <div>
                   <Label className="mb-4">
                     <span>No. Nota</span>
@@ -177,6 +236,19 @@ const Edit = () => {
                       Bisa Diubah
                     </HelperText>
                   </Label>
+                  <Label className="mb-4">
+                    <span>Total Harga</span>
+                    <Input
+                      type="number"
+                      name="total_harga"
+                      value={totalHarga}
+                      className="mt-1"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <HelperText className="text-lime-600 italic">
+                      Terhitung otomatis dari list item penyewaan kapal
+                    </HelperText>
+                  </Label>
                   <div className="flex justify-end">
                     <Button
                       onClick={handleFormSubmit}
@@ -188,11 +260,20 @@ const Edit = () => {
                 </div>
               </form>
 
+              <hr />
+              {/* Notifikasi Peringatan untuk save apabila ada perubahan values */}
+              {valuesChanged && (
+                <div className="bg-red-600 text-white p-3 rounded-md mt-3">
+                  Terjadi perubahan, jangan lupa{" "}
+                  <span className="font-semibold">disimpan!</span>
+                </div>
+              )}
+
               <div className="mb-2 mt-4 flex justify-between">
-                <h1 className="text-lg font-semibold ">
+                <h1 className="text-lg font-semibold pb-4">
                   List Item Penyewaan Kapal
                 </h1>
-                {true && (
+                {loadingUpdate && (
                   <img src={LoadingIcon} alt="loading-icon" className="w-10" />
                 )}
               </div>
@@ -251,7 +332,7 @@ const Edit = () => {
                             style={{ width: 150 }}
                             id="statusBayar"
                             name="statusBayar"
-                            value={`${item.id_status_spt}`}
+                            value={item.id_status_spt}
                             onChange={(e) =>
                               handleChangeStatusBayar(
                                 item.id_spt,
@@ -262,31 +343,16 @@ const Edit = () => {
                             {statusNota.map((item) => (
                               <option
                                 key={item.id_status_nota}
-                                value={`${item.id_status_nota}`}
+                                value={item.id_status_nota}
                               >
                                 {item.nm_status_nota}
                               </option>
                             ))}
                           </Select>
-                          {/* {item.id_status_spt === 3 && (
-                            <span className="text-sm text-white bg-red-500 px-5 py-2 font-semibold rounded-sm">
-                              {item.nm_status_spt}
-                            </span>
-                          )}
-                          {item.id_status_spt === 2 && (
-                            <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm">
-                              {item.nm_status_spt}
-                            </span>
-                          )}
-                          {item.id_status_spt === 1 && (
-                            <span className="text-sm bg-lime-400 px-5 py-2 font-semibold rounded-sm">
-                              {item.nm_status_spt}
-                            </span>
-                          )} */}
                         </TableCell>
                         <TableCell className="space-x-2">
                           <button
-                            // onClick={() => openModalEdit(item.id_spt_temp)}
+                            onClick={() => openModalEdit(item.id_spt)}
                             className="bg-blue-500 text-white px-3 py-1 text-sm rounded-md"
                           >
                             Ubah
@@ -316,6 +382,15 @@ const Edit = () => {
           )}
         </CardBody>
       </Card>
+
+      {/* Modal Edit Item Penyewaan */}
+      <ModalEdit
+        isModalOpen={isModalEditOpen}
+        closeModal={closeModalEdit}
+        setSpt={setNota}
+        idNota={params.id}
+        setValuesChanged={setValuesChanged}
+      />
     </>
   );
 };
