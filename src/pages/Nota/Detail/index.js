@@ -33,6 +33,39 @@ const Detail = () => {
     });
   };
 
+  const hitungPotonganHarga = (diskon, hargaTujuan) => {
+    return ((diskon / 100) * hargaTujuan).toLocaleString("id", {
+      style: "currency",
+      currency: "IDR",
+    });
+  };
+
+  const hitungTotalHarga = () => {
+    const totHarga = nota.data_spt.reduce(add, 0);
+    function add(accumulator, a) {
+      return accumulator + a.harga;
+    }
+
+    return totHarga.toLocaleString("id", {
+      style: "currency",
+      currency: "IDR",
+    });
+  };
+
+  const hitungTotalPotongan = () => {
+    const totPotongan = nota.data_spt.reduce(add, 0);
+
+    function add(accumulator, a) {
+      const potonganHarga = (a.diskon / 100) * a.harga_tujuan;
+      return accumulator + potonganHarga;
+    }
+
+    return totPotongan.toLocaleString("id", {
+      style: "currency",
+      currency: "IDR",
+    });
+  };
+
   return (
     <>
       <PageTitle backButton={true}>Detail Nota Transaksi</PageTitle>
@@ -47,40 +80,40 @@ const Detail = () => {
                   <TableBody>
                     <TableRow className="bg-gray-200 dark:bg-gray-700">
                       <TableCell className="font-semibold">No Nota</TableCell>
-                      <TableCell>{nota.no_nota}</TableCell>
+                      <TableCell>{nota.data_nota.no_nota}</TableCell>
                     </TableRow>
                     <TableRow className="bg-gray-100 dark:bg-gray-800">
                       <TableCell className="font-semibold">
                         Tanggal Nota
                       </TableCell>
                       <TableCell>
-                        {format(new Date(nota.waktu_buat), "dd-MM-y")}
+                        {format(new Date(nota.data_nota.waktu_buat), "dd-MM-y")}
                       </TableCell>
                     </TableRow>
                     <TableRow className="bg-gray-200 dark:bg-gray-700">
                       <TableCell className="font-semibold">
                         Nama Pelanggan
                       </TableCell>
-                      <TableCell>{nota.nm_pelanggan}</TableCell>
+                      <TableCell>{nota.data_nota.nm_pelanggan}</TableCell>
                     </TableRow>
                     <TableRow className="bg-gray-100 dark:bg-gray-800">
                       <TableCell className="font-semibold">
                         Status Pembayaran
                       </TableCell>
                       <TableCell className="space-x-2">
-                        {nota.id_status_nota === 3 && (
+                        {nota.data_nota.id_status_nota === 3 && (
                           <span className="text-sm bg-red-500 px-5 py-2 font-semibold rounded-sm">
-                            {nota.nm_status_nota}
+                            {nota.data_nota.nm_status_nota}
                           </span>
                         )}
-                        {nota.id_status_nota === 2 && (
+                        {nota.data_nota.id_status_nota === 2 && (
                           <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm">
-                            {nota.nm_status_nota}
+                            {nota.data_nota.nm_status_nota}
                           </span>
                         )}
-                        {nota.id_status_nota === 1 && (
+                        {nota.data_nota.id_status_nota === 1 && (
                           <span className="text-sm bg-lime-500 px-5 py-2 font-semibold rounded-sm">
-                            {nota.nm_status_nota}
+                            {nota.data_nota.nm_status_nota}
                           </span>
                         )}
                       </TableCell>
@@ -89,25 +122,25 @@ const Detail = () => {
                       <TableCell className="font-semibold">
                         Dibuat Oleh
                       </TableCell>
-                      <TableCell>{nota.nm_pembuat}</TableCell>
+                      <TableCell>{nota.data_nota.nm_pembuat}</TableCell>
                     </TableRow>
                     <TableRow className="bg-gray-100 dark:bg-gray-800">
                       <TableCell className="font-semibold">
                         Waktu Buat
                       </TableCell>
-                      <TableCell>{nota.waktu_buat}</TableCell>
+                      <TableCell>{nota.data_nota.waktu_buat}</TableCell>
                     </TableRow>
                     <TableRow className="bg-gray-200 dark:bg-gray-700">
                       <TableCell className="font-semibold">
                         Diubah Oleh
                       </TableCell>
-                      <TableCell>{nota.nm_penggubah}</TableCell>
+                      <TableCell>{nota.data_nota.nm_penggubah}</TableCell>
                     </TableRow>
                     <TableRow className="bg-gray-100 dark:bg-gray-800">
                       <TableCell className="font-semibold">
                         Waktu Ubah
                       </TableCell>
-                      <TableCell>{nota.waktu_ubah}</TableCell>
+                      <TableCell>{nota.data_nota.waktu_ubah}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -134,38 +167,56 @@ const Detail = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow>
-                      <TableCell>1</TableCell>
-                      <TableCell>Palaran</TableCell>
-                      <TableCell>Anto</TableCell>
-                      <TableCell>Marine X123A</TableCell>
-                      <TableCell>20-01-2022</TableCell>
-                      <TableCell>10:10</TableCell>
-                      <TableCell>
-                        <Interweave content={"Survey TB"} />
-                      </TableCell>
-                      <TableCell>10 %</TableCell>
+                    {nota.data_spt.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>{item.nm_tujuan}</TableCell>
+                        <TableCell>{item.nm_driver}</TableCell>
+                        <TableCell>{item.nm_marine}</TableCell>
+                        <TableCell>
+                          {format(new Date(item.tgl_keberangkatan), "dd/MM/y")}
+                        </TableCell>
+                        <TableCell>{item.waktu_keberangkatan}</TableCell>
+                        <TableCell>
+                          <Interweave content={item.keterangan} />
+                        </TableCell>
+                        <TableCell>{item.diskon} %</TableCell>
 
-                      <TableCell>
                         <TableCell>
-                          {/* {hitungPotonganHarga(item.diskon, item.harga_tujuan)} */}
-                          Potongan Harga
+                          <TableCell>
+                            {hitungPotonganHarga(
+                              item.diskon,
+                              item.harga_tujuan
+                            )}
+                          </TableCell>
                         </TableCell>
-                      </TableCell>
-                      <TableCell>
                         <TableCell>
-                          {(1000).toLocaleString("id", {
-                            style: "currency",
-                            currency: "IDR",
-                          })}
+                          <TableCell>
+                            {item.harga.toLocaleString("id", {
+                              style: "currency",
+                              currency: "IDR",
+                            })}
+                          </TableCell>
                         </TableCell>
-                      </TableCell>
-                      <TableCell>
-                        <span className="text-sm bg-lime-400 px-5 py-2 font-semibold rounded-sm">
-                          Lunas
-                        </span>
-                      </TableCell>
-                    </TableRow>
+                        <TableCell>
+                          {item.id_status_spt === 3 && (
+                            <span className="text-sm text-white bg-red-500 px-5 py-2 font-semibold rounded-sm">
+                              {item.nm_status_spt}
+                            </span>
+                          )}
+                          {item.id_status_spt === 2 && (
+                            <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm">
+                              {item.nm_status_spt}
+                            </span>
+                          )}
+                          {item.id_status_spt === 1 && (
+                            <span className="text-sm bg-lime-400 px-5 py-2 font-semibold rounded-sm">
+                              {item.nm_status_spt}
+                            </span>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))}
 
                     <TableRow>
                       <TableCell
@@ -175,9 +226,11 @@ const Detail = () => {
                         Total
                       </TableCell>
                       <TableCell className="text-center">
-                        Total Potongan
+                        {hitungTotalPotongan()}
                       </TableCell>
-                      <TableCell className="text-center">Total Harga</TableCell>
+                      <TableCell className="text-center">
+                        {hitungTotalHarga()}
+                      </TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>

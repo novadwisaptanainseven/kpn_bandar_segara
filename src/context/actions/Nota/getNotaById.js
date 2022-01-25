@@ -4,7 +4,7 @@ const getNotaById = (id, setData) => {
   axiosInstance
     .get(`nota/detail/${id}`)
     .then((res) => {
-      setData(res.data.data_nota);
+      setData(res.data);
       // console.log(res.data.data_nota);
     })
     .catch((err) => {

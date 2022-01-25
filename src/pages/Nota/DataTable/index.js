@@ -100,6 +100,8 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     requestSort(key);
   };
 
+  
+
   return (
     <>
       <TableContainer className="mb-8">
@@ -237,8 +239,8 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">
-                    {item.harga &&
-                      item.harga.toLocaleString("id", {
+                    {item.total_harga &&
+                      item.total_harga.toLocaleString("id", {
                         style: "currency",
                         currency: "IDR",
                       })}
