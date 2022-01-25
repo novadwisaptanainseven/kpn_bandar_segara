@@ -1,0 +1,26 @@
+import { getStatusNota } from ".";
+import axiosInstance from "../../../helpers/axios";
+
+const deleteStatusNota = (id, dispatch, Swal) => {
+  axiosInstance
+    .get(`status_nota/hapus/${id}`)
+    .then((res) => {
+      getStatusNota(dispatch);
+
+      Swal.fire({
+        icon: "success",
+        title: "Terhapus",
+        text: "Data berhasil dihapus",
+      });
+    })
+    .catch((err) => {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `"Data gagal dihapus. ${err.response.data.pesan}"`,
+      });
+      // console.log(err.response.data);
+    });
+};
+
+export default deleteStatusNota;

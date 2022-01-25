@@ -1,11 +1,10 @@
-import { getNota } from ".";
 import {
   showAlertError,
-  showAlertSuccess,
+  showAlertSuccessV2,
 } from "../../../components/AlertMessages";
 import axiosInstance from "../../../helpers/axios";
 
-const editNotaById = (id, values, setLoading, history, dispatch) => {
+const editNotaById = (id, values, setLoading) => {
   const messageSuccess = "Edit Nota Transaksi Berhasil";
   const messageError = "Edit Nota Transaksi Gagal. Terjadi Kesalahan Server";
 
@@ -15,8 +14,7 @@ const editNotaById = (id, values, setLoading, history, dispatch) => {
     .post(`nota/update/${id}`, values)
     .then((res) => {
       setLoading(false);
-      showAlertSuccess(messageSuccess, "nota", history);
-      getNota(dispatch);
+      showAlertSuccessV2(messageSuccess);
     })
     .catch((err) => {
       setLoading(false);
