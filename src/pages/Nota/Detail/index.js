@@ -68,7 +68,7 @@ const Detail = () => {
 
   return (
     <>
-      <PageTitle backButton={true}>Detail Nota Transaksi</PageTitle>
+      <PageTitle backButton={true}>Edit Nota Transaksi</PageTitle>
       <Card className="mb-32">
         <CardBody>
           {!nota ? (
@@ -176,6 +176,7 @@ const Detail = () => {
                   <TableHeader>
                     <TableRow>
                       <TableCell>No.</TableCell>
+                      <TableCell>No. SPT</TableCell>
                       <TableCell>Tujuan</TableCell>
                       <TableCell>Driver</TableCell>
                       <TableCell>Marine</TableCell>
@@ -192,6 +193,7 @@ const Detail = () => {
                     {nota.data_spt.map((item, index) => (
                       <TableRow key={index}>
                         <TableCell>{index + 1}</TableCell>
+                        <TableCell>{item.no_spt}</TableCell>
                         <TableCell>{item.nm_tujuan}</TableCell>
                         <TableCell>{item.nm_driver}</TableCell>
                         <TableCell>{item.nm_marine}</TableCell>

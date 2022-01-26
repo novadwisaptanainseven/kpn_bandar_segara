@@ -53,7 +53,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.id_spt.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.no_spt.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
           item.tgl_spt.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_tujuan.toLowerCase().includes(filterText.toLowerCase())
@@ -120,17 +120,17 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 <div className="flex gap-1 items-center">
                   <a
                     className={`${
-                      sortConfig && sortConfig.key === "id_spt"
+                      sortConfig && sortConfig.key === "no_spt"
                         ? "text-gray-900 dark:text-gray-100"
                         : ""
                     }`}
                     href="."
-                    onClick={(e) => handleSorting(e, "id_spt")}
+                    onClick={(e) => handleSorting(e, "no_spt")}
                   >
-                    ID SPT
+                    NO. SPT
                   </a>
                   {sortConfig &&
-                    sortConfig.key === "id_spt" &&
+                    sortConfig.key === "no_spt" &&
                     (sortConfig.direction === "ascending" ? (
                       <ArrowUp />
                     ) : (
@@ -211,7 +211,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
             {sortedDatatable.map((item, i) => (
               <TableRow key={i}>
                 <TableCell>
-                  <span className="text-sm">{item.id_spt}</span>
+                  <span className="text-sm">{item.no_spt}</span>
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">{item.nm_pelanggan}</span>
@@ -247,12 +247,12 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                     </button>
                   </div>
                   <div className="flex items-center gap-1 mt-1">
-                    <button
+                    {/* <button
                       className="bg-yellow-300 text-black px-3 py-1 text-sm rounded-md"
                       onClick={() => goToBuatNota(item.id_spt)}
                     >
                       Buat Nota
-                    </button>
+                    </button> */}
                     <button
                       className="bg-gray-500 text-white px-3 py-1 text-sm rounded-md"
                       onClick={() => goToCetak(item.id_spt)}

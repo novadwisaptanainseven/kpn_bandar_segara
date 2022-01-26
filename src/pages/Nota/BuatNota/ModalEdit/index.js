@@ -126,7 +126,7 @@ const ModalEdit = ({ isModalOpen, closeModal, setSptTemp, idPelanggan }) => {
           setDataSptTemp("");
         }}
       >
-        <ModalHeader>Tambah Item Penyewaan</ModalHeader>
+        <ModalHeader>Edit Item Penyewaan</ModalHeader>
         <div className=" overflow-scroll" style={{ height: "500px" }}>
           {!dataSptTemp ? (
             <div className="mt-4">

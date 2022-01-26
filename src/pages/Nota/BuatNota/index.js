@@ -56,6 +56,7 @@ const BuatNota = () => {
   const [statusBayar, setStatusBayar] = useState("2");
   const [idSptTempModal, setIdSptTempModal] = useState("");
   const [jumlahBayar, setJumlahBayar] = useState(0);
+  const jumlahMaksimalItem = 2;
 
   useEffect(() => {
     console.log(statusBayar);
@@ -190,13 +191,26 @@ const BuatNota = () => {
               List Item Penyewaan Kapal
             </h1>
 
+            {sptTemp.length > jumlahMaksimalItem && (
+              <div className="text-sm bg-red-600 text-white p-3 rounded-md mb-2">
+                Item penyewaan barang sudah mencapai jumlah maksimal. Silahkan
+                simpan transaksi terlebih dahulu
+              </div>
+            )}
+
             <div className="flex justify-between">
               <button
                 className={`bg-teal-400 text-white px-3 py-2 text-sm rounded-md mb-2  ${
-                  !idPelanggan ? "opacity-50 cursor-not-allowed" : " "
+                  !idPelanggan || sptTemp.length > jumlahMaksimalItem
+                    ? "opacity-50 cursor-not-allowed"
+                    : " "
                 }`}
                 onClick={openModal}
-                disabled={!idPelanggan ? true : false}
+                disabled={
+                  !idPelanggan || sptTemp.length > jumlahMaksimalItem
+                    ? true
+                    : false
+                }
               >
                 Tambah Item
               </button>

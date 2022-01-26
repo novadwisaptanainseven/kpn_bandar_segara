@@ -237,6 +237,28 @@ const Edit = () => {
                     </HelperText>
                   </Label>
                   <Label className="mb-4">
+                    <span>Jumlah yg Dibayar</span>
+                    <Input
+                      type="number"
+                      name="bayar"
+                      value={values ? values.bayar : 0}
+                      className="mt-1"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    {values.bayar && (
+                      <HelperText>
+                        {parseFloat(values.bayar).toLocaleString("id", {
+                          style: "currency",
+                          currency: "IDR",
+                        })}
+                        <br />
+                      </HelperText>
+                    )}
+                    <HelperText className="text-lime-600 italic">
+                      Bisa diubah
+                    </HelperText>
+                  </Label>
+                  <Label className="mb-4">
                     <span>Total Harga</span>
                     <Input
                       type="text"
@@ -303,6 +325,7 @@ const Edit = () => {
                     {nota.data_spt.map((item, index) => (
                       <TableRow key={index}>
                         <TableCell>{index + 1}</TableCell>
+                        <TableCell>{item.no_spt}</TableCell>
                         <TableCell>{item.nm_tujuan}</TableCell>
                         <TableCell>{item.nm_driver}</TableCell>
                         <TableCell>{item.nm_marine}</TableCell>

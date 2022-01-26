@@ -76,9 +76,10 @@ const CetakSPT = () => {
               <div className="spt-body mx-8 mt-8">
                 <div className="flex justify-between">
                   <span>
-                    Tanggal: {format(new Date(spt.tgl_spt), "dd/MM/y")} | 09:00
+                    <b>Tgl. SPT :</b>{" "}
+                    {format(new Date(spt.waktu_buat), "dd/MM/y")}
                   </span>
-                  <span>{spt.id_spt}</span>
+                  <span><b>No : </b>{spt.no_spt}</span>
                 </div>
 
                 <div className="mt-8 mb-20">
@@ -96,12 +97,12 @@ const CetakSPT = () => {
                     <tr>
                       <th align="left">Kode / Nama Marine</th>
                       <th align="left">:</th>
-                      <td align="left">M15 / {spt.nm_marine.toUpperCase()}</td>
+                      <td align="left">{spt.nm_marine.toUpperCase()}</td>
                     </tr>
                     <tr>
                       <th align="left">Kode / Nama Driver</th>
                       <th align="left">:</th>
-                      <td align="left">DS1 / {spt.nm_driver.toUpperCase()}</td>
+                      <td align="left">{spt.nm_driver.toUpperCase()}</td>
                     </tr>
                     <tr>
                       <th align="left">Tujuan</th>
@@ -109,9 +110,23 @@ const CetakSPT = () => {
                       <td align="left">{spt.nm_tujuan.toUpperCase()}</td>
                     </tr>
                     <tr>
+                      <th align="left">Tanggal Keberangkatan</th>
+                      <th align="left">:</th>
+                      <td align="left">
+                        {format(new Date(spt.tgl_keberangkatan), "dd-MM-y")}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th align="left">Jam Keberangkatan</th>
+                      <th align="left">:</th>
+                      <td align="left">
+                        {spt.waktu_keberangkatan.toUpperCase()}
+                      </td>
+                    </tr>
+                    <tr>
                       <th align="left">Keterangan</th>
                       <th align="left">:</th>
-                      <td align="left">Survei TB DANNY 96</td>
+                      <td align="left">{spt.keterangan}</td>
                     </tr>
                   </table>
                 </div>

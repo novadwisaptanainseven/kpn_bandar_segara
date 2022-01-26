@@ -100,8 +100,6 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     requestSort(key);
   };
 
-  
-
   return (
     <>
       <TableContainer className="mb-8">
@@ -196,6 +194,28 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                     ))}
                 </div>
               </TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "bayar"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "bayar")}
+                  >
+                    Jumlah yg Dibayar
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "bayar" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
 
               <TableCell>
                 <div className="flex gap-1 items-center">
@@ -241,6 +261,15 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   <span className="text-sm">
                     {item.total_harga &&
                       item.total_harga.toLocaleString("id", {
+                        style: "currency",
+                        currency: "IDR",
+                      })}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <span className="text-sm">
+                    {item.bayar &&
+                      item.bayar.toLocaleString("id", {
                         style: "currency",
                         currency: "IDR",
                       })}

@@ -66,6 +66,9 @@ const Pengaturan = () => {
     const formData = new FormData();
     formData.append("title_website", values.title_website);
     formData.append("deskripsi_aplikasi", values.deskripsi_aplikasi);
+    formData.append("no_hp", values.no_hp);
+    formData.append("instagram", values.instagram);
+    formData.append("alamat", values.alamat);
     if (values.logo) {
       formData.append("logo", values.logo);
     }
@@ -97,7 +100,10 @@ const Pengaturan = () => {
               dirty,
               isValid,
             }) => (
-              <form onSubmit={handleSubmit} className="grid md:grid-cols-2">
+              <form
+                onSubmit={handleSubmit}
+                className="grid md:grid-cols-2 gap-4"
+              >
                 <div>
                   <Label className="mt-4">
                     <span>Nama Aplikasi</span>
@@ -186,6 +192,63 @@ const Pengaturan = () => {
                       {loading ? "Loading" : "Simpan"}
                     </Button>
                   </div>
+                </div>
+                <div>
+                  <Label className="mt-4">
+                    <span>No. Telp Perusahaan</span>
+                    <Input
+                      type="text"
+                      placeholder="No. Telp Perusahaan"
+                      name="no_hp"
+                      value={values.no_hp}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`mt-1 ${
+                        errors.no_hp && touched.no_hp ? "border-red-500" : null
+                      }`}
+                    />
+                    {errors.no_hp && touched.no_hp && (
+                      <HelperText valid={false}>{errors.no_hp}</HelperText>
+                    )}
+                  </Label>
+                  <Label className="mt-4">
+                    <span>Instagram</span>
+                    <Input
+                      type="text"
+                      placeholder="Instagram"
+                      name="instagram"
+                      value={values.instagram}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`mt-1 ${
+                        errors.instagram && touched.instagram
+                          ? "border-red-500"
+                          : null
+                      }`}
+                    />
+                    {errors.instagram && touched.instagram && (
+                      <HelperText valid={false}>{errors.instagram}</HelperText>
+                    )}
+                  </Label>
+                  <Label className="mt-4">
+                    <span>Alamat Perusahaan</span>
+                    <Textarea
+                      rows={3}
+                      placeholder="Alamat Perusahaan"
+                      name="alamat"
+                      value={values.alamat}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`mt-1 ${
+                        errors.alamat && touched.alamat
+                          ? "border-red-500"
+                          : null
+                      }`}
+                    />
+                    {errors.alamat && touched.alamat && (
+                      <HelperText valid={false}>{errors.alamat}</HelperText>
+                    )}
+                  </Label>
                 </div>
               </form>
             )}

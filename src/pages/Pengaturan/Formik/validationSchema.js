@@ -7,6 +7,9 @@ const FOTO_SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
 const validationSchema = Yup.object().shape({
   title_website: Yup.string().required("Title website harus diisi"),
   deskripsi_aplikasi: Yup.string().required("Deskripsi aplikasi harus diisi"),
+  no_hp: Yup.string().required("No. telepon perusahaan harus diisi"),
+  instagram: Yup.string().required("Instagram harus diisi"),
+  alamat: Yup.string().required("Alamat perusahaan harus diisi"),
   foto: Yup.mixed()
     .test("size", "Kapasitas file maksimal 1 mb", (value) => {
       if (value) {

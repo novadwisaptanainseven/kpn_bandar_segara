@@ -131,7 +131,7 @@ const ModalEdit = ({
           setDataSpt("");
         }}
       >
-        <ModalHeader>Tambah Item Penyewaan</ModalHeader>
+        <ModalHeader>Edit Item Penyewaan</ModalHeader>
         <div className=" overflow-scroll" style={{ height: "500px" }}>
           {!dataSpt ? (
             <div className="mt-4">
