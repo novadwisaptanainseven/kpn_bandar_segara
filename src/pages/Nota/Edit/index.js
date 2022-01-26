@@ -239,11 +239,15 @@ const Edit = () => {
                   <Label className="mb-4">
                     <span>Total Harga</span>
                     <Input
-                      type="number"
+                      type="text"
                       name="total_harga"
-                      value={totalHarga}
+                      value={totalHarga.toLocaleString("id", {
+                        style: "currency",
+                        currency: "IDR",
+                      })}
                       className="mt-1"
-                      onChange={(e) => handleChange(e)}
+                      readOnly
+                      // onChange={(e) => handleChange(e)}
                     />
                     <HelperText className="text-lime-600 italic">
                       Terhitung otomatis dari list item penyewaan kapal
@@ -271,7 +275,7 @@ const Edit = () => {
 
               <div className="mb-2 mt-4 flex justify-between">
                 <h1 className="text-lg font-semibold pb-4">
-                  List Item Penyewaan Kapal
+                  Rincian Item Penyewaan Kapal
                 </h1>
                 {loadingUpdate && (
                   <img src={LoadingIcon} alt="loading-icon" className="w-10" />
@@ -291,7 +295,7 @@ const Edit = () => {
                       <TableCell>Diskon</TableCell>
                       <TableCell>Potongan</TableCell>
                       <TableCell>Harga</TableCell>
-                      <TableCell>Status</TableCell>
+                      {/* <TableCell>Status</TableCell> */}
                       <TableCell>Aksi</TableCell>
                     </TableRow>
                   </TableHeader>
@@ -327,7 +331,7 @@ const Edit = () => {
                             })}
                           </TableCell>
                         </TableCell>
-                        <TableCell>
+                        {/* <TableCell>
                           <Select
                             style={{ width: 150 }}
                             id="statusBayar"
@@ -349,7 +353,7 @@ const Edit = () => {
                               </option>
                             ))}
                           </Select>
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell className="space-x-2">
                           <button
                             onClick={() => openModalEdit(item.id_spt)}

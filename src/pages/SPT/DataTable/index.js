@@ -221,7 +221,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">
-                    {format(new Date(item.tgl_spt), "dd-MM-y")}
+                    {format(new Date(item.tgl_keberangkatan), "dd-MM-y")}
                   </span>
                 </TableCell>
 

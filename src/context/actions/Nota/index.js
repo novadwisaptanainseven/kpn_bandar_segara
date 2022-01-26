@@ -5,6 +5,7 @@ import deleteNota from "./deleteNota";
 import getNotaById from "./getNotaById";
 import getEditNotaById from "./getEditNotaById";
 import editNotaById from "./editNotaById";
+import selectStatusNota from "./selectStatusNota";
 
 export {
   insertNota,
@@ -14,4 +15,5 @@ export {
   getNotaById,
   getEditNotaById,
   editNotaById,
+  selectStatusNota,
 };

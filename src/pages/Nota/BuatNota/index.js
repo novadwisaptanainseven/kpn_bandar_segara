@@ -36,6 +36,7 @@ import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Interweave from "interweave";
 import ModalEdit from "./ModalEdit";
+import { selectStatusNota } from "../../../context/actions/StatusNota";
 
 const Swal = withReactContent(swal2);
 
@@ -54,6 +55,7 @@ const BuatNota = () => {
   const [loading, setLoading] = useState(false);
   const [statusBayar, setStatusBayar] = useState("2");
   const [idSptTempModal, setIdSptTempModal] = useState("");
+  const [jumlahBayar, setJumlahBayar] = useState(0);
 
   useEffect(() => {
     console.log(statusBayar);
@@ -61,7 +63,7 @@ const BuatNota = () => {
 
   useEffect(() => {
     // Get data status nota
-    selectStatusSPT(setStatusNota);
+    selectStatusNota(setStatusNota);
     // Get data SPT Temporary by ID Pelanggan
     if (idPelanggan) getSptTemp(idPelanggan, setLoading, setSptTemp);
   }, [idPelanggan]);
@@ -158,6 +160,7 @@ const BuatNota = () => {
   const handleSimpanTransaksi = () => {
     const values = {
       id_status_nota: statusBayar,
+      bayar: jumlahBayar,
     };
     insertNota(idPelanggan, values, setLoading, history, notaDispatch);
   };
@@ -216,7 +219,7 @@ const BuatNota = () => {
                     <TableCell>Diskon</TableCell>
                     <TableCell>Potongan</TableCell>
                     <TableCell>Harga</TableCell>
-                    <TableCell>Status</TableCell>
+                    {/* <TableCell>Status</TableCell> */}
                     <TableCell>Aksi</TableCell>
                   </TableRow>
                 </TableHeader>
@@ -256,7 +259,7 @@ const BuatNota = () => {
                           })}
                         </TableCell>
                       </TableCell>
-                      <TableCell>
+                      {/* <TableCell>
                         <Select
                           style={{ width: 150 }}
                           id="statusBayar"
@@ -278,7 +281,7 @@ const BuatNota = () => {
                             </option>
                           ))}
                         </Select>
-                      </TableCell>
+                      </TableCell> */}
 
                       <TableCell className="space-x-2">
                         <button
@@ -317,25 +320,51 @@ const BuatNota = () => {
             </TableContainer>
           </div>
           <div className="flex justify-between">
-            <Label className="w-64">
-              <span>Status Pembayaran</span>
-              <Select
-                className="mt-1"
-                id="statusBayar"
-                name="statusBayar"
-                onChange={(e) => setStatusBayar(e.target.value)}
-              >
-                {statusNota.map((item) => (
-                  <option key={item.id_status_spt} value={item.id_status_spt}>
-                    {item.nm_status_spt}
-                  </option>
-                ))}
-              </Select>
-            </Label>
+            <div className="flex gap-2">
+              <Label className="w-64">
+                <span>Jumlah yg Dibayar</span>
+                <Input
+                  type="number"
+                  id="jumlahBayar"
+                  name="jumlahBayar"
+                  onChange={(e) => setJumlahBayar(e.target.value)}
+                  value={jumlahBayar}
+                  className="mt-1"
+                  disabled={!idPelanggan || sptTemp.length === 0 ? true : false}
+                />
+                <HelperText>
+                  {parseFloat(jumlahBayar).toLocaleString("id", {
+                    style: "currency",
+                    currency: "IDR",
+                  })}
+                </HelperText>
+              </Label>
+              <Label className="w-64">
+                <span>Status Pembayaran</span>
+                <Select
+                  className="mt-1"
+                  id="statusBayar"
+                  name="statusBayar"
+                  onChange={(e) => setStatusBayar(e.target.value)}
+                  disabled={!idPelanggan || sptTemp.length === 0 ? true : false}
+                >
+                  {statusNota.map((item) => (
+                    <option
+                      key={item.id_status_nota}
+                      value={item.id_status_nota}
+                    >
+                      {item.nm_status_nota}
+                    </option>
+                  ))}
+                </Select>
+              </Label>
+            </div>
             <Button
               className="h-10"
               disabled={
-                !idPelanggan || sptTemp.length === 0 || loading ? true : false
+                !idPelanggan || !jumlahBayar || sptTemp.length === 0 || loading
+                  ? true
+                  : false
               }
               onClick={handleSimpanTransaksi}
             >

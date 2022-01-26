@@ -98,6 +98,28 @@ const Detail = () => {
                     </TableRow>
                     <TableRow className="bg-gray-100 dark:bg-gray-800">
                       <TableCell className="font-semibold">
+                        Total Harga
+                      </TableCell>
+                      <TableCell>
+                        {nota.data_nota.total_harga.toLocaleString("id", {
+                          style: "currency",
+                          currency: "IDR",
+                        })}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="bg-gray-200 dark:bg-gray-700">
+                      <TableCell className="font-semibold">
+                        Jumlah yg Dibayar
+                      </TableCell>
+                      <TableCell>
+                        {nota.data_nota.bayar.toLocaleString("id", {
+                          style: "currency",
+                          currency: "IDR",
+                        })}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow className="bg-gray-100 dark:bg-gray-800">
+                      <TableCell className="font-semibold">
                         Status Pembayaran
                       </TableCell>
                       <TableCell className="space-x-2">
@@ -147,7 +169,7 @@ const Detail = () => {
               </TableContainer>
 
               <h1 className="text-lg font-semibold mb-2 mt-4">
-                List Item Penyewaan Kapal
+                Rincian Item Penyewaan Kapal
               </h1>
               <TableContainer className="text-sm mb-3">
                 <Table>
@@ -163,7 +185,7 @@ const Detail = () => {
                       <TableCell>Diskon</TableCell>
                       <TableCell>Potongan</TableCell>
                       <TableCell>Harga</TableCell>
-                      <TableCell>Status</TableCell>
+                      {/* <TableCell>Status</TableCell> */}
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -198,7 +220,7 @@ const Detail = () => {
                             })}
                           </TableCell>
                         </TableCell>
-                        <TableCell>
+                        {/* <TableCell>
                           {item.id_status_spt === 3 && (
                             <span className="text-sm text-white bg-red-500 px-5 py-2 font-semibold rounded-sm">
                               {item.nm_status_spt}
@@ -214,7 +236,7 @@ const Detail = () => {
                               {item.nm_status_spt}
                             </span>
                           )}
-                        </TableCell>
+                        </TableCell> */}
                       </TableRow>
                     ))}
 
