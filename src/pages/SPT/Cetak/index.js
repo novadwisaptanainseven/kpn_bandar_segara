@@ -79,7 +79,10 @@ const CetakSPT = () => {
                     <b>Tgl. SPT :</b>{" "}
                     {format(new Date(spt.waktu_buat), "dd/MM/y")}
                   </span>
-                  <span><b>No : </b>{spt.no_spt}</span>
+                  <span>
+                    <b>No : </b>
+                    {spt.no_spt}
+                  </span>
                 </div>
 
                 <div className="mt-8 mb-20">

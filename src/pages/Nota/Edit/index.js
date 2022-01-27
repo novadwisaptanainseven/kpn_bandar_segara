@@ -308,6 +308,7 @@ const Edit = () => {
                   <TableHeader>
                     <TableRow>
                       <TableCell>No.</TableCell>
+                      <TableCell>No. SPT</TableCell>
                       <TableCell>Tujuan</TableCell>
                       <TableCell>Driver</TableCell>
                       <TableCell>Marine</TableCell>
@@ -390,7 +391,7 @@ const Edit = () => {
 
                     <TableRow>
                       <TableCell
-                        colSpan={8}
+                        colSpan={9}
                         className="text-center font-semibold"
                       >
                         Total

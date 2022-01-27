@@ -48,10 +48,15 @@ const BuatNota = lazy(() => import("../pages/Nota/BuatNota"));
 const Nota = lazy(() => import("../pages/Nota"));
 const DetailNota = lazy(() => import("../pages/Nota/Detail"));
 const EditNota = lazy(() => import("../pages/Nota/Edit"));
+const CetakNota = lazy(() => import("../pages/Nota/Cetak"));
+
+// Users
 const Users = lazy(() => import("../pages/Users"));
 const TambahUsers = lazy(() => import("../pages/Users/Tambah"));
 const EditUsers = lazy(() => import("../pages/Users/Edit"));
 const DetailUsers = lazy(() => import("../pages/Users/Detail"));
+
+// Pengaturan
 const Pengaturan = lazy(() => import("../pages/Pengaturan"));
 
 const Page404 = lazy(() => import("../pages/404"));
@@ -190,6 +195,7 @@ const routes = [
     path: "/spt/:id/buat-nota",
     component: BuatNota,
   },
+
   // Route Nota
   {
     path: "/nota",
@@ -206,6 +212,10 @@ const routes = [
   {
     path: "/nota/transaksi",
     component: BuatNota,
+  },
+  {
+    path: "/nota/cetak/:id",
+    component: CetakNota,
   },
 
   // Route Users

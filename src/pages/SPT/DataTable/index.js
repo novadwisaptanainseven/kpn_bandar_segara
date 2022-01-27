@@ -225,8 +225,8 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   </span>
                 </TableCell>
 
-                <TableCell>
-                  <div className="flex items-center gap-1">
+                <TableCell className="text-xs">
+                  <div className="flex items-center gap-1 ">
                     <button
                       className="bg-teal-400 text-white px-3 py-1 text-sm rounded-md"
                       onClick={() => goToDetail(item.id_spt)}

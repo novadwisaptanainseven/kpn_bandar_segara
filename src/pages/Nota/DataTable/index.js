@@ -91,6 +91,11 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     history.push(`${path}/edit/${id}`);
   };
 
+  // Menuju halaman cetak
+  const goToCetak = (id) => {
+    history.push(`${path}/cetak/${id}`);
+  };
+
   const { sortedDatatable, requestSort, sortConfig } =
     useSortableData(dataTable);
 
@@ -316,7 +321,10 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                     </button>
                   </div>
                   <div className="flex items-center mt-1">
-                    <button className="w-full bg-gray-500 text-white px-3 py-1 rounded-md">
+                    <button
+                      onClick={() => goToCetak(item.id_nota)}
+                      className="w-full bg-gray-500 text-white px-3 py-1 rounded-md"
+                    >
                       Cetak Nota
                     </button>
                   </div>
