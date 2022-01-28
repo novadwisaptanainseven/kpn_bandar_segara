@@ -206,6 +206,9 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
                 <span className="text-sm">{i + 1}</span>
               </TableCell>
               <TableCell>
+                <span className="text-sm">{item.nm_tujuan}</span>
+              </TableCell>
+              <TableCell>
                 <span className="text-sm">
                   {item.harga.toLocaleString("id", {
                     style: "currency",

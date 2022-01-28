@@ -187,7 +187,19 @@ const TablePerusahaan = ({ resultsPerPage, response, filterText }) => {
               </TableCell>
               <TableCell>
                 <span className="text-sm">
-                  <Interweave content={item.keterangan} />
+                  {item.keterangan ? (
+                    <>
+                      {/* <Interweave content={item.keterangan} /> */}
+                      <button
+                        type="button"
+                        className="transition-all transition-duration-300 ease-in-out py-2 px-5 bg-gray-500 rounded-md text-white font-semibold hover:bg-gray-600"
+                      >
+                        Lihat
+                      </button>
+                    </>
+                  ) : (
+                    <>Tidak Ada</>
+                  )}
                 </span>
               </TableCell>
 
