@@ -22,8 +22,12 @@ import { format } from "date-fns";
 import Interweave from "interweave";
 import { selectStatusNota } from "../../../context/actions/StatusNota";
 import { LoadingIcon } from "../../../assets";
-import { updateStatusSpt } from "../../../context/actions/SPT";
+import { deleteSptNota, updateStatusSpt } from "../../../context/actions/SPT";
 import ModalEdit from "./ModalEdit";
+import swal2 from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const Swal = withReactContent(swal2);
 
 const Edit = () => {
   const match = useRouteMatch();
@@ -165,9 +169,26 @@ const Edit = () => {
     setValuesChanged(false);
   };
 
+  const handleDelete = (id) => {
+    Swal.fire({
+      icon: "warning",
+      title: "Anda yakin ingin menghapus data ini ?",
+      text: "Jika yakin, klik YA",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "YA",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        deleteSptNota(params.id, id, setNota, Swal);
+      }
+    });
+  };
+
   return (
     <>
-      <PageTitle backButton={true}>Detail Nota Transaksi</PageTitle>
+      <PageTitle backButton={true}>Edit Nota Transaksi</PageTitle>
       <Card className="mb-32">
         <CardBody>
           {!nota ? (
@@ -378,12 +399,18 @@ const Edit = () => {
                             ))}
                           </Select>
                         </TableCell> */}
-                        <TableCell className="space-x-2">
+                        <TableCell className="flex items-center gap-1">
                           <button
                             onClick={() => openModalEdit(item.id_spt)}
                             className="bg-blue-500 text-white px-3 py-1 text-sm rounded-md"
                           >
                             Ubah
+                          </button>
+                          <button
+                            className="bg-red-400 text-white px-3 py-1 text-sm rounded-md"
+                            onClick={() => handleDelete(item.id_spt)}
+                          >
+                            Hapus
                           </button>
                         </TableCell>
                       </TableRow>

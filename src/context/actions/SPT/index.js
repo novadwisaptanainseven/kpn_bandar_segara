@@ -10,6 +10,7 @@ import getBuatNota from "./getBuatNota";
 import selectStatusSPT from "./selectStatusSPT";
 import updateStatusSpt from "./updateStatusSpt";
 import editSptModal from "./editSptModal";
+import deleteSptNota from "./deleteSptNota";
 
 export {
   getSpt,
@@ -24,4 +25,5 @@ export {
   selectStatusSPT,
   updateStatusSpt,
   editSptModal,
+  deleteSptNota,
 };
