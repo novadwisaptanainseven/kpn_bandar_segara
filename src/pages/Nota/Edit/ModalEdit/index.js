@@ -75,7 +75,7 @@ const ModalEdit = ({
     : [];
 
   const handleFormSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
 
     editSptModal(
       idNota,

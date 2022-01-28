@@ -110,6 +110,28 @@ const TableDriver = ({ resultsPerPage, response, filterText }) => {
               <div className="flex gap-1 items-center">
                 <a
                   className={`${
+                    sortConfig && sortConfig.key === "nomor"
+                      ? "text-gray-900 dark:text-gray-100"
+                      : ""
+                  }`}
+                  href="."
+                  onClick={(e) => handleSorting(e, "nomor")}
+                >
+                  No.
+                </a>
+                {sortConfig &&
+                  sortConfig.key === "nomor" &&
+                  (sortConfig.direction === "ascending" ? (
+                    <ArrowUp />
+                  ) : (
+                    <ArrowDown />
+                  ))}
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="flex gap-1 items-center">
+                <a
+                  className={`${
                     sortConfig && sortConfig.key === "nm_driver"
                       ? "text-gray-900 dark:text-gray-100"
                       : ""
@@ -156,6 +178,9 @@ const TableDriver = ({ resultsPerPage, response, filterText }) => {
         <TableBody>
           {sortedDatatable.map((item, i) => (
             <TableRow key={i}>
+              <TableCell>
+                <span className="text-sm">{i + 1}</span>
+              </TableCell>
               <TableCell>
                 <span className="text-sm">{item.nm_driver}</span>
               </TableCell>
