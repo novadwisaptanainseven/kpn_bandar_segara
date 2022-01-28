@@ -6,7 +6,7 @@ export class ComponentToPrint extends React.Component {
   render() {
     return (
       <>
-        <div className=" grid md:grid-cols-2">
+        <div style={{ width: "279.4mm" }}>
           <div className="border-2 border-black dark:border-gray-300 py-6">
             {/* Header */}
             <div className="spt-header flex items-center flex-col mx-10">
@@ -18,7 +18,7 @@ export class ComponentToPrint extends React.Component {
               <h1 className="text-lg font-semibold">
                 {this.props.dataKonten.title_website}
               </h1>
-              <h2 className="text-md">
+              <h2 className="text-md text-center">
                 {this.props.dataKonten.alamat
                   ? this.props.dataKonten.alamat
                   : "Jalan Yos Sudarso No. 2 Samarinda, Kalimantan Timur"}

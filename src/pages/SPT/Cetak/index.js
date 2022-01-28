@@ -22,7 +22,7 @@ const CetakSPT = () => {
     pageStyle: `
       @media print {
         @page {
-          size: 210mm 330mm;
+          size: 210mm 297mm;
         }
       }
     `,
