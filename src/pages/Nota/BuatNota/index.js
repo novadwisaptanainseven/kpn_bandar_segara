@@ -59,7 +59,7 @@ const BuatNota = () => {
   const jumlahMaksimalItem = 2;
 
   useEffect(() => {
-    console.log(statusBayar);
+    // console.log(statusBayar);
   }, [statusBayar]);
 
   useEffect(() => {

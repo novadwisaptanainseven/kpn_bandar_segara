@@ -72,7 +72,7 @@ const ModalEdit = ({ isModalOpen, closeModal, setSptTemp, idPelanggan }) => {
     : [];
 
   const handleFormSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
 
     editSptTemp(
       dataSptTemp.data_spt_temp.id_spt_temp,

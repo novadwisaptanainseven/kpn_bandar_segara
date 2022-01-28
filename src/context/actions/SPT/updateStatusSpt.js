@@ -12,7 +12,7 @@ const updateStatusSpt = (idNota, idSpt, values, setLoading, setData) => {
     })
     .catch((err) => {
       setLoading(false);
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 
