@@ -34,6 +34,11 @@ module.exports = windmill({
       ringOpacity: ["focus"],
       ringOffsetWidth: ["focus"],
       ringOffsetColor: ["focus"],
-    }
-  }
+      opacity: ["disabled"],
+      transitionProperty: ["responsive", "hover"],
+      transitionTimingFunction: ["responsive", "hover"],
+      transitionDuration: ["responsive", "hover"],
+      transitionDelay: ["responsive", "hover"],
+    },
+  },
 });

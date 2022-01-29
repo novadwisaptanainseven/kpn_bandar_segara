@@ -22,6 +22,7 @@ import useSortableData from "../../../../helpers/useSortableData";
 import ArrowUp from "../../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
 import Interweave from "interweave";
+import ModalKeterangan from "../../../../components/ModalKeterangan";
 
 const Swal = withReactContent(swal2);
 
@@ -30,6 +31,19 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
   const history = useHistory();
   const { path } = match;
   const { tujuanDispatch } = useContext(GlobalContext);
+  const [modalKeterangan, setModalKeterangan] = useState(false);
+  const [keterangan, setKeterangan] = useState("");
+
+  // Open modal keterangan
+  const openModalKeterangan = (value) => {
+    setKeterangan(value);
+    setModalKeterangan(true);
+  };
+
+  // Close modal keterangan
+  const closeModalKeterangan = () => {
+    setModalKeterangan(false);
+  };
 
   // Go To Edit
   const goToEdit = (id) => {
@@ -68,7 +82,6 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
       response2 = response.filter(
         (item) =>
           item.nm_tujuan.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.keterangan.toLowerCase().includes(filterText.toLowerCase()) ||
           item.harga.toString().includes(filterText)
       );
     }
@@ -104,169 +117,191 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
   };
 
   return (
-    <TableContainer className="mb-8">
-      <Table>
-        <TableHeader>
-          <tr>
-            <TableCell>
-              <div className="flex gap-1 items-center">
-                <a
-                  className={`${
-                    sortConfig && sortConfig.key === "nomor"
-                      ? "text-gray-900 dark:text-gray-100"
-                      : ""
-                  }`}
-                  href="."
-                  onClick={(e) => handleSorting(e, "nomor")}
-                >
-                  No.
-                </a>
-                {sortConfig &&
-                  sortConfig.key === "nomor" &&
-                  (sortConfig.direction === "ascending" ? (
-                    <ArrowUp />
-                  ) : (
-                    <ArrowDown />
-                  ))}
-              </div>
-            </TableCell>
-            <TableCell>
-              <div className="flex gap-1 items-center">
-                <a
-                  className={`${
-                    sortConfig && sortConfig.key === "nm_tujuan"
-                      ? "text-gray-900 dark:text-gray-100"
-                      : ""
-                  }`}
-                  href="."
-                  onClick={(e) => handleSorting(e, "nm_tujuan")}
-                >
-                  Nama Tujuan
-                </a>
-                {sortConfig &&
-                  sortConfig.key === "nm_tujuan" &&
-                  (sortConfig.direction === "ascending" ? (
-                    <ArrowUp />
-                  ) : (
-                    <ArrowDown />
-                  ))}
-              </div>
-            </TableCell>
-            <TableCell>
-              <div className="flex gap-1 items-center">
-                <a
-                  className={`${
-                    sortConfig && sortConfig.key === "harga"
-                      ? "text-gray-900 dark:text-gray-100"
-                      : ""
-                  }`}
-                  href="."
-                  onClick={(e) => handleSorting(e, "harga")}
-                >
-                  Harga
-                </a>
-                {sortConfig &&
-                  sortConfig.key === "harga" &&
-                  (sortConfig.direction === "ascending" ? (
-                    <ArrowUp />
-                  ) : (
-                    <ArrowDown />
-                  ))}
-              </div>
-            </TableCell>
-            <TableCell>
-              <div className="flex gap-1 items-center">
-                <a
-                  className={`${
-                    sortConfig && sortConfig.key === "keterangan"
-                      ? "text-gray-900 dark:text-gray-100"
-                      : ""
-                  }`}
-                  href="."
-                  onClick={(e) => handleSorting(e, "keterangan")}
-                >
-                  Keterangan
-                </a>
-                {sortConfig &&
-                  sortConfig.key === "keterangan" &&
-                  (sortConfig.direction === "ascending" ? (
-                    <ArrowUp />
-                  ) : (
-                    <ArrowDown />
-                  ))}
-              </div>
-            </TableCell>
-            <TableCell>Aksi</TableCell>
-          </tr>
-        </TableHeader>
-        <TableBody>
-          {sortedDatatable.map((item, i) => (
-            <TableRow key={i}>
+    <>
+      <TableContainer className="mb-8">
+        <Table>
+          <TableHeader>
+            <tr>
               <TableCell>
-                <span className="text-sm">{i + 1}</span>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "nomor"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "nomor")}
+                  >
+                    No.
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "nomor" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
               </TableCell>
               <TableCell>
-                <span className="text-sm">{item.nm_tujuan}</span>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "nm_tujuan"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "nm_tujuan")}
+                  >
+                    Nama Tujuan
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "nm_tujuan" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
               </TableCell>
               <TableCell>
-                <span className="text-sm">
-                  {item.harga.toLocaleString("id", {
-                    style: "currency",
-                    currency: "IDR",
-                  })}
-                </span>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "harga"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "harga")}
+                  >
+                    Harga
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "harga" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
               </TableCell>
               <TableCell>
-                <span className="text-sm">
-                  <Interweave content={item.keterangan} />
-                </span>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "keterangan"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "keterangan")}
+                  >
+                    Keterangan
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "keterangan" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
               </TableCell>
+              <TableCell>Aksi</TableCell>
+            </tr>
+          </TableHeader>
+          <TableBody>
+            {sortedDatatable.map((item, i) => (
+              <TableRow key={i}>
+                <TableCell>
+                  <span className="text-sm">{i + 1}</span>
+                </TableCell>
+                <TableCell>
+                  <span className="text-sm">{item.nm_tujuan}</span>
+                </TableCell>
+                <TableCell>
+                  <span className="text-sm">
+                    {item.harga.toLocaleString("id", {
+                      style: "currency",
+                      currency: "IDR",
+                    })}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <span className="text-sm">
+                    {item.keterangan ? (
+                      <>
+                        {/* <Interweave content={item.keterangan} /> */}
+                        <button
+                          onClick={() => openModalKeterangan(item.keterangan)}
+                          type="button"
+                          className="transition-all duration-200 ease-in-out py-2 px-5 bg-gray-500 rounded-md text-white font-semibold hover:bg-gray-600"
+                        >
+                          Lihat
+                        </button>
+                      </>
+                    ) : (
+                      <>Tidak Ada</>
+                    )}
+                  </span>
+                </TableCell>
 
-              <TableCell>
-                <div className="flex items-center space-x-4">
-                  {localStorage.level === "1" && (
+                <TableCell>
+                  <div className="flex items-center space-x-4">
+                    {localStorage.level === "1" && (
+                      <Button
+                        layout="link"
+                        size="icon"
+                        aria-label="Detail"
+                        onClick={(e) => goToDetail(item.id_tujuan)}
+                      >
+                        <MenuIcon className="w-5 h-5" aria-hidden="true" />
+                      </Button>
+                    )}
                     <Button
                       layout="link"
                       size="icon"
-                      aria-label="Detail"
-                      onClick={(e) => goToDetail(item.id_tujuan)}
+                      aria-label="Edit"
+                      onClick={(e) => goToEdit(item.id_tujuan)}
                     >
-                      <MenuIcon className="w-5 h-5" aria-hidden="true" />
+                      <EditIcon className="w-5 h-5" aria-hidden="true" />
                     </Button>
-                  )}
-                  <Button
-                    layout="link"
-                    size="icon"
-                    aria-label="Edit"
-                    onClick={(e) => goToEdit(item.id_tujuan)}
-                  >
-                    <EditIcon className="w-5 h-5" aria-hidden="true" />
-                  </Button>
-                  <Button
-                    layout="link"
-                    size="icon"
-                    aria-label="Delete"
-                    onClick={() => handleDelete(item.id_tujuan)}
-                  >
-                    <TrashIcon className="w-5 h-5" aria-hidden="true" />
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <TableFooter>
-        {!filterText && (
-          <Pagination
-            totalResults={totalResults}
-            resultsPerPage={resultsPerPage}
-            onChange={onPageChangeTable}
-            label="Table navigation"
-          />
-        )}
-      </TableFooter>
-    </TableContainer>
+                    <Button
+                      layout="link"
+                      size="icon"
+                      aria-label="Delete"
+                      onClick={() => handleDelete(item.id_tujuan)}
+                    >
+                      <TrashIcon className="w-5 h-5" aria-hidden="true" />
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <TableFooter>
+          {!filterText && (
+            <Pagination
+              totalResults={totalResults}
+              resultsPerPage={resultsPerPage}
+              onChange={onPageChangeTable}
+              label="Table navigation"
+            />
+          )}
+        </TableFooter>
+      </TableContainer>
+
+      {/* Modal Keterangan */}
+      <ModalKeterangan
+        isOpen={modalKeterangan}
+        onClose={closeModalKeterangan}
+        keterangan={keterangan}
+      />
+    </>
   );
 };
 

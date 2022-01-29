@@ -23,6 +23,7 @@ import useSortableData from "../../../../helpers/useSortableData";
 import { deletePelanggan } from "../../../../context/actions/Pelanggan";
 import { GlobalContext } from "../../../../context/Provider";
 import Interweave from "interweave";
+import ModalKeterangan from "../../../../components/ModalKeterangan";
 
 const Swal = withReactContent(swal2);
 
@@ -31,6 +32,19 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
   const history = useHistory();
   const { path } = match;
   const { pelangganDispatch } = useContext(GlobalContext);
+  const [modalKeterangan, setModalKeterangan] = useState(false);
+  const [keterangan, setKeterangan] = useState("");
+
+  // Open modal keterangan
+  const openModalKeterangan = (value) => {
+    setKeterangan(value);
+    setModalKeterangan(true);
+  };
+
+  // Close modal keterangan
+  const closeModalKeterangan = () => {
+    setModalKeterangan(false);
+  };
 
   // Go To Edit
   const goToEdit = (id) => {
@@ -68,7 +82,6 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
     } else {
       response2 = response.filter(
         (item) =>
-          item.keterangan.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_perusahaan.toLowerCase().includes(filterText.toLowerCase())
       );
@@ -215,7 +228,20 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">
-                    <Interweave content={item.keterangan} />
+                    {item.keterangan ? (
+                      <>
+                        {/* <Interweave content={item.keterangan} /> */}
+                        <button
+                          onClick={() => openModalKeterangan(item.keterangan)}
+                          type="button"
+                          className="transition-all duration-200 ease-in-out py-2 px-5 bg-gray-500 rounded-md text-white font-semibold hover:bg-gray-600"
+                        >
+                          Lihat
+                        </button>
+                      </>
+                    ) : (
+                      <>Tidak Ada</>
+                    )}
                   </span>
                 </TableCell>
 
@@ -264,6 +290,12 @@ const TablePelanggan = ({ resultsPerPage, response, filterText }) => {
           )}
         </TableFooter>
       </TableContainer>
+
+      <ModalKeterangan
+        isOpen={modalKeterangan}
+        onClose={closeModalKeterangan}
+        keterangan={keterangan}
+      />
     </>
   );
 };
