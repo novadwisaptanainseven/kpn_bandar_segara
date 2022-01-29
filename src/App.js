@@ -9,6 +9,7 @@ import AccessibleNavigationAnnouncer from "./components/AccessibleNavigationAnno
 import { GlobalContext, GlobalProvider } from "./context/Provider";
 
 const Layout = lazy(() => import("./containers/Layout"));
+const FrontPage = lazy(() => import("./pages/FrontPage"));
 const Login = lazy(() => import("./pages/Login"));
 const CreateAccount = lazy(() => import("./pages/CreateAccount"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
@@ -20,6 +21,7 @@ function App() {
         <Router>
           <AccessibleNavigationAnnouncer />
           <Switch>
+            {/* <Route path="/" component={FrontPage} /> */}
             <Route path="/login" component={Login} />
             <Route path="/create-account" component={CreateAccount} />
             <Route path="/forgot-password" component={ForgotPassword} />

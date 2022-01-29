@@ -11,7 +11,7 @@ export const checkToken = (history, Swal) => {
         showConfirmButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
-          history.goBack();
+          window.location.href = "/app/";
         }
       });
     })
