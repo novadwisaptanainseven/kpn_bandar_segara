@@ -225,7 +225,7 @@ const TableDriver = ({ resultsPerPage, response, filterText }) => {
                         aria-label="Detail"
                         onClick={(e) => goToDetail(item.id_driver)}
                       >
-                        <MenuIcon className="w-5 h-5" aria-hidden="true" />
+                        <MenuIcon className="w-5 h-5 text-blue-500" aria-hidden="true" />
                       </Button>
                     )}
                     <Button
@@ -234,7 +234,7 @@ const TableDriver = ({ resultsPerPage, response, filterText }) => {
                       aria-label="Edit"
                       onClick={(e) => goToEdit(item.id_driver)}
                     >
-                      <EditIcon className="w-5 h-5" aria-hidden="true" />
+                      <EditIcon className="w-5 h-5 text-lime-600" aria-hidden="true" />
                     </Button>
                     <Button
                       layout="link"
@@ -242,7 +242,7 @@ const TableDriver = ({ resultsPerPage, response, filterText }) => {
                       aria-label="Delete"
                       onClick={() => handleDelete(item.id_driver)}
                     >
-                      <TrashIcon className="w-5 h-5" aria-hidden="true" />
+                      <TrashIcon className="w-5 h-5 text-red-600" aria-hidden="true" />
                     </Button>
                   </div>
                 </TableCell>

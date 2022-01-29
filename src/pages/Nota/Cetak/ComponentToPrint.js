@@ -40,9 +40,9 @@ export class ComponentToPrint extends React.Component {
       <>
         <div className="grid md:grid-cols-1">
           <div className="nota-header flex justify-between items-center border-t-4 border-b-4 border-black py-2 px-4">
-            <div className="font-semibold text-xl">NOTA TRANSAKSI</div>
+            <div className="font-semibold text-md">NOTA TRANSAKSI</div>
             <div className="text-right">
-              <span className="font-semibold text-lg block">
+              <span className="font-semibold text-sm block">
                 {this.props.dataKonten.title_website}
               </span>
               <span>{this.props.dataKonten.alamat}</span>
@@ -50,7 +50,7 @@ export class ComponentToPrint extends React.Component {
           </div>
           <div className="nota-sub-header flex justify-between pt-1 px-4 mb-10">
             <div>
-              <table className="" style={{ width: 350 }}>
+              <table className="text-sm" style={{ width: 350 }}>
                 <tr>
                   <td>No. Nota</td>
                   <td>:</td>
@@ -69,7 +69,7 @@ export class ComponentToPrint extends React.Component {
               </table>
             </div>
             <div>
-              <table className="" style={{ width: 350 }}>
+              <table className="text-sm" style={{ width: 350 }}>
                 <tr valign="top">
                   <td className="w-32">Pelanggan</td>
                   <td>:</td>
@@ -84,7 +84,7 @@ export class ComponentToPrint extends React.Component {
             </div>
           </div>
           <div className="nota-table-items w-full">
-            <table className="w-full">
+            <table className="w-full text-xs">
               <thead>
                 <tr className="border-t-2 border-b-2 border-black text-left">
                   <th>No.</th>
@@ -144,7 +144,7 @@ export class ComponentToPrint extends React.Component {
               </tbody>
             </table>
           </div>
-          <div className="nota-ttd flex justify-between mt-3 px-10">
+          <div className="nota-ttd flex justify-between mt-3 px-10 text-sm">
             <div className="text-center w-48">
               <h1 className="font-semibold">Tanda Terima</h1>
               <br />

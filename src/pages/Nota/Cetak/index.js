@@ -83,7 +83,7 @@ const Cetak = () => {
                 Cetak
               </Button>
               <div className="grid md:grid-cols-1">
-                <div className="nota-header flex justify-between items-center border-t-4 border-b-4 border-black py-2 px-4">
+                <div className="nota-header flex justify-between items-center border-t-4 border-b-4 border-black dark:border-gray-200 py-2 px-4 ">
                   <div className="font-semibold text-xl">NOTA TRANSAKSI</div>
                   <div className="text-right">
                     <span className="font-semibold text-lg block">
@@ -130,7 +130,7 @@ const Cetak = () => {
                 <div className="nota-table-items w-full">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-t-2 border-b-2 border-black text-left">
+                      <tr className="border-t-2 border-b-2 border-black dark:border-gray-200 text-left">
                         <th>No.</th>
                         <th>Tujuan</th>
                         <th>Driver</th>
@@ -176,10 +176,10 @@ const Cetak = () => {
                         </tr>
                       ))}
 
-                      <tr className="border-t-2 border-b-2 border-black">
+                      <tr className="border-t-2 border-b-2 border-black dark:border-gray-200">
                         <td
                           colSpan={6}
-                          className="font-semibold text-center border-r-2 border-black"
+                          className="font-semibold text-center border-r-2 border-black dark:border-gray-200"
                         >
                           Total
                         </td>

@@ -308,17 +308,17 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
 
                 <TableCell>
                   {item.id_status_nota === 3 && (
-                    <span className="text-sm text-white bg-red-500 px-5 py-2 font-semibold rounded-sm">
+                    <span className="text-sm text-white bg-red-500 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                       {item.nm_status_nota}
                     </span>
                   )}
                   {item.id_status_nota === 2 && (
-                    <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm">
+                    <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                       {item.nm_status_nota}
                     </span>
                   )}
                   {item.id_status_nota === 1 && (
-                    <span className="text-sm bg-lime-400 px-5 py-2 font-semibold rounded-sm">
+                    <span className="text-sm bg-lime-400 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                       {item.nm_status_nota}
                     </span>
                   )}
@@ -327,19 +327,19 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 <TableCell className="text-xs">
                   <div className="flex items-center gap-1">
                     <button
-                      className="flex-1 bg-teal-400 text-white px-3 py-1 rounded-md"
+                      className="flex-1 bg-teal-400 text-white px-3 py-1 rounded-md hover:bg-teal-500 transition duration-100"
                       onClick={() => goToDetail(item.id_nota)}
                     >
                       Detail
                     </button>
                     <button
-                      className="flex-1 bg-lime-500 text-white px-3 py-1 rounded-md"
+                      className="flex-1 bg-lime-500 text-white px-3 py-1 rounded-md hover:bg-lime-600 transition duration-100"
                       onClick={() => goToEdit(item.id_nota)}
                     >
                       Edit
                     </button>
                     <button
-                      className="flex-1 bg-red-400 text-white px-3 py-1 rounded-md"
+                      className="flex-1 bg-red-400 text-white px-3 py-1 rounded-md hover:bg-red-500 transition duration-100"
                       onClick={() => handleDelete(item.id_nota)}
                     >
                       Hapus
@@ -348,7 +348,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   <div className="flex items-center mt-1">
                     <button
                       onClick={() => goToCetak(item.id_nota)}
-                      className="w-full bg-gray-500 text-white px-3 py-1 rounded-md"
+                      className="w-full bg-gray-500 text-white px-3 py-1 rounded-md hover:bg-gray-600 transition duration-100"
                     >
                       Cetak Nota
                     </button>

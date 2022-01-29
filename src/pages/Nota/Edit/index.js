@@ -317,7 +317,7 @@ const Edit = () => {
               )}
 
               <div className="mb-2 mt-4 flex justify-between">
-                <h1 className="text-lg font-semibold pb-4">
+                <h1 className="text-lg font-semibold pb-4 dark:text-gray-200">
                   Rincian Item Penyewaan Kapal
                 </h1>
                 {loadingUpdate && (
@@ -402,12 +402,12 @@ const Edit = () => {
                         <TableCell className="flex items-center gap-1">
                           <button
                             onClick={() => openModalEdit(item.id_spt)}
-                            className="bg-blue-500 text-white px-3 py-1 text-sm rounded-md"
+                            className="bg-blue-500 text-white px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-blue-600"
                           >
                             Ubah
                           </button>
                           <button
-                            className="bg-red-400 text-white px-3 py-1 text-sm rounded-md"
+                            className="bg-red-400 text-white px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-red-500"
                             onClick={() => handleDelete(item.id_spt)}
                           >
                             Hapus

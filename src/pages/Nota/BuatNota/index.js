@@ -56,7 +56,7 @@ const BuatNota = () => {
   const [statusBayar, setStatusBayar] = useState("2");
   const [idSptTempModal, setIdSptTempModal] = useState("");
   const [jumlahBayar, setJumlahBayar] = useState(0);
-  const jumlahMaksimalItem = 2;
+  const jumlahMaksimalItem = 9;
 
   useEffect(() => {
     // console.log(statusBayar);
@@ -187,7 +187,7 @@ const BuatNota = () => {
           </form>
 
           <div className="list-item-sewa">
-            <h1 className="text-lg font-semibold mb-2">
+            <h1 className="text-lg font-semibold mb-2 dark:text-gray-100">
               List Item Penyewaan Kapal
             </h1>
 
@@ -200,7 +200,7 @@ const BuatNota = () => {
 
             <div className="flex justify-between">
               <button
-                className={`bg-teal-400 text-white px-3 py-2 text-sm rounded-md mb-2  ${
+                className={`bg-teal-400 text-white px-3 py-2 text-sm rounded-md mb-2 transition duration-100 hover:bg-teal-500  ${
                   !idPelanggan || sptTemp.length > jumlahMaksimalItem
                     ? "opacity-50 cursor-not-allowed"
                     : " "
@@ -300,13 +300,13 @@ const BuatNota = () => {
                       <TableCell className="space-x-2">
                         <button
                           onClick={() => openModalEdit(item.id_spt_temp)}
-                          className="bg-blue-500 text-white px-3 py-1 text-sm rounded-md"
+                          className="bg-blue-500 text-white px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-blue-600"
                         >
                           Ubah
                         </button>
                         <button
                           onClick={() => handleDelete(item.id_spt_temp)}
-                          className="bg-red-400 text-white px-3 py-1 text-sm rounded-md"
+                          className="bg-red-400 text-white px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-red-500"
                         >
                           Hapus
                         </button>

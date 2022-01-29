@@ -68,7 +68,7 @@ const Detail = () => {
 
   return (
     <>
-      <PageTitle backButton={true}>Edit Nota Transaksi</PageTitle>
+      <PageTitle backButton={true}>Detail Nota Transaksi</PageTitle>
       <Card className="mb-32">
         <CardBody>
           {!nota ? (
@@ -124,17 +124,17 @@ const Detail = () => {
                       </TableCell>
                       <TableCell className="space-x-2">
                         {nota.data_nota.id_status_nota === 3 && (
-                          <span className="text-sm bg-red-500 px-5 py-2 font-semibold rounded-sm">
+                          <span className="text-sm bg-red-500 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                             {nota.data_nota.nm_status_nota}
                           </span>
                         )}
                         {nota.data_nota.id_status_nota === 2 && (
-                          <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm">
+                          <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                             {nota.data_nota.nm_status_nota}
                           </span>
                         )}
                         {nota.data_nota.id_status_nota === 1 && (
-                          <span className="text-sm bg-lime-500 px-5 py-2 font-semibold rounded-sm">
+                          <span className="text-sm bg-lime-500 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                             {nota.data_nota.nm_status_nota}
                           </span>
                         )}
@@ -168,7 +168,7 @@ const Detail = () => {
                 </Table>
               </TableContainer>
 
-              <h1 className="text-lg font-semibold mb-2 mt-4">
+              <h1 className="text-lg font-semibold mb-2 mt-4 dark:text-gray-200">
                 Rincian Item Penyewaan Kapal
               </h1>
               <TableContainer className="text-sm mb-3">

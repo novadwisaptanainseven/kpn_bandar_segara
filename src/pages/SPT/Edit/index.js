@@ -7,6 +7,7 @@ import {
   Input,
   Label,
   HelperText,
+  Textarea,
 } from "@windmill/react-ui";
 import SelectData from "react-select";
 import { useHistory, useRouteMatch } from "react-router-dom";
@@ -16,6 +17,7 @@ import { FormSkeletonLoading } from "../../../components/SkeletonLoading";
 import { Formik } from "formik";
 import initState from "../Formik/initState";
 import validationSchema from "../Formik/validationSchema";
+import TimePicker from "react-time-picker-input";
 
 const Edit = () => {
   const match = useRouteMatch();
@@ -35,31 +37,31 @@ const Edit = () => {
   //   { value: "vanilla", label: "Vanilla" },
   // ];
 
-  const optionsPelanggan = spt
-    ? spt.data_pelanggan.map((item) => ({
-        value: item.id_pelanggan,
-        label: `${item.nm_pelanggan} (${item.id_pelanggan})`,
-      }))
-    : [];
+  // const optionsPelanggan = spt
+  //   ? spt.data_pelanggan.map((item) => ({
+  //       value: item.id_pelanggan,
+  //       label: `${item.nm_pelanggan} (${item.id_pelanggan})`,
+  //     }))
+  //   : [];
 
   const optionsMarine = spt
     ? spt.data_marine.map((item) => ({
         value: item.id_marine,
-        label: `${item.nm_marine} (${item.id_marine})`,
+        label: `${item.nm_marine}`,
       }))
     : [];
 
   const optionsDriver = spt
     ? spt.data_driver.map((item) => ({
         value: item.id_driver,
-        label: `${item.nm_driver} (${item.id_driver})`,
+        label: `${item.nm_driver}`,
       }))
     : [];
 
   const optionsTujuan = spt
     ? spt.data_tujuan.map((item) => ({
         value: item.id_tujuan,
-        label: `${item.nm_tujuan} (${item.id_tujuan})`,
+        label: `${item.nm_tujuan}`,
       }))
     : [];
 
@@ -100,16 +102,26 @@ const Edit = () => {
                     <div>
                       {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
                       <Label>
-                        <span>Kode SPT</span>
+                        <span>No. SPT</span>
                         <Input
-                          name="id_spt"
+                          name="no_spt"
                           type="text"
-                          placeholder="Nama Kapal"
-                          value={values.id_spt || ""}
+                          placeholder="No. SPT"
+                          value={values.no_spt || ""}
                           readOnly="readOnly"
                         />
                       </Label>
-                      <Label className="space-y-1 mt-4">
+                      <Label className="mt-4">
+                        <span>Pelanggan</span>
+                        <Input
+                          name="nm_pelanggan"
+                          type="text"
+                          placeholder="Pelanggan"
+                          value={values.nm_pelanggan || ""}
+                          readOnly="readOnly"
+                        />
+                      </Label>
+                      {/* <Label className="space-y-1 mt-4">
                         <span>Pelanggan</span>
                         <SelectData
                           name="id_pelanggan"
@@ -131,7 +143,7 @@ const Edit = () => {
                             {errors.id_pelanggan}
                           </HelperText>
                         )}
-                      </Label>
+                      </Label> */}
                       <Label className="space-y-1 mt-4">
                         <span>Marine</span>
                         <SelectData
@@ -146,7 +158,7 @@ const Edit = () => {
                           isClearable
                           defaultValue={{
                             value: spt.data_spt.id_marine,
-                            label: `${spt.data_spt.nm_marine} (${spt.data_spt.id_marine})`,
+                            label: `${spt.data_spt.nm_marine}`,
                           }}
                         />
                         {errors.id_marine && touched.id_marine && (
@@ -169,7 +181,7 @@ const Edit = () => {
                           isClearable
                           defaultValue={{
                             value: spt.data_spt.id_driver,
-                            label: `${spt.data_spt.nm_driver} (${spt.data_spt.id_driver})`,
+                            label: `${spt.data_spt.nm_driver}`,
                           }}
                         />
                         {errors.id_driver && touched.id_driver && (
@@ -193,7 +205,7 @@ const Edit = () => {
                           isClearable
                           defaultValue={{
                             value: spt.data_spt.id_tujuan,
-                            label: `${spt.data_spt.nm_tujuan} (${spt.data_spt.id_tujuan})`,
+                            label: `${spt.data_spt.nm_tujuan}`,
                           }}
                         />
                         {errors.id_tujuan && touched.id_tujuan && (
@@ -204,43 +216,64 @@ const Edit = () => {
                       </Label>
 
                       <Label className="mt-4">
-                        <span>Nama Kapal</span>
+                        <span>Tanggal Keberangkatan</span>
                         <Input
-                          name="nm_kapal"
-                          type="text"
-                          placeholder="Nama Kapal"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.nm_kapal || ""}
-                          className={`mt-1 ${
-                            errors.nm_kapal && touched.nm_kapal
-                              ? "border-red-500"
-                              : null
-                          }`}
-                        />
-                        {errors.nm_kapal && touched.nm_kapal && (
-                          <HelperText valid={false}>
-                            {errors.nm_kapal}
-                          </HelperText>
-                        )}
-                      </Label>
-                      <Label className="mt-4">
-                        <span>Tanggal</span>
-                        <Input
-                          name="tgl_spt"
+                          name="tgl_keberangkatan"
                           type="date"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values.tgl_spt || ""}
+                          value={values.tgl_keberangkatan || ""}
                           className={`mt-1 ${
-                            errors.tgl_spt && touched.tgl_spt
+                            errors.tgl_keberangkatan &&
+                            touched.tgl_keberangkatan
                               ? "border-red-500"
                               : null
                           }`}
                         />
-                        {errors.tgl_spt && touched.tgl_spt && (
+                        {errors.tgl_keberangkatan &&
+                          touched.tgl_keberangkatan && (
+                            <HelperText valid={false}>
+                              {errors.tgl_keberangkatan}
+                            </HelperText>
+                          )}
+                      </Label>
+
+                      <Label className="mt-4">
+                        <span>Jam Keberangkatan</span>
+
+                        <TimePicker
+                          onChange={(newValue) =>
+                            setFieldValue("waktu_keberangkatan", newValue)
+                          }
+                          value={values.waktu_keberangkatan}
+                          eachInputDropdown={true}
+                        />
+                        {errors.waktu_keberangkatan &&
+                          touched.waktu_keberangkatan && (
+                            <HelperText valid={false}>
+                              {errors.waktu_keberangkatan}
+                            </HelperText>
+                          )}
+                      </Label>
+
+                      <Label className="mt-4">
+                        <span>Keterangan</span>
+                        <Textarea
+                          name="keterangan"
+                          type="text"
+                          placeholder="Keterangan"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.keterangan || ""}
+                          className={`mt-1 ${
+                            errors.keterangan && touched.keterangan
+                              ? "border-red-500"
+                              : null
+                          }`}
+                        />
+                        {errors.keterangan && touched.keterangan && (
                           <HelperText valid={false}>
-                            {errors.tgl_spt}
+                            {errors.keterangan}
                           </HelperText>
                         )}
                       </Label>

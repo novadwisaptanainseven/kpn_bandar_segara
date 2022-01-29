@@ -57,38 +57,46 @@ const Detail = () => {
                     <TableCell>{spt.nm_driver}</TableCell>
                   </TableRow>
                   <TableRow className="bg-gray-200 dark:bg-gray-700">
-                    <TableCell className="font-semibold">Nama Kapal</TableCell>
-                    <TableCell>{spt.nm_kapal}</TableCell>
-                  </TableRow>
-                  <TableRow className="bg-gray-100 dark:bg-gray-800">
                     <TableCell className="font-semibold">Tujuan</TableCell>
                     <TableCell>{spt.nm_tujuan}</TableCell>
                   </TableRow>
+                  <TableRow className="bg-gray-100 dark:bg-gray-800">
+                    <TableCell className="font-semibold">Keterangan</TableCell>
+                    <TableCell>{spt.keterangan}</TableCell>
+                  </TableRow>
                   <TableRow className="bg-gray-200 dark:bg-gray-700">
-                    <TableCell className="font-semibold">Tanggal SPT</TableCell>
-                    <TableCell>
-                      {format(new Date(spt.waktu_buat), "dd-MM-y")}
+                    <TableCell className="font-semibold">
+                      Tanggal Keberangkatan
                     </TableCell>
+                    <TableCell>
+                      {format(new Date(spt.tgl_keberangkatan), "dd-MM-y")}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow className="bg-gray-100 dark:bg-gray-800">
+                    <TableCell className="font-semibold">
+                      Jam Keberangkatan
+                    </TableCell>
+                    <TableCell>{spt.waktu_keberangkatan}</TableCell>
                   </TableRow>
                   {localStorage.level === "1" && (
                     <>
-                      <TableRow className="bg-gray-100 dark:bg-gray-800">
+                      <TableRow className="bg-gray-200 dark:bg-gray-700">
                         <TableCell className="font-semibold">Pembuat</TableCell>
                         <TableCell>{spt.nm_pembuat}</TableCell>
                       </TableRow>
-                      <TableRow className="bg-gray-200 dark:bg-gray-700">
+                      <TableRow className="bg-gray-100 dark:bg-gray-800">
                         <TableCell className="font-semibold">
                           Penggubah
                         </TableCell>
                         <TableCell>{spt.nm_penggubah}</TableCell>
                       </TableRow>
-                      <TableRow className="bg-gray-100 dark:bg-gray-800">
+                      <TableRow className="bg-gray-200 dark:bg-gray-700">
                         <TableCell className="font-semibold">
                           Dibuat pada tanggal
                         </TableCell>
                         <TableCell>{spt.waktu_buat}</TableCell>
                       </TableRow>
-                      <TableRow className="bg-gray-200 dark:bg-gray-700">
+                      <TableRow className="bg-gray-100 dark:bg-gray-800">
                         <TableCell className="font-semibold">
                           Diubah pada tanggal
                         </TableCell>

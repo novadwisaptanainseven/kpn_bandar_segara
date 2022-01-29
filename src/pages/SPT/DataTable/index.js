@@ -253,19 +253,19 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 <TableCell className="text-xs">
                   <div className="flex items-center gap-1 ">
                     <button
-                      className="bg-teal-400 text-white px-3 py-1 text-sm rounded-md"
+                      className="bg-teal-400 text-white px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-teal-500"
                       onClick={() => goToDetail(item.id_spt)}
                     >
                       Detail
                     </button>
                     <button
-                      className="bg-lime-500 text-white px-3 py-1 text-sm rounded-md"
+                      className="bg-lime-500 text-white px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-lime-600"
                       onClick={() => goToEdit(item.id_spt)}
                     >
                       Edit
                     </button>
                     <button
-                      className="bg-red-400 text-white px-3 py-1 text-sm rounded-md"
+                      className="bg-red-400 text-white px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-red-500"
                       onClick={() => handleDelete(item.id_spt)}
                     >
                       Hapus
@@ -273,13 +273,13 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   </div>
                   <div className="flex items-center gap-1 mt-1">
                     {/* <button
-                      className="bg-yellow-300 text-black px-3 py-1 text-sm rounded-md"
+                      className="bg-yellow-300 text-black px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-teal-500"
                       onClick={() => goToBuatNota(item.id_spt)}
                     >
                       Buat Nota
                     </button> */}
                     <button
-                      className="bg-gray-500 text-white px-3 py-1 text-sm rounded-md"
+                      className="bg-gray-500 text-white px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-gray-600"
                       onClick={() => goToCetak(item.id_spt)}
                     >
                       Cetak SPT

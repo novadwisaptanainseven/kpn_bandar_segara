@@ -50,7 +50,7 @@ const CetakSPT = () => {
               <div className=" grid md:grid-cols-2">
                 <div className="border-2 border-black dark:border-gray-300 py-6">
                   {/* Header */}
-                  <div className="spt-header flex items-center flex-col mx-10">
+                  <div className="spt-header flex items-center flex-col mx-10 text-center">
                     <img
                       src={getImage("", dataKonten.logo)}
                       alt="logo"
