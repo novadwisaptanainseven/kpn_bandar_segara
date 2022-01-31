@@ -36,8 +36,20 @@ export class ComponentToPrint extends React.Component {
       });
     };
 
+    const marginTop = "30px";
+    const marginBottom = "30px";
+    const marginRight = "30px";
+    const marginLeft = "30px";
+
+    const getPageMargins = () => {
+      return `@page { margin: ${marginTop} ${marginRight} ${marginBottom} ${marginLeft} !important; }`;
+    };
+
     return (
       <>
+        {/* <style>
+        {getPageMargins()}
+      </style> */}
         <div className="grid md:grid-cols-1">
           <div className="nota-header flex justify-between items-center border-t-4 border-b-4 border-black py-2 px-4">
             <div className="font-semibold text-md">NOTA TRANSAKSI</div>
