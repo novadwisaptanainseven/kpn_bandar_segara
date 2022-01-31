@@ -22,7 +22,7 @@ import validationSchema from "./Formik/validationSchema";
 import { GlobalContext } from "../../../context/Provider";
 import { insertNota } from "../../../context/actions/Nota";
 import { selectStatusSPT } from "../../../context/actions/SPT";
-import { selectPelanggan } from "../../../context/actions/Pelanggan";
+import { selectPelangganOrderBy } from "../../../context/actions/Pelanggan";
 import SelectData from "react-select";
 import ModalTambahItem from "./ModalTambahItem";
 import {
@@ -92,7 +92,7 @@ const BuatNota = () => {
   };
 
   useEffect(() => {
-    selectPelanggan(setPelanggan);
+    selectPelangganOrderBy(setPelanggan);
   }, []);
 
   const optionsPelanggan = pelanggan.map((item) => ({
