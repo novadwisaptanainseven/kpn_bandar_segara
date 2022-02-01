@@ -48,7 +48,7 @@ const NavigationBar = ({ dataKonten }) => {
       {/* End of Desktop Device */}
 
       {/* Mobile Device*/}
-      <div className="navbar fixed top-0 left-0 right-0 bg-white flex justify-between px-10 py-3 md:hidden">
+      <div className="navbar fixed top-0 left-0 right-0 bg-white flex justify-between px-10 py-3 md:hidden z-20">
         <div className="navbar-brand flex items-center gap-4">
           <img
             src={getImage(dataKonten.logo, "")}
@@ -71,7 +71,7 @@ const NavigationBar = ({ dataKonten }) => {
       </div>
       {/* List Menu Hamburger */}
       <div
-        className={`navbar-menu-items fixed left-0 right-0 opacity-1 bg-white px-10 py-8 transition-all duration-300 transform ${openBar}`}
+        className={`navbar-menu-items fixed left-0 right-0 opacity-1 bg-white px-10 py-8 transition-all duration-300 transform z-20 ${openBar}`}
         style={{
           display: "flex",
           flexDirection: "column",
