@@ -5,6 +5,7 @@ import * as Icons from "../../icons";
 import SidebarSubmenu from "./SidebarSubmenu";
 import { Button } from "@windmill/react-ui";
 import { GlobalContext } from "../../context/Provider";
+import getImage from "../../context/actions/Files/getImage";
 
 function Icon({ icon, ...props }) {
   const Icon = Icons[icon];
@@ -17,12 +18,21 @@ function SidebarContent() {
 
   return (
     <div className="py-4 text-gray-500 dark:text-gray-400">
-      <a
-        className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-        href="#"
-      >
-        {dataKonten.title_website}
-      </a>
+      <div className="brand flex flex-col items-center gap-3">
+        <img
+          src={dataKonten ? getImage(dataKonten.logo, "") : ""}
+          alt="logo"
+          className="w-12 rounded-full"
+        />
+        <div className="pl-6">
+          <a
+            className=" text-lg font-bold text-gray-800 dark:text-gray-200"
+            href="#"
+          >
+            {dataKonten.title_website}
+          </a>
+        </div>
+      </div>
       <ul className="mt-6">
         {routes.map((route) =>
           route.routes ? (
