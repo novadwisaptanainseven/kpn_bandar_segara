@@ -1,24 +1,27 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import PageTitle from "../../../components/Typography/PageTitle";
 import { Card, CardBody, Button } from "@windmill/react-ui";
-import { useReactToPrint } from "react-to-print";
 import { GlobalContext } from "../../../context/Provider";
-import getImage from "../../../context/actions/Files/getImage";
-import style from "./printStyle.module.css";
-import { getSptById } from "../../../context/actions/SPT";
-import { useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { format } from "date-fns";
-import { getNotaById } from "../../../context/actions/Nota";
-import { ComponentToPrint } from "./ComponentToPrint";
+import {
+  hitungPotonganHarga,
+  hitungTotalHarga,
+  hitungTotalPotongan,
+} from "../../../helpers/GlobalFunctions";
 import Interweave from "interweave";
+import { useReactToPrint } from "react-to-print";
+import { ComponentToPrint2 } from "./ComponentToPrint2";
+import { simpanCetakNota } from "../../../context/actions/Nota";
 
-const Cetak = () => {
-  const match = useRouteMatch();
-  const { params } = match;
-  const { kontenState } = useContext(GlobalContext);
+const PreviewCetakNota = () => {
+  const { cetakNotaState, kontenState, listCetakNotaState, notaDispatch } =
+    useContext(GlobalContext);
+  const { data: nota } = cetakNotaState;
+  const { data: listCetakNota } = listCetakNotaState;
   const { data: dataKonten } = kontenState;
-  const [nota, setNota] = useState("");
   const componentPrintRef = useRef();
+
   // Handle print nota
   const handlePrint = useReactToPrint({
     content: () => componentPrintRef.current,
@@ -31,46 +34,15 @@ const Cetak = () => {
       }
     `,
     copyStyles: true,
-    documentTitle: nota && nota.data_nota.id_nota,
+    documentTitle: nota && nota.id_nota,
+    onAfterPrint: () => simpanCetakNota(listCetakNota, history, notaDispatch),
   });
 
-  // Get data Nota by ID
-  useEffect(() => {
-    getNotaById(params.id, setNota);
-  }, [params]);
+  const history = useHistory();
 
-  const hitungTotalHarga = () => {
-    const totHarga = nota.data_spt.reduce(add, 0);
-    function add(accumulator, a) {
-      return accumulator + a.harga;
-    }
-
-    return totHarga.toLocaleString("id", {
-      style: "currency",
-      currency: "IDR",
-    });
-  };
-
-  const hitungTotalPotongan = () => {
-    const totPotongan = nota.data_spt.reduce(add, 0);
-
-    function add(accumulator, a) {
-      const potonganHarga = (a.diskon / 100) * a.harga_tujuan;
-      return accumulator + potonganHarga;
-    }
-
-    return totPotongan.toLocaleString("id", {
-      style: "currency",
-      currency: "IDR",
-    });
-  };
-
-  const hitungPotonganHarga = (diskon, hargaTujuan) => {
-    return ((diskon / 100) * hargaTujuan).toLocaleString("id", {
-      style: "currency",
-      currency: "IDR",
-    });
-  };
+  if (!nota) {
+    history.push(`/app/nota`);
+  }
 
   return (
     <>
@@ -102,17 +74,12 @@ const Cetak = () => {
                       <tr>
                         <td>No. Nota</td>
                         <td>:</td>
-                        <td>{nota.data_nota.no_nota}</td>
+                        <td>{nota.no_cetak_nota}</td>
                       </tr>
                       <tr>
                         <td>Tanggal</td>
                         <td>:</td>
-                        <td>
-                          {format(
-                            new Date(nota.data_nota.waktu_buat),
-                            "dd-MM-y"
-                          )}
-                        </td>
+                        <td>{format(new Date(nota.tgl_nota), "dd-MM-y")}</td>
                       </tr>
                     </table>
                   </div>
@@ -121,12 +88,12 @@ const Cetak = () => {
                       <tr valign="top">
                         <td className="w-32">Pelanggan</td>
                         <td>:</td>
-                        <td>{nota.data_nota.nm_pelanggan}</td>
+                        <td>{nota.nm_pelanggan}</td>
                       </tr>
                       <tr valign="top">
                         <td>Perusahaan</td>
                         <td>:</td>
-                        <td>{nota.data_nota.nm_perusahaan}</td>
+                        <td>{nota.nm_perusahaan}</td>
                       </tr>
                     </table>
                   </div>
@@ -187,8 +154,8 @@ const Cetak = () => {
                         >
                           Total
                         </td>
-                        <td>{hitungTotalPotongan()}</td>
-                        <td>{hitungTotalHarga()}</td>
+                        <td>{hitungTotalPotongan(nota)}</td>
+                        <td>{hitungTotalHarga(nota)}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -218,7 +185,7 @@ const Cetak = () => {
       {/* Component For Printing */}
       {nota && (
         <div style={{ display: "none" }}>
-          <ComponentToPrint
+          <ComponentToPrint2
             ref={componentPrintRef}
             nota={nota}
             dataKonten={dataKonten}
@@ -229,4 +196,4 @@ const Cetak = () => {
   );
 };
 
-export default Cetak;
+export default PreviewCetakNota;

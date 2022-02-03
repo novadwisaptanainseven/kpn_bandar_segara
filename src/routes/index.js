@@ -49,6 +49,9 @@ const Nota = lazy(() => import("../pages/Nota"));
 const DetailNota = lazy(() => import("../pages/Nota/Detail"));
 const EditNota = lazy(() => import("../pages/Nota/Edit"));
 const CetakNota = lazy(() => import("../pages/Nota/Cetak"));
+const PreviewCetakNota = lazy(() =>
+  import("../pages/Nota/Cetak/PreviewCetakNota")
+);
 
 // Users
 const Users = lazy(() => import("../pages/Users"));
@@ -216,6 +219,10 @@ const routes = [
   {
     path: "/nota/cetak/:id",
     component: CetakNota,
+  },
+  {
+    path: "/nota/preview-cetak",
+    component: PreviewCetakNota,
   },
 
   // Route Users

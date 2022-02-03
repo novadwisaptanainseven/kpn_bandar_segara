@@ -6,8 +6,13 @@ import ButtonExcel from "../../components/Buttons/ButtonExcel";
 import DataTable from "./DataTable";
 import ModalExcel from "../../components/Modals/ModalExcel";
 import { GlobalContext } from "../../context/Provider";
-import { getNota, getNotaByFilter } from "../../context/actions/Nota";
+import {
+  getNota,
+  getNotaByFilter,
+  getPreviewCetakNota,
+} from "../../context/actions/Nota";
 import { TableSkeletonLoading } from "../../components/SkeletonLoading";
+import ButtonCetak from "../../components/Buttons/ButtonCetak";
 
 const Nota = () => {
   const history = useHistory();
@@ -15,12 +20,26 @@ const Nota = () => {
   const { path } = match;
   const [filterText, setFilterText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { notaState, notaDispatch } = useContext(GlobalContext);
+  const {
+    notaState,
+    notaDispatch,
+    cetakNotaState,
+    cetakNotaDispatch,
+    listCetakNotaState,
+    listCetakNotaDispatch,
+  } = useContext(GlobalContext);
   const { loading, data: dataNota } = notaState;
+  const {
+    loading: loadingCetakNota,
+    data: dataCetakNota,
+    error: errorCetakNota,
+  } = cetakNotaState;
   const [filterTgl, setFilterTgl] = useState({
     dari_tgl: "",
     sampai_tgl: "",
   });
+  const [listCheckbox, setListCheckbox] = useState([]);
+  const [listIdPelanggan, setListIdPelanggan] = useState([]);
 
   // Get data nota
   useEffect(() => {
@@ -60,6 +79,30 @@ const Nota = () => {
   // Halaman tambah transaksi
   const goToTambah = () => {
     history.push(`${path}/transaksi`);
+  };
+
+  // Halaman cetak nota terpilih
+  const goToCetakNotaTerpilih = () => {
+    const values = {
+      id_nota: listCheckbox,
+      id_pelanggan: listIdPelanggan,
+    };
+
+    getPreviewCetakNota(
+      cetakNotaDispatch,
+      listCetakNotaDispatch,
+      values,
+      history
+    );
+  };
+
+  // Fungsi untuk menghilangkan alert error
+  const handleCloseAlert = () => {
+    const alertError = document.getElementById("alertError");
+    alertError.classList.add("opacity-0");
+    setTimeout(() => {
+      alertError.classList.add("hidden");
+    }, [150]);
   };
 
   return (
@@ -118,7 +161,7 @@ const Nota = () => {
             </CardBody>
           </Card>
 
-          <div className="flex flex-wrap justify-between flex-col md:flex-row mb-5 mt-4">
+          <div className="flex flex-wrap justify-between flex-col md:flex-row mb-2 mt-4">
             <div className="flex flex-wrap flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-1">
               <Button onClick={goToTambah}>Buat Transaksi</Button>
               <ButtonExcel onClick={openModal} />
@@ -135,6 +178,39 @@ const Nota = () => {
             </div>
           </div>
 
+          {listCheckbox.length > 0 && (
+            <div className="mb-2 text-center">
+              <ButtonCetak
+                onClick={goToCetakNotaTerpilih}
+                disabled={loadingCetakNota ? true : false}
+              >
+                {loadingCetakNota ? (
+                  "Loading..."
+                ) : (
+                  <>Cetak Nota Checklist ({listCheckbox.length})</>
+                )}
+              </ButtonCetak>
+            </div>
+          )}
+
+          {errorCetakNota && (
+            <div
+              id="alertError"
+              className="text-sm transition duration-150 ease-in-out bg-red-600 text-white p-3 rounded-md mb-5 flex gap-3"
+            >
+              <p>
+                Daftar nota yang dichecklist hanya boleh 1 nama pengguna yg
+                sama, tidak boleh lebih dari 2 nama pengguna yg berbeda
+              </p>
+              <span
+                onClick={handleCloseAlert}
+                className="text-2xl cursor-pointer opacity-50 hover:opacity-100"
+              >
+                &times;
+              </span>
+            </div>
+          )}
+
           {!dataNota && loading && <TableSkeletonLoading />}
 
           {/* Table */}
@@ -143,6 +219,10 @@ const Nota = () => {
               response={dataNota}
               resultsPerPage={10}
               filterText={filterText}
+              listCheckbox={listCheckbox}
+              setListCheckbox={setListCheckbox}
+              listIdPelanggan={listIdPelanggan}
+              setListIdPelanggan={setListIdPelanggan}
             />
           )}
 

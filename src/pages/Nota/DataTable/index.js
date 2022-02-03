@@ -11,6 +11,7 @@ import {
   TableFooter,
   Pagination,
   TableContainer,
+  Input,
 } from "@windmill/react-ui";
 import { GlobalContext } from "../../../context/Provider";
 import { deleteNota } from "../../../context/actions/Nota";
@@ -18,10 +19,19 @@ import useSortableData from "../../../helpers/useSortableData";
 import ArrowUp from "../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../components/DataTableIcons/ArrowDown";
 import { format } from "date-fns";
+import { removeArrayByValue } from "../../../helpers/GlobalFunctions";
 
 const Swal = withReactContent(swal2);
 
-const DataTable = ({ resultsPerPage, response, filterText }) => {
+const DataTable = ({
+  resultsPerPage,
+  response,
+  filterText,
+  setListCheckbox,
+  listCheckbox,
+  listIdPelanggan,
+  setListIdPelanggan,
+}) => {
   const history = useHistory();
   const match = useRouteMatch();
   const { path } = match;
@@ -105,6 +115,24 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     requestSort(key);
   };
 
+  // Handle checkbox for printing selected data
+  const handleCheckBox = (e, idNota, idPelanggan) => {
+    const isChecked = e.target.checked;
+
+    if (isChecked) {
+      setListCheckbox([...listCheckbox, idNota]);
+      setListIdPelanggan([...listIdPelanggan, idPelanggan]);
+    } else {
+      const arrAfterRemove = removeArrayByValue([...listCheckbox], idNota);
+      const arrAfterRemove2 = removeArrayByValue(
+        [...listIdPelanggan],
+        idPelanggan
+      );
+      setListCheckbox(arrAfterRemove);
+      setListIdPelanggan(arrAfterRemove2);
+    }
+  };
+
   return (
     <>
       <TableContainer className="mb-8">
@@ -133,6 +161,8 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                     ))}
                 </div>
               </TableCell>
+              <TableCell>Checklist</TableCell>
+
               <TableCell>
                 <div className="flex gap-1 items-center">
                   <a
@@ -274,6 +304,15 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
               <TableRow key={i}>
                 <TableCell>
                   <span className="text-sm">{i + 1}</span>
+                </TableCell>
+                <TableCell>
+                  <Input
+                    type="checkbox"
+                    onChange={(e) =>
+                      handleCheckBox(e, item.id_nota, item.id_pelanggan)
+                    }
+                    disabled={item.id_status_nota === 2 ? false : true}
+                  />
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">{item.no_nota}</span>

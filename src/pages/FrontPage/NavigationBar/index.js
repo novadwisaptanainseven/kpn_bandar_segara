@@ -22,7 +22,7 @@ const NavigationBar = ({ dataKonten }) => {
       {/* Navigation Bar */}
       {/* Desktop Device */}
       <div
-        className="navbar fixed top-0 left-0 right-0 px-20 py-3 hidden md:flex md:justify-between bg-white"
+        className="navbar fixed top-0 left-0 right-0 px-20 py-3 hidden md:flex md:justify-between bg-white shadow-lg"
         style={{ zIndex: 999 }}
       >
         <div className="navbar-brand flex items-center gap-4">

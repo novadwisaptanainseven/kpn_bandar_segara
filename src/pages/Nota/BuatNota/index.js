@@ -376,7 +376,7 @@ const BuatNota = () => {
             <Button
               className="h-10"
               disabled={
-                !idPelanggan || !jumlahBayar || sptTemp.length === 0 || loading
+                !idPelanggan || sptTemp.length === 0 || loading
                   ? true
                   : false
               }

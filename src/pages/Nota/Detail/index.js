@@ -244,7 +244,7 @@ const Detail = () => {
 
                     <TableRow>
                       <TableCell
-                        colSpan={8}
+                        colSpan={9}
                         className="text-center font-semibold"
                       >
                         Total

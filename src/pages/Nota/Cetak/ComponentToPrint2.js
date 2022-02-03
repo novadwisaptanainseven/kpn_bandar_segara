@@ -2,7 +2,7 @@ import React from "react";
 import format from "date-fns/format";
 import Interweave from "interweave";
 
-export class ComponentToPrint extends React.Component {
+export class ComponentToPrint2 extends React.Component {
   render() {
     const hitungTotalHarga = () => {
       const totHarga = this.props.nota.data_spt.reduce(add, 0);
@@ -69,16 +69,13 @@ export class ComponentToPrint extends React.Component {
                 <tr>
                   <td>No. Nota</td>
                   <td>:</td>
-                  <td>{this.props.nota.data_nota.no_nota}</td>
+                  <td>{this.props.nota.no_cetak_nota}</td>
                 </tr>
                 <tr>
                   <td>Tanggal</td>
                   <td>:</td>
                   <td>
-                    {format(
-                      new Date(this.props.nota.data_nota.waktu_buat),
-                      "dd-MM-y"
-                    )}
+                    {format(new Date(this.props.nota.tgl_nota), "dd-MM-y")}
                   </td>
                 </tr>
               </table>
@@ -88,12 +85,12 @@ export class ComponentToPrint extends React.Component {
                 <tr valign="top">
                   <td className="w-32">Pelanggan</td>
                   <td>:</td>
-                  <td>{this.props.nota.data_nota.nm_pelanggan}</td>
+                  <td>{this.props.nota.nm_pelanggan}</td>
                 </tr>
                 <tr valign="top">
                   <td>Perusahaan</td>
                   <td>:</td>
-                  <td>{this.props.nota.data_nota.nm_perusahaan}</td>
+                  <td>{this.props.nota.nm_perusahaan}</td>
                 </tr>
               </table>
             </div>

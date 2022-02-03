@@ -6,6 +6,8 @@ import getNotaById from "./getNotaById";
 import getEditNotaById from "./getEditNotaById";
 import editNotaById from "./editNotaById";
 import selectStatusNota from "./selectStatusNota";
+import getPreviewCetakNota from "./getPreviewCetakNota";
+import simpanCetakNota from "./simpanCetakNota";
 
 export {
   insertNota,
@@ -16,4 +18,6 @@ export {
   getEditNotaById,
   editNotaById,
   selectStatusNota,
+  getPreviewCetakNota,
+  simpanCetakNota,
 };
