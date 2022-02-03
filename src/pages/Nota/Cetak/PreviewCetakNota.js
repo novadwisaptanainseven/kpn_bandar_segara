@@ -13,6 +13,7 @@ import Interweave from "interweave";
 import { useReactToPrint } from "react-to-print";
 import { ComponentToPrint2 } from "./ComponentToPrint2";
 import { simpanCetakNota } from "../../../context/actions/Nota";
+import { PrintingComponentHeaderNota } from "../../../components/PrintingComponent";
 
 const PreviewCetakNota = () => {
   const { cetakNotaState, kontenState, listCetakNotaState, notaDispatch } =
@@ -57,18 +58,8 @@ const PreviewCetakNota = () => {
                 Cetak
               </Button>
               <div className="grid md:grid-cols-1">
-                
-                <div className="nota-header flex gap-5 justify-between items-center border-t-4 border-b-4 border-black dark:border-gray-200 py-2 px-4 ">
-                  <div className="font-semibold text-xl">NOTA TRANSAKSI</div>
-                  <div className="text-right">
-                    <span className="font-semibold text-lg block">
-                      {dataKonten.title_website}
-                    </span>
-                    <span>
-                      <Interweave content={dataKonten.alamat} />
-                    </span>
-                  </div>
-                </div>
+                {/* Header */}
+                <PrintingComponentHeaderNota dataKonten={dataKonten} />
                 <div className="nota-sub-header flex justify-between pt-1 px-4 mb-10">
                   <div>
                     <table className="" style={{ width: 350 }}>

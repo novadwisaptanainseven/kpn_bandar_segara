@@ -10,6 +10,7 @@ const validationSchema = Yup.object().shape({
   no_hp: Yup.string().required("No. telepon perusahaan harus diisi"),
   instagram: Yup.string().required("Instagram harus diisi"),
   alamat: Yup.string().required("Alamat perusahaan harus diisi"),
+  nm_perusahaan: Yup.string().required("Nama perusahaan harus diisi"),
   foto: Yup.mixed()
     .test("size", "Kapasitas file maksimal 1 mb", (value) => {
       if (value) {

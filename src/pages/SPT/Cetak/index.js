@@ -8,6 +8,7 @@ import getImage from "../../../context/actions/Files/getImage";
 import { getSptById } from "../../../context/actions/SPT";
 import { useRouteMatch } from "react-router-dom";
 import { format } from "date-fns";
+import { PrintingComponentHeaderSPT } from "../../../components/PrintingComponent";
 
 const CetakSPT = () => {
   const match = useRouteMatch();
@@ -50,28 +51,7 @@ const CetakSPT = () => {
               <div className=" grid md:grid-cols-2">
                 <div className="border-2 border-black dark:border-gray-300 py-6">
                   {/* Header */}
-                  <div className="spt-header flex items-center flex-col mx-10 text-center">
-                    <img
-                      src={getImage("", dataKonten.logo)}
-                      alt="logo"
-                      className="w-24 mb-3"
-                    />
-                    <h1 className="text-lg font-semibold">
-                      {dataKonten.title_website}
-                    </h1>
-                    <h2 className="text-md">
-                      {dataKonten.alamat
-                        ? dataKonten.alamat
-                        : "Jalan Yos Sudarso No. 2 Samarinda, Kalimantan Timur"}
-                    </h2>
-                    <h2 className="text-md">
-                      No. HP:
-                      {" " +
-                        (dataKonten.no_hp
-                          ? dataKonten.no_hp
-                          : "+62 857-5013-8028")}
-                    </h2>
-                  </div>
+                  <PrintingComponentHeaderSPT dataKonten={dataKonten} />
 
                   {/* Title */}
                   <h1 className="text-md text-center my-3 font-semibold border-t-2 border-b-2 border-black dark:border-gray-300 w-full">

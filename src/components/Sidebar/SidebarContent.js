@@ -24,9 +24,9 @@ function SidebarContent() {
           alt="logo"
           className="w-12 rounded-full"
         />
-        <div className="pl-6">
+        <div className="">
           <a
-            className=" text-lg font-bold text-gray-800 dark:text-gray-200"
+            className="text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
           >
             {dataKonten.title_website}

@@ -1,5 +1,6 @@
 import format from "date-fns/format";
 import React from "react";
+import { PrintingComponentHeaderSPT } from "../../../components/PrintingComponent";
 import getImage from "../../../context/actions/Files/getImage";
 
 export class ComponentToPrint2 extends React.Component {
@@ -13,28 +14,7 @@ export class ComponentToPrint2 extends React.Component {
             <div key={item.id_spt} style={{ width: "279.4mm" }}>
               <div className="border-2 border-black dark:border-gray-300 py-6">
                 {/* Header */}
-                <div className="spt-header flex items-center flex-col mx-10">
-                  <img
-                    src={getImage("", dataKonten.logo)}
-                    alt="logo"
-                    className="w-24 mb-3"
-                  />
-                  <h1 className="text-lg font-semibold">
-                    {dataKonten.title_website}
-                  </h1>
-                  <h2 className="text-md text-center">
-                    {dataKonten.alamat
-                      ? dataKonten.alamat
-                      : "Jalan Yos Sudarso No. 2 Samarinda, Kalimantan Timur"}
-                  </h2>
-                  <h2 className="text-md">
-                    No. HP:
-                    {" " +
-                      (dataKonten.no_hp
-                        ? dataKonten.no_hp
-                        : "+62 857-5013-8028")}
-                  </h2>
-                </div>
+                <PrintingComponentHeaderSPT dataKonten={dataKonten} />
 
                 {/* Title */}
                 <h1 className="text-md text-center my-3 font-semibold border-t-2 border-b-2 border-black dark:border-gray-300 w-full">

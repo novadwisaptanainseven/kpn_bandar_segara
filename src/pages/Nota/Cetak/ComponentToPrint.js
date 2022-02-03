@@ -1,11 +1,14 @@
 import React from "react";
 import format from "date-fns/format";
 import Interweave from "interweave";
+import { PrintingComponentHeaderNotaV2 } from "../../../components/PrintingComponent";
 
 export class ComponentToPrint extends React.Component {
   render() {
+    const { dataKonten, nota } = this.props;
+
     const hitungTotalHarga = () => {
-      const totHarga = this.props.nota.data_spt.reduce(add, 0);
+      const totHarga = nota.data_spt.reduce(add, 0);
       function add(accumulator, a) {
         return accumulator + a.harga;
       }
@@ -17,7 +20,7 @@ export class ComponentToPrint extends React.Component {
     };
 
     const hitungTotalPotongan = () => {
-      const totPotongan = this.props.nota.data_spt.reduce(add, 0);
+      const totPotongan = nota.data_spt.reduce(add, 0);
 
       function add(accumulator, a) {
         const potonganHarga = (a.diskon / 100) * a.harga_tujuan;
@@ -52,33 +55,21 @@ export class ComponentToPrint extends React.Component {
         {getPageMargins()}
       </style> */}
         <div className="grid md:grid-cols-1">
-          <div className="nota-header flex gap-5 justify-between items-center border-t-4 border-b-4 border-black py-2 px-4">
-            <div className="font-semibold text-lg">NOTA TRANSAKSI</div>
-            <div className="text-right">
-              <span className="font-semibold text-md block">
-                {this.props.dataKonten.title_website}
-              </span>
-              <span className="text-sm">
-                <Interweave content={this.props.dataKonten.alamat} />
-              </span>
-            </div>
-          </div>
+          {/* Header */}
+          <PrintingComponentHeaderNotaV2 dataKonten={dataKonten} />
           <div className="nota-sub-header flex justify-between pt-1 px-4 mb-10">
             <div>
               <table className="text-sm" style={{ width: 350 }}>
                 <tr>
                   <td>No. Nota</td>
                   <td>:</td>
-                  <td>{this.props.nota.data_nota.no_nota}</td>
+                  <td>{nota.data_nota.no_nota}</td>
                 </tr>
                 <tr>
                   <td>Tanggal</td>
                   <td>:</td>
                   <td>
-                    {format(
-                      new Date(this.props.nota.data_nota.waktu_buat),
-                      "dd-MM-y"
-                    )}
+                    {format(new Date(nota.data_nota.waktu_buat), "dd-MM-y")}
                   </td>
                 </tr>
               </table>
@@ -88,12 +79,12 @@ export class ComponentToPrint extends React.Component {
                 <tr valign="top">
                   <td className="w-32">Pelanggan</td>
                   <td>:</td>
-                  <td>{this.props.nota.data_nota.nm_pelanggan}</td>
+                  <td>{nota.data_nota.nm_pelanggan}</td>
                 </tr>
                 <tr valign="top">
                   <td>Perusahaan</td>
                   <td>:</td>
-                  <td>{this.props.nota.data_nota.nm_perusahaan}</td>
+                  <td>{nota.data_nota.nm_perusahaan}</td>
                 </tr>
               </table>
             </div>
@@ -113,13 +104,11 @@ export class ComponentToPrint extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.props.nota.data_spt.map((item, index) => (
+                {nota.data_spt.map((item, index) => (
                   <tr key={item.id_spt} valign="top">
                     <td
                       className={
-                        index + 1 === this.props.nota.data_spt.length
-                          ? "pb-2"
-                          : null
+                        index + 1 === nota.data_spt.length ? "pb-2" : null
                       }
                     >
                       {index + 1}

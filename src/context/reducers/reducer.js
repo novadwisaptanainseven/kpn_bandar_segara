@@ -24,6 +24,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         data: "",
+        error: false,
+        loading: false,
       };
 
     default:

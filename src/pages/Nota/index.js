@@ -13,6 +13,7 @@ import {
 } from "../../context/actions/Nota";
 import { TableSkeletonLoading } from "../../components/SkeletonLoading";
 import ButtonCetak from "../../components/Buttons/ButtonCetak";
+import { CLEAN_UP } from "../../context/actionTypes";
 
 const Nota = () => {
   const history = useHistory();
@@ -101,6 +102,9 @@ const Nota = () => {
     alertError.classList.add("opacity-0");
     setTimeout(() => {
       alertError.classList.add("hidden");
+      cetakNotaDispatch({
+        type: CLEAN_UP,
+      });
     }, [150]);
   };
 
@@ -195,7 +199,7 @@ const Nota = () => {
           {errorCetakNota && (
             <div
               id="alertError"
-              className="text-sm transition duration-150 ease-in-out bg-red-600 text-white p-3 rounded-md mb-5 flex gap-3"
+              className="text-sm transition duration-150 ease-in-out bg-red-600 text-white p-3 rounded-md mb-5 flex gap-3 justify-between items-center"
             >
               <p>
                 Daftar nota yang dichecklist hanya boleh 1 nama pengguna yg

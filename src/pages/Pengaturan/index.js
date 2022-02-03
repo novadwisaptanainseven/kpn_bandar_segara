@@ -69,6 +69,7 @@ const Pengaturan = () => {
     formData.append("no_hp", values.no_hp);
     formData.append("instagram", values.instagram);
     formData.append("alamat", values.alamat);
+    formData.append("nm_perusahaan", values.nm_perusahaan);
     if (values.logo) {
       formData.append("logo", values.logo);
     }
@@ -195,6 +196,27 @@ const Pengaturan = () => {
                 </div>
                 <div>
                   <Label className="mt-4">
+                    <span>Nama Perusahaan</span>
+                    <Input
+                      type="text"
+                      placeholder="Nama Perusahaan"
+                      name="nm_perusahaan"
+                      value={values.nm_perusahaan}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`mt-1 ${
+                        errors.nm_perusahaan && touched.nm_perusahaan
+                          ? "border-red-500"
+                          : null
+                      }`}
+                    />
+                    {errors.nm_perusahaan && touched.nm_perusahaan && (
+                      <HelperText valid={false}>
+                        {errors.nm_perusahaan}
+                      </HelperText>
+                    )}
+                  </Label>
+                  <Label className="mt-4">
                     <span>No. Telp Perusahaan</span>
                     <Input
                       type="text"
@@ -211,6 +233,7 @@ const Pengaturan = () => {
                       <HelperText valid={false}>{errors.no_hp}</HelperText>
                     )}
                   </Label>
+
                   <Label className="mt-4">
                     <span>Instagram</span>
                     <Input
