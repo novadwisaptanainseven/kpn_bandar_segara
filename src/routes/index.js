@@ -42,6 +42,9 @@ const TambahSPT = lazy(() => import("../pages/SPT/Tambah"));
 const DetailSPT = lazy(() => import("../pages/SPT/Detail"));
 const EditSPT = lazy(() => import("../pages/SPT/Edit"));
 const CetakSPT = lazy(() => import("../pages/SPT/Cetak"));
+const PreviewCetakSpt = lazy(() =>
+  import("../pages/SPT/Cetak/PreviewCetakSpt")
+);
 
 // Nota
 const BuatNota = lazy(() => import("../pages/Nota/BuatNota"));
@@ -198,6 +201,10 @@ const routes = [
     path: "/spt/:id/buat-nota",
     component: BuatNota,
   },
+  {
+    path: "/spt/preview-cetak",
+    component: PreviewCetakSpt,
+  },
 
   // Route Nota
   {
@@ -242,6 +249,7 @@ const routes = [
     path: "/users/detail/:id",
     component: DetailUsers,
   },
+
   // Route Pengaturan
   {
     path: "/pengaturan",

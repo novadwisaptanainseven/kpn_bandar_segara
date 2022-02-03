@@ -6,8 +6,13 @@ import DataTable from "./DataTable";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import ModalExcel from "../../components/Modals/ModalExcel";
 import { GlobalContext } from "../../context/Provider";
-import { getSpt, getSptByFilter } from "../../context/actions/SPT";
+import {
+  getSpt,
+  getSptByFilter,
+  getPreviewCetakSpt,
+} from "../../context/actions/SPT";
 import { TableSkeletonLoading } from "../../components/SkeletonLoading";
+import ButtonCetak from "../../components/Buttons/ButtonCetak";
 
 const SPT = () => {
   const history = useHistory();
@@ -15,12 +20,19 @@ const SPT = () => {
   const { path } = match;
   const [filterText, setFilterText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { sptState, sptDispatch } = useContext(GlobalContext);
+  const { sptState, sptDispatch, cetakSptState, cetakSptDispatch } =
+    useContext(GlobalContext);
   const { loading, data: dataSpt } = sptState;
+  const {
+    loading: loadingCetakSpt,
+    data: dataCetakSpt,
+    error: errorCetakSpt,
+  } = cetakSptState;
   const [filterTgl, setFilterTgl] = useState({
     dari_tgl: "",
     sampai_tgl: "",
   });
+  const [listCheckbox, setListCheckbox] = useState([]);
 
   // Get data spt
   useEffect(() => {
@@ -60,6 +72,15 @@ const SPT = () => {
       sampai_tgl: "",
     });
     getSpt(sptDispatch);
+  };
+
+  // Halaman cetak spt terpilih
+  const goToCetakSptTerpilih = () => {
+    const values = {
+      id_spt: listCheckbox,
+    };
+
+    getPreviewCetakSpt(cetakSptDispatch, values, history);
   };
 
   return (
@@ -135,6 +156,21 @@ const SPT = () => {
             </div>
           </div>
 
+          {listCheckbox.length > 0 && (
+            <div className="mb-2 text-center">
+              <ButtonCetak
+                onClick={goToCetakSptTerpilih}
+                disabled={loadingCetakSpt ? true : false}
+              >
+                {loadingCetakSpt ? (
+                  "Loading..."
+                ) : (
+                  <>Cetak SPT Checklist ({listCheckbox.length})</>
+                )}
+              </ButtonCetak>
+            </div>
+          )}
+
           {!dataSpt && loading && <TableSkeletonLoading />}
 
           {/* Table */}
@@ -143,6 +179,8 @@ const SPT = () => {
               response={dataSpt}
               resultsPerPage={10}
               filterText={filterText}
+              listCheckbox={listCheckbox}
+              setListCheckbox={setListCheckbox}
             />
           )}
 

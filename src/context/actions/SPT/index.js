@@ -11,6 +11,7 @@ import selectStatusSPT from "./selectStatusSPT";
 import updateStatusSpt from "./updateStatusSpt";
 import editSptModal from "./editSptModal";
 import deleteSptNota from "./deleteSptNota";
+import getPreviewCetakSpt from "./getPreviewCetakSpt";
 
 export {
   getSpt,
@@ -26,4 +27,5 @@ export {
   updateStatusSpt,
   editSptModal,
   deleteSptNota,
+  getPreviewCetakSpt,
 };

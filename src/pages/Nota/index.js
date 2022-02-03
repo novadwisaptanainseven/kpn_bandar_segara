@@ -25,7 +25,6 @@ const Nota = () => {
     notaDispatch,
     cetakNotaState,
     cetakNotaDispatch,
-    listCetakNotaState,
     listCetakNotaDispatch,
   } = useContext(GlobalContext);
   const { loading, data: dataNota } = notaState;

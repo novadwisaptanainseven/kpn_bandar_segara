@@ -11,6 +11,7 @@ import {
   TableFooter,
   Pagination,
   TableContainer,
+  Input,
 } from "@windmill/react-ui";
 import { GlobalContext } from "../../../context/Provider";
 import { deleteSpt } from "../../../context/actions/SPT";
@@ -18,10 +19,17 @@ import useSortableData from "../../../helpers/useSortableData";
 import ArrowUp from "../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../components/DataTableIcons/ArrowDown";
 import { format } from "date-fns";
+import { removeArrayByValue } from "../../../helpers/GlobalFunctions";
 
 const Swal = withReactContent(swal2);
 
-const DataTable = ({ resultsPerPage, response, filterText }) => {
+const DataTable = ({
+  resultsPerPage,
+  response,
+  filterText,
+  listCheckbox,
+  setListCheckbox,
+}) => {
   const history = useHistory();
   const match = useRouteMatch();
   const { path } = match;
@@ -110,6 +118,22 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
     requestSort(key);
   };
 
+  // useEffect(() => {
+  //   console.log(listCheckbox);
+  // }, [listCheckbox]);
+
+  // Handle checkbox for printing selected data
+  const handleCheckBox = (e, idNota) => {
+    const isChecked = e.target.checked;
+
+    if (isChecked) {
+      setListCheckbox([...listCheckbox, idNota]);
+    } else {
+      const arrAfterRemove = removeArrayByValue([...listCheckbox], idNota);
+      setListCheckbox(arrAfterRemove);
+    }
+  };
+
   return (
     <>
       <TableContainer className="mb-8">
@@ -138,6 +162,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                     ))}
                 </div>
               </TableCell>
+              <TableCell>Checklist</TableCell>
               <TableCell>
                 <div className="flex gap-1 items-center">
                   <a
@@ -234,6 +259,13 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
               <TableRow key={i}>
                 <TableCell>
                   <span className="text-sm">{i + 1}</span>
+                </TableCell>
+                <TableCell className="text-center ">
+                  <Input
+                    type="checkbox"
+                    className="cursor-pointer"
+                    onChange={(e) => handleCheckBox(e, item.id_spt)}
+                  />
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">{item.no_spt}</span>

@@ -305,9 +305,10 @@ const DataTable = ({
                 <TableCell>
                   <span className="text-sm">{i + 1}</span>
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-center">
                   <Input
                     type="checkbox"
+                    className="cursor-pointer"
                     onChange={(e) =>
                       handleCheckBox(e, item.id_nota, item.id_pelanggan)
                     }

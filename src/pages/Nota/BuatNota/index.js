@@ -166,6 +166,21 @@ const BuatNota = () => {
     insertNota(idPelanggan, values, setLoading, history, notaDispatch);
   };
 
+  const handleChangeJumlahBayar = (e) => {
+    setJumlahBayar(e.target.value);
+
+    const totHarga = sptTemp.reduce(add, 0);
+    function add(accumulator, a) {
+      return accumulator + a.harga;
+    }
+
+    if (e.target.value >= totHarga) {
+      setStatusBayar("1");
+    } else {
+      setStatusBayar("2");
+    }
+  };
+
   return (
     <>
       <PageTitle backButton>Pembuatan Nota Transaksi</PageTitle>
@@ -341,7 +356,7 @@ const BuatNota = () => {
                   type="number"
                   id="jumlahBayar"
                   name="jumlahBayar"
-                  onChange={(e) => setJumlahBayar(e.target.value)}
+                  onChange={(e) => handleChangeJumlahBayar(e)}
                   value={jumlahBayar}
                   className="mt-1"
                   disabled={!idPelanggan || sptTemp.length === 0 ? true : false}
@@ -360,6 +375,7 @@ const BuatNota = () => {
                   id="statusBayar"
                   name="statusBayar"
                   onChange={(e) => setStatusBayar(e.target.value)}
+                  value={statusBayar}
                   disabled={!idPelanggan || sptTemp.length === 0 ? true : false}
                 >
                   {statusNota.map((item) => (
@@ -376,9 +392,7 @@ const BuatNota = () => {
             <Button
               className="h-10"
               disabled={
-                !idPelanggan || sptTemp.length === 0 || loading
-                  ? true
-                  : false
+                !idPelanggan || sptTemp.length === 0 || loading ? true : false
               }
               onClick={handleSimpanTransaksi}
             >
