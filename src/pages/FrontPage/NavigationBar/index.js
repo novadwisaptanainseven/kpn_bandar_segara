@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import getImage from "../../../context/actions/Files/getImage";
 import { MenuIcon } from "../../../icons";
+import { Link, animateScroll as scroll } from "react-scroll";
 
 const NavigationBar = ({ dataKonten }) => {
   const closeBarClassName = "-translate-y-64 opacity-0";
   const [openBar, setOpenBar] = useState(closeBarClassName);
+  const [linkActive, setLinkActive] = useState("beranda");
 
   // Handle Toggle Sidebar
   const toggleSidebar = () => {
@@ -34,15 +36,47 @@ const NavigationBar = ({ dataKonten }) => {
           <h1 className="text-xl font-semibold">{dataKonten.nm_perusahaan}</h1>
         </div>
         <div className="navbar-menu flex gap-20 items-center text-gray-500">
-          <a href="." className="hover:text-gray-900">
+          <Link
+            className={`hover:text-gray-900 cursor-pointer ${
+              linkActive === "beranda" && "text-gray-900"
+            }`}
+            activeClass="active"
+            to="section-beranda"
+            spy={true}
+            smooth={true}
+            duration={800}
+            onClick={() => setLinkActive("beranda")}
+          >
             Beranda
-          </a>
-          <a href="." className="hover:text-gray-900">
+          </Link>
+          <Link
+           className={`hover:text-gray-900 cursor-pointer ${
+              linkActive === "tentang" && "text-gray-900"
+            }`}
+            activeClass="active"
+            to="section-tentang"
+            spy={true}
+            smooth={true}
+            duration={800}
+            offset={-100}
+            onClick={() => setLinkActive("tentang")}
+          >
             Tentang
-          </a>
-          <a href="." className="hover:text-gray-900">
-            Kontak
-          </a>
+          </Link>
+          <Link
+           className={`hover:text-gray-900 cursor-pointer ${
+              linkActive === "pelayanan" && "text-gray-900"
+            }`}
+            activeClass="active"
+            to="section-pelayanan"
+            spy={true}
+            smooth={true}
+            duration={800}
+            offset={-100}
+            onClick={() => setLinkActive("pelayanan")}
+          >
+            Pelayanan
+          </Link>
         </div>
       </div>
       {/* End of Desktop Device */}
@@ -71,7 +105,7 @@ const NavigationBar = ({ dataKonten }) => {
       </div>
       {/* List Menu Hamburger */}
       <div
-        className={`navbar-menu-items fixed left-0 right-0 opacity-1 bg-white px-10 py-8 transition-all duration-300 transform z-20 ${openBar}`}
+        className={`navbar-menu-items fixed left-0 right-0 opacity-1 bg-white px-10 py-8 transition-all duration-300 transform z-20 shadow-lg ${openBar}`}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -80,15 +114,38 @@ const NavigationBar = ({ dataKonten }) => {
           top: 72,
         }}
       >
-        <a href="." className="hover:text-gray-900">
+        <Link
+          className="hover:text-gray-900 cursor-pointer"
+          activeClass="active"
+          to="section-beranda"
+          spy={true}
+          smooth={true}
+          duration={800}
+        >
           Beranda
-        </a>
-        <a href="." className="hover:text-gray-900">
+        </Link>
+        <Link
+          className="hover:text-gray-900 cursor-pointer"
+          activeClass="active"
+          to="section-tentang"
+          spy={true}
+          smooth={true}
+          duration={800}
+          offset={-100}
+        >
           Tentang
-        </a>
-        <a href="." className="hover:text-gray-900">
-          Kontak
-        </a>
+        </Link>
+        <Link
+          className="hover:text-gray-900 cursor-pointer"
+          activeClass="active"
+          to="section-pelayanan"
+          spy={true}
+          smooth={true}
+          duration={800}
+          offset={-100}
+        >
+          Pelayanan
+        </Link>
       </div>
       {/* End of Mobile Device */}
       {/* End of Navigation Bar */}

@@ -15,21 +15,32 @@ const Pelayanan = ({ dataKonten }) => {
 
         <div className="pelayanan-cards mt-3 flex justify-around gap-10 flex-col md:flex-row">
           <div className="card bg-white p-4 rounded-md shadow-lg border border-gray-200 text-center text-gray-600 transition duration-200 ease-in-out hover:bg-blue-600 hover:text-white">
-            <h1 className="font-semibold text-lg mb-3">Pelayanan 1</h1>
+            <img src="img/boat.png" alt="boat" className="w-24 mx-auto mb-6" />
+            <h1 className="font-semibold text-lg mb-3">Transportasi</h1>
             <p className="text-md">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Assumenda ut consequuntur maxime dolores nesciunt doloremque eum
             </p>
           </div>
           <div className="card bg-white p-4 rounded-md shadow-lg border border-gray-200 text-center text-gray-600 transition duration-200 ease-in-out hover:bg-blue-600 hover:text-white">
-            <h1 className="font-semibold text-lg mb-3">Pelayanan 2</h1>
+            <img
+              src="img/store.png"
+              alt="store"
+              className="w-24 mx-auto mb-6"
+            />
+            <h1 className="font-semibold text-lg mb-3">Toko</h1>
             <p className="text-md">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Assumenda ut consequuntur maxime dolores nesciunt doloremque eum
             </p>
           </div>
           <div className="card bg-white p-4 rounded-md shadow-lg border border-gray-200 text-center text-gray-600 transition duration-200 ease-in-out hover:bg-blue-600 hover:text-white">
-            <h1 className="font-semibold text-lg mb-3">Pelayanan 3</h1>
+            <img
+              src="img/coffee-shop.png"
+              alt="coffe-shop"
+              className="w-24 mx-auto mb-6"
+            />
+            <h1 className="font-semibold text-lg mb-3">Warung Kopi</h1>
             <p className="text-md">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Assumenda ut consequuntur maxime dolores nesciunt doloremque eum

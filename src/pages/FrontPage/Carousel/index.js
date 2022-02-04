@@ -142,7 +142,7 @@ const Carousel = ({ autoPlay, interval, dataKonten }) => {
 
   return (
     <>
-      <div className="carousel">
+      <div className="section-beranda carousel">
         <button className="carousel__button carousel__button--left focus:outline-none opacity-50 hover:opacity-100 transition-opacity duration-200 is-hidden">
           <img src="img/arrow-left.png" alt="arrow left" />
         </button>
