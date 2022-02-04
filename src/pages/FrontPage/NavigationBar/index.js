@@ -31,7 +31,7 @@ const NavigationBar = ({ dataKonten }) => {
             alt="Logo Brand"
             className="w-12"
           />
-          <h1 className="text-xl font-semibold">{dataKonten.title_website}</h1>
+          <h1 className="text-xl font-semibold">{dataKonten.nm_perusahaan}</h1>
         </div>
         <div className="navbar-menu flex gap-20 items-center text-gray-500">
           <a href="." className="hover:text-gray-900">

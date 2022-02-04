@@ -49,9 +49,9 @@ const routes = [
     name: "SPT",
   },
   // {
-  //   path: "/app/transaksi",
+  //   path: "/app/riwayat-nota",
   //   icon: "MoneyIcon",
-  //   name: "Riwayat Transaksi",
+  //   name: "Riwayat Cetak Nota",
   // },
   {
     path: "/app/users",

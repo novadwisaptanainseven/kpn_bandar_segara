@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import ThemedSuspense from "../../components/ThemedSuspense";
-import { getKonten } from "../../context/actions/Konten";
+import { getKontenFrontPage } from "../../context/actions/Konten";
 import { GlobalContext } from "../../context/Provider";
 import Carousel from "./Carousel";
+import Footer from "./Footer";
 import NavigationBar from "./NavigationBar";
+import Pelayanan from "./Pelayanan";
 import Tentang from "./Tentang";
 
 const FrontPage = () => {
@@ -12,7 +14,7 @@ const FrontPage = () => {
 
   // Get konten
   useEffect(() => {
-    getKonten(kontenDispatch);
+    getKontenFrontPage(kontenDispatch);
   }, [kontenDispatch]);
 
   return (
@@ -33,7 +35,13 @@ const FrontPage = () => {
           <div className="content px-5 md:px-24 py-12 ">
             {/* Section Tentang */}
             <Tentang />
+
+            {/* Section Pelayanan */}
+            <Pelayanan dataKonten={dataKonten} />
           </div>
+
+          {/* Footer */}
+          <Footer dataKonten={dataKonten} />
         </>
       )}
     </>
