@@ -3,12 +3,10 @@ import PageTitle from "../../../components/Typography/PageTitle";
 import { Card, CardBody, Button, Input } from "@windmill/react-ui";
 
 import TableDriver from "./TableDriver";
-import ButtonExcel from "../../../components/Buttons/ButtonExcel";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import ModalExcel from "../../../components/Modals/ModalExcel";
 import { GlobalContext } from "../../../context/Provider";
 import { getDriver } from "../../../context/actions/Driver";
-import { exportExcel } from "../../../context/actions/Export/exportExcel";
 import { TableSkeletonLoading } from "../../../components/SkeletonLoading";
 
 const Driver = () => {

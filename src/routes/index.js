@@ -64,9 +64,12 @@ const DetailUsers = lazy(() => import("../pages/Users/Detail"));
 
 // Pengaturan
 const Pengaturan = lazy(() => import("../pages/Pengaturan"));
-
 const Page404 = lazy(() => import("../pages/404"));
 const Blank = lazy(() => import("../pages/Blank"));
+
+// Galeri
+const Galeri = lazy(() => import("../pages/Galeri"));
+const DetailGaleri = lazy(() => import("../pages/Galeri/Detail"));
 
 /**
  * ⚠ These are internal routes!
@@ -262,6 +265,16 @@ const routes = [
   {
     path: "/blank",
     component: Blank,
+  },
+
+  // Route Galeri
+  {
+    path: "/galeri",
+    component: Galeri,
+  },
+  {
+    path: "/galeri/detail/:id",
+    component: DetailGaleri,
   },
 ];
 

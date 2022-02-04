@@ -42,6 +42,9 @@ export const GlobalProvider = ({ children }) => {
   // Data Cetak SPT State
   const [cetakSptState, cetakSptDispatch] = useReducer(reducer, initState);
 
+  // Galeri
+  const [galeriState, galeriDispatch] = useReducer(reducer, initState);
+
   const dataGlobal = {
     loginState,
     loginDispatch,
@@ -73,6 +76,8 @@ export const GlobalProvider = ({ children }) => {
     cetakSptDispatch,
     listCetakNotaState,
     listCetakNotaDispatch,
+    galeriState,
+    galeriDispatch,
   };
 
   return (

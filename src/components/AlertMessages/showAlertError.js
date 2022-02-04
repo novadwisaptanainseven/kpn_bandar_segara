@@ -11,7 +11,7 @@ const showAlertError = (message, title) => {
 
   Swal.fire({
     icon: "error",
-    title: message,
+    title: title,
     text: err_message,
   }).then((result) => {});
 };

@@ -21,7 +21,6 @@ import { deleteDriver } from "../../../../context/actions/Driver";
 import useSortableData from "../../../../helpers/useSortableData";
 import ArrowUp from "../../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
-import Interweave from "interweave";
 import ModalKeterangan from "../../../../components/ModalKeterangan";
 const Swal = withReactContent(swal2);
 

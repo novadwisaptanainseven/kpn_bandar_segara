@@ -59,9 +59,27 @@ const routes = [
     name: "Data Users",
   },
   {
-    path: "/app/pengaturan",
     icon: "OutlineCogIcon",
-    name: "Pengaturan",
+    name: "Pengaturan Konten",
+    routes: [
+      // submenu
+      {
+        path: "/app/pengaturan",
+        name: "Informasi Umum",
+      },
+      {
+        path: "/app/galeri",
+        name: "Foto Galeri",
+      },
+      {
+        path: "/app/pelayanan",
+        name: "Pelayanan",
+      },
+      {
+        path: "/app/kontak",
+        name: "Kontak",
+      },
+    ],
   },
 ];
 
