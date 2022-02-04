@@ -41,7 +41,7 @@ const Users = () => {
 
   return (
     <>
-      <PageTitle>Users</PageTitle>
+      <PageTitle>Data Admin</PageTitle>
 
       <Card className="mb-8 shadow-md">
         <CardBody>

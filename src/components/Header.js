@@ -130,11 +130,11 @@ function Header() {
                   className="w-4 h-4 mr-3"
                   aria-hidden="true"
                 />
-                <span>Profile</span>
+                <span>Profil</span>
               </DropdownItem>
               <DropdownItem tag="a" onClick={goToPengaturan}>
                 <OutlineCogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
-                <span>Settings</span>
+                <span>Pengaturan</span>
               </DropdownItem>
               <DropdownItem onClick={handleLogout}>
                 <OutlineLogoutIcon

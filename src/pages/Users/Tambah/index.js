@@ -66,7 +66,7 @@ const Tambah = () => {
 
   return (
     <>
-      <PageTitle backButton={true}>Tambah Users</PageTitle>
+      <PageTitle backButton={true}>Tambah Data Admin</PageTitle>
 
       <Card className="overflow-visible mb-32">
         <CardBody>
@@ -94,7 +94,7 @@ const Tambah = () => {
                     <Label>
                       <span>Nama Lengkap</span>
                       <Input
-                        placeholder="Nama Users"
+                        placeholder="Nama Admin"
                         name="nama"
                         onChange={handleChange}
                         onBlur={handleBlur}

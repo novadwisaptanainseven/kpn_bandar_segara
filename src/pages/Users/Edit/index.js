@@ -85,7 +85,7 @@ const Edit = () => {
 
   return (
     <>
-      <PageTitle backButton={true}>Edit Users</PageTitle>
+      <PageTitle backButton={true}>Edit Data Admin</PageTitle>
 
       <Card className="overflow-visible mb-32">
         <CardBody>
@@ -116,7 +116,7 @@ const Edit = () => {
                       <Label>
                         <span>Nama Lengkap</span>
                         <Input
-                          placeholder="Nama Users"
+                          placeholder="Nama Admin"
                           name="nama"
                           onChange={handleChange}
                           onBlur={handleBlur}

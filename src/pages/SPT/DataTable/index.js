@@ -196,7 +196,7 @@ const DataTable = ({
                     href="."
                     onClick={(e) => handleSorting(e, "nm_pelanggan")}
                   >
-                    Nama Pelanggan
+                    Nama Pengguna
                   </a>
                   {sortConfig &&
                     sortConfig.key === "nm_pelanggan" &&

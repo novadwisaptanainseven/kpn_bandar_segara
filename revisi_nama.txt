@@ -1,0 +1,8 @@
+oke Dashboard - Dasbor
+oke Pelanggan - Pengguna
+oke Data Users - Data Admin
+Cancel - Batal
+Password - Kata Sandi
+Oke Username - Nama Pengguna
+Oke Profile - Profil
+Oke Settings - Pengaturan

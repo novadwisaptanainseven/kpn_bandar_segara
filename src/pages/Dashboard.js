@@ -22,7 +22,7 @@ function Dashboard() {
 
   return (
     <>
-      <PageTitle>Dashboard</PageTitle>
+      <PageTitle>Dasbor</PageTitle>
 
       {/* Description App */}
       <CTA />
@@ -52,7 +52,7 @@ function Dashboard() {
         </InfoCard>
 
         <InfoCard
-          title="Jumlah Pelanggan"
+          title="Jumlah Pengguna"
           value={dataDashboard.jumlah_pelanggan}
         >
           <RoundIcon

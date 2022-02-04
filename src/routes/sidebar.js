@@ -9,7 +9,7 @@ const routes = [
   {
     path: "/app/dashboard", // the url
     icon: "HomeIcon", // the component being exported from icons/index.js
-    name: "Dashboard", // name that appear in Sidebar
+    name: "Dasbor", // name that appear in Sidebar
   },
   {
     icon: "MenuIcon",
@@ -22,7 +22,7 @@ const routes = [
       },
       {
         path: "/app/pelanggan",
-        name: "Pelanggan",
+        name: "Pengguna",
       },
       {
         path: "/app/tujuan",
@@ -56,7 +56,7 @@ const routes = [
   {
     path: "/app/users",
     icon: "PeopleIcon",
-    name: "Data Users",
+    name: "Data Admin",
   },
   {
     icon: "OutlineCogIcon",

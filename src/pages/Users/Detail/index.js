@@ -19,7 +19,7 @@ const Detail = () => {
 
   return (
     <>
-      <PageTitle backButton={true}>Detail Pengguna</PageTitle>
+      <PageTitle backButton={true}>Detail Admin</PageTitle>
 
       <Card>
         <CardBody className="text-gray-900 dark:text-gray-200">
@@ -28,11 +28,11 @@ const Detail = () => {
           ) : (
             <>
               <div className="grid grid-cols-3 mb-2">
-                <div className="font-semibold">ID Pengguna</div>
+                <div className="font-semibold">ID Admin</div>
                 <div className="col-span-2">{pengguna.id_user}</div>
               </div>
               <div className="grid grid-cols-3 mb-2">
-                <div className="font-semibold">Nama Pengguna</div>
+                <div className="font-semibold">Nama Admin</div>
                 <div className="col-span-2">{pengguna.nama}</div>
               </div>
               <div className="grid grid-cols-3 mb-2">

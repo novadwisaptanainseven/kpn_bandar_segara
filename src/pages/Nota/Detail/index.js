@@ -92,7 +92,7 @@ const Detail = () => {
                     </TableRow>
                     <TableRow className="bg-gray-200 dark:bg-gray-700">
                       <TableCell className="font-semibold">
-                        Nama Pelanggan
+                        Nama Pengguna
                       </TableCell>
                       <TableCell>{nota.data_nota.nm_pelanggan}</TableCell>
                     </TableRow>

@@ -65,7 +65,7 @@ const BuatNota = () => {
   useEffect(() => {
     // Get data status nota
     selectStatusNota(setStatusNota);
-    // Get data SPT Temporary by ID Pelanggan
+    // Get data SPT Temporary by ID Pengguna
     if (idPelanggan) getSptTemp(idPelanggan, setLoading, setSptTemp);
   }, [idPelanggan]);
 

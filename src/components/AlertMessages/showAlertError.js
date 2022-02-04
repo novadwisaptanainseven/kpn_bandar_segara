@@ -13,6 +13,7 @@ const showAlertError = (message, title) => {
     icon: "error",
     title: title,
     text: err_message,
+    cancelButtonText: "Batal",
   }).then((result) => {});
 };
 

@@ -7,7 +7,7 @@ import {
   Input,
   Label,
   HelperText,
-  Textarea
+  Textarea,
 } from "@windmill/react-ui";
 import SelectData from "react-select";
 
@@ -42,7 +42,7 @@ const Edit = () => {
     selectPerusahaan(setDataPerusahaan);
   }, []);
 
-  // Get pelanggan by id pelanggan
+  // Get pelanggan by ID Pengguna
   useEffect(() => {
     getPelangganById(params.id, setPelanggan);
   }, [params]);
@@ -91,7 +91,7 @@ const Edit = () => {
 
   return (
     <>
-      <PageTitle backButton={true}>Edit Pelanggan</PageTitle>
+      <PageTitle backButton={true}>Edit Pengguna</PageTitle>
 
       <Card className="overflow-visible">
         <CardBody>
@@ -122,7 +122,7 @@ const Edit = () => {
                           errors.nm_pelanggan ? "border-red-500" : null
                         }`}
                         name="nm_pelanggan"
-                        placeholder="Nama Pelanggan"
+                        placeholder="Nama Pengguna"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.nm_pelanggan || ""}
@@ -161,7 +161,7 @@ const Edit = () => {
                           errors.keterangan ? "border-red-500" : null
                         }`}
                         rows="3"
-                        placeholder="Keterangan Pelanggan"
+                        placeholder="Keterangan Pengguna"
                         name="keterangan"
                         onChange={handleChange}
                         onBlur={handleBlur}

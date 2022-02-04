@@ -43,7 +43,7 @@ const Pelanggan = () => {
 
   return (
     <>
-      <PageTitle>Pelanggan</PageTitle>
+      <PageTitle>Pengguna</PageTitle>
 
       <Card className="mb-8 shadow-md">
         <CardBody>

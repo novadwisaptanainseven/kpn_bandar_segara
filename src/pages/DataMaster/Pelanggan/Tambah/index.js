@@ -7,7 +7,7 @@ import {
   Input,
   Label,
   HelperText,
-  Textarea
+  Textarea,
 } from "@windmill/react-ui";
 import SelectData from "react-select";
 import { selectPerusahaan } from "../../../../context/actions/Perusahaan";
@@ -73,7 +73,7 @@ const Tambah = () => {
 
   return (
     <>
-      <PageTitle backButton={true}>Tambah Pelanggan</PageTitle>
+      <PageTitle backButton={true}>Tambah Pengguna</PageTitle>
 
       <Card className="overflow-visible">
         <CardBody>
@@ -100,7 +100,7 @@ const Tambah = () => {
                         errors.nm_pelanggan ? "border-red-500" : null
                       }`}
                       name="nm_pelanggan"
-                      placeholder="Nama Pelanggan"
+                      placeholder="Nama Pengguna"
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.nm_pelanggan || ""}
@@ -135,7 +135,7 @@ const Tambah = () => {
                         errors.keterangan ? "border-red-500" : null
                       }`}
                       rows="3"
-                      placeholder="Keterangan Pelanggan"
+                      placeholder="Keterangan Pengguna"
                       name="keterangan"
                       onChange={handleChange}
                       onBlur={handleBlur}
