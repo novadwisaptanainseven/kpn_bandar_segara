@@ -1,19 +1,11 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
+import getImage from "../../../context/actions/Files/getImage";
 
-const Carousel = ({ autoPlay, interval, dataKonten }) => {
-  const track = useRef();
-  const slides = useRef();
-  const dotsNav = useRef();
-  const dots = useRef();
-  const slideWidth = useRef();
-
+const Carousel = ({ autoPlay, interval, galeri }) => {
   useEffect(() => {
-    // track.current = document.querySelector(`.carousel__track`);
-    // slides.current = Array.from(track.current.children);
-    // dotsNav.current = document.querySelector(`.carousel__nav`);
-    // dots.current = Array.from(dotsNav.current.children);
-
-    // slideWidth.current = slides.current[0].getBoundingClientRect().width;
+    if (!galeri) {
+      return;
+    }
 
     const carouselContainer = document.querySelector(`.carousel`);
     const track = document.querySelector(`.carousel__track`);
@@ -22,6 +14,9 @@ const Carousel = ({ autoPlay, interval, dataKonten }) => {
     const dots = Array.from(dotsNav.children);
     const nextButton = document.querySelector(`.carousel__button--right`);
     const prevButton = document.querySelector(`.carousel__button--left`);
+    if (slides.length === 1) {
+      nextButton.classList.add("is-hidden");
+    }
 
     const slideWidth = slides[0].getBoundingClientRect().width;
 
@@ -117,7 +112,7 @@ const Carousel = ({ autoPlay, interval, dataKonten }) => {
     });
 
     // Autoplay Carousel
-    if (autoPlay) {
+    if (galeri.length > 1 && autoPlay) {
       setInterval(() => {
         const currentSlide = track.querySelector(`.current-slide`);
         const targetSlide = currentSlide.nextElementSibling;
@@ -159,31 +154,43 @@ const Carousel = ({ autoPlay, interval, dataKonten }) => {
         </div>
         <div className="carousel__track-container">
           <ul className="carousel__track">
-            {Array.from(new Array(4)).map((item, index) => (
-              <li
-                className={`carousel__slide ${index === 0 && `current-slide`}`}
-              >
-                <img
-                  className="carousel__image"
-                  src={`img/img-carousel${index + 1}.jpg`}
-                  alt="img-carousel"
-                />
-              </li>
-            ))}
-            {/* <li className="carousel__slide">
-              <img
-                className="carousel__image"
-                src="img/img-carousel2.jpg"
-                alt="img-carousel"
-              />
-            </li>
-            <li className="carousel__slide">
-              <img
-                className="carousel__image"
-                src="img/img-carousel3.jpg"
-                alt="img-carousel"
-              />
-            </li> */}
+            {galeri && galeri.length === 0 && (
+              <>
+                {Array.from(new Array(4)).map((item, index) => (
+                  <li
+                    key={index}
+                    className={`carousel__slide ${
+                      index === 0 && `current-slide`
+                    }`}
+                  >
+                    <img
+                      className="carousel__image"
+                      src={`img/img-carousel${index + 1}.jpg`}
+                      alt="img-carousel"
+                    />
+                  </li>
+                ))}
+              </>
+            )}
+
+            {galeri && galeri.length > 0 && (
+              <>
+                {galeri.map((item, index) => (
+                  <li
+                    key={index}
+                    className={`carousel__slide ${
+                      index === 0 && `current-slide`
+                    }`}
+                  >
+                    <img
+                      className="carousel__image"
+                      src={getImage("foto_galeri", item.foto)}
+                      alt={item.foto}
+                    />
+                  </li>
+                ))}
+              </>
+            )}
           </ul>
         </div>
         <button className="carousel__button carousel__button--right focus:outline-none opacity-50 hover:opacity-100 transition-opacity duration-200">
@@ -191,8 +198,9 @@ const Carousel = ({ autoPlay, interval, dataKonten }) => {
         </button>
 
         <div className="carousel__nav">
-          {Array.from(new Array(4)).map((item, index) => (
+          {Array.from(new Array(galeri.length)).map((item, index) => (
             <button
+              key={index}
               className={`carousel__indicator focus:outline-none ${
                 index === 0 && "current-slide"
               }`}

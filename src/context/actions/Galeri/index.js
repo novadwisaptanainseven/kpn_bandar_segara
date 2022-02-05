@@ -3,6 +3,7 @@ import deleteGaleri from "./deleteGaleri";
 import getGaleri from "./getGaleri";
 import getGaleriById from "./getGaleriById";
 import insertGaleri from "./insertGaleri";
+import getGaleriFrontPage from "./getGaleriFrontPage";
 
 export {
   deleteAllGaleri,
@@ -10,4 +11,5 @@ export {
   getGaleri,
   getGaleriById,
   insertGaleri,
+  getGaleriFrontPage,
 };
