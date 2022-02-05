@@ -56,6 +56,11 @@ const PreviewCetakNota = lazy(() =>
   import("../pages/Nota/Cetak/PreviewCetakNota")
 );
 
+// Riwayat Cetak Nota
+const RiwayatNota = lazy(() => import("../pages/RiwayatNota"));
+const DetailRiwayatNota = lazy(() => import("../pages/RiwayatNota/Detail"));
+const CetakRiwayatNota = lazy(() => import("../pages/RiwayatNota/Cetak"));
+
 // Users
 const Users = lazy(() => import("../pages/Users"));
 const TambahUsers = lazy(() => import("../pages/Users/Tambah"));
@@ -233,6 +238,20 @@ const routes = [
   {
     path: "/nota/preview-cetak",
     component: PreviewCetakNota,
+  },
+
+  // Route Riwayat Cetak Nota
+  {
+    path: "/riwayat-nota",
+    component: RiwayatNota,
+  },
+  {
+    path: "/riwayat-nota/detail/:id",
+    component: DetailRiwayatNota,
+  },
+  {
+    path: "/riwayat-nota/cetak/:id",
+    component: CetakRiwayatNota,
   },
 
   // Route Users

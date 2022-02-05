@@ -24,7 +24,7 @@ const editKonten = (values, setLoading, history, dispatch) => {
     })
     .catch((err) => {
       setLoading(false);
-      showAlertError(err.response.data, messageError);
+      showAlertError(err.response.data.errors, messageError);
       // console.log(err.response.data);
     });
 };

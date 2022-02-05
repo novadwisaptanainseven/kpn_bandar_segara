@@ -45,6 +45,9 @@ export const GlobalProvider = ({ children }) => {
   // Galeri
   const [galeriState, galeriDispatch] = useReducer(reducer, initState);
 
+  // Galeri
+  const [riwayatNotaState, riwayatNotaDispatch] = useReducer(reducer, initState);
+
   const dataGlobal = {
     loginState,
     loginDispatch,
@@ -78,6 +81,8 @@ export const GlobalProvider = ({ children }) => {
     listCetakNotaDispatch,
     galeriState,
     galeriDispatch,
+    riwayatNotaState,
+    riwayatNotaDispatch,
   };
 
   return (

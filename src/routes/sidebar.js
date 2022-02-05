@@ -48,11 +48,11 @@ const routes = [
     icon: "MailIcon",
     name: "SPT",
   },
-  // {
-  //   path: "/app/riwayat-nota",
-  //   icon: "MoneyIcon",
-  //   name: "Riwayat Cetak Nota",
-  // },
+  {
+    path: "/app/riwayat-nota",
+    icon: "MoneyIcon",
+    name: "Riwayat Cetak Nota",
+  },
   {
     path: "/app/users",
     icon: "PeopleIcon",

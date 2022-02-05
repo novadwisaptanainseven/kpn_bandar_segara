@@ -182,7 +182,7 @@ const Pengaturan = () => {
                       kurang dari 2 MB
                     </span>
                   </Label>
-                  <div className="mt-5 flex flex-col-reverse md:flex-row justify-end gap-2">
+                  <div className="mt-5 flex-col-reverse md:flex-row justify-end gap-2 hidden md:flex">
                     <Button onClick={handleReset} layout="outline">
                       Reset
                     </Button>
@@ -272,6 +272,17 @@ const Pengaturan = () => {
                       <HelperText valid={false}>{errors.alamat}</HelperText>
                     )}
                   </Label>
+                  <div className="mt-5 flex-col-reverse md:flex-row justify-end gap-2 flex md:hidden">
+                    <Button onClick={handleReset} layout="outline">
+                      Reset
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={loading || !isValid ? true : false}
+                    >
+                      {loading ? "Loading" : "Simpan"}
+                    </Button>
+                  </div>
                 </div>
               </form>
             )}

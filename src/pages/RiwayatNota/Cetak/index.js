@@ -1,21 +1,22 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import PageTitle from "../../../components/Typography/PageTitle";
-import { Card, CardBody, Button } from "@windmill/react-ui";
-import { useReactToPrint } from "react-to-print";
-import { GlobalContext } from "../../../context/Provider";
 import { useRouteMatch } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
+import PageTitle from "../../../components/Typography/PageTitle";
+import { cetakRiwayatNotaById } from "../../../context/actions/RiwayatNota";
+import { GlobalContext } from "../../../context/Provider";
+import { Card, CardBody, Button } from "@windmill/react-ui";
 import { format } from "date-fns";
-import { getNotaById } from "../../../context/actions/Nota";
-import { ComponentToPrint } from "./ComponentToPrint";
 import { PrintingComponentHeaderNota } from "../../../components/PrintingComponent";
+import { ComponentToPrint } from "./ComponentToPrint";
 
 const Cetak = () => {
   const match = useRouteMatch();
   const { params } = match;
   const { kontenState } = useContext(GlobalContext);
   const { data: dataKonten } = kontenState;
-  const [nota, setNota] = useState("");
+  const [riwayatNota, setRiwayatNota] = useState("");
   const componentPrintRef = useRef();
+
   // Handle print nota
   const handlePrint = useReactToPrint({
     content: () => componentPrintRef.current,
@@ -28,16 +29,16 @@ const Cetak = () => {
       }
     `,
     copyStyles: true,
-    documentTitle: nota && nota.data_nota.id_nota,
+    documentTitle: riwayatNota && riwayatNota.no_nota,
   });
 
   // Get data Nota by ID
   useEffect(() => {
-    getNotaById(params.id, setNota);
+    cetakRiwayatNotaById(params.id, setRiwayatNota);
   }, [params]);
 
   const hitungTotalHarga = () => {
-    const totHarga = nota.data_spt.reduce(add, 0);
+    const totHarga = riwayatNota.data_cetak_nota.reduce(add, 0);
     function add(accumulator, a) {
       return accumulator + a.harga;
     }
@@ -49,7 +50,7 @@ const Cetak = () => {
   };
 
   const hitungTotalPotongan = () => {
-    const totPotongan = nota.data_spt.reduce(add, 0);
+    const totPotongan = riwayatNota.data_cetak_nota.reduce(add, 0);
 
     function add(accumulator, a) {
       const potonganHarga = (a.diskon / 100) * a.harga_tujuan;
@@ -72,9 +73,10 @@ const Cetak = () => {
   return (
     <>
       <PageTitle backButton={true}>Cetak Nota</PageTitle>
+
       <Card className="mb-32 text-sm">
         <CardBody className="text-gray-900 dark:text-gray-200">
-          {!nota ? (
+          {!riwayatNota ? (
             <h1 className="text-xl">Loading ...</h1>
           ) : (
             <>
@@ -90,16 +92,13 @@ const Cetak = () => {
                       <tr>
                         <td>No. Nota</td>
                         <td>:</td>
-                        <td>{nota.data_nota.no_nota}</td>
+                        <td>{riwayatNota.no_nota}</td>
                       </tr>
                       <tr>
                         <td>Tanggal</td>
                         <td>:</td>
                         <td>
-                          {format(
-                            new Date(nota.data_nota.waktu_buat),
-                            "dd-MM-y"
-                          )}
+                          {format(new Date(riwayatNota.tgl_nota), "dd-MM-y")}
                         </td>
                       </tr>
                     </table>
@@ -109,12 +108,12 @@ const Cetak = () => {
                       <tr valign="top">
                         <td className="w-32">Pelanggan</td>
                         <td>:</td>
-                        <td>{nota.data_nota.nm_pelanggan}</td>
+                        <td>{riwayatNota.nm_pelanggan}</td>
                       </tr>
                       <tr valign="top">
                         <td>Perusahaan</td>
                         <td>:</td>
-                        <td>{nota.data_nota.nm_perusahaan}</td>
+                        <td>{riwayatNota.nm_perusahaan}</td>
                       </tr>
                     </table>
                   </div>
@@ -134,11 +133,13 @@ const Cetak = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {nota.data_spt.map((item, index) => (
-                        <tr key={item.id_spt} valign="top">
+                      {riwayatNota.data_cetak_nota.map((item, index) => (
+                        <tr key={index} valign="top">
                           <td
                             className={
-                              index + 1 === nota.data_spt.length ? "pb-2" : null
+                              index + 1 === riwayatNota.data_cetak_nota.length
+                                ? "pb-2"
+                                : null
                             }
                           >
                             {index + 1}
@@ -204,11 +205,11 @@ const Cetak = () => {
       </Card>
 
       {/* Component For Printing */}
-      {nota && (
+      {riwayatNota && (
         <div style={{ display: "none" }}>
           <ComponentToPrint
             ref={componentPrintRef}
-            nota={nota}
+            nota={riwayatNota}
             dataKonten={dataKonten}
           />
         </div>
