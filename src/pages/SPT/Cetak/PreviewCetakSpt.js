@@ -17,7 +17,7 @@ import getImage from "../../../context/actions/Files/getImage";
 import { PrintingComponentHeaderSPT } from "../../../components/PrintingComponent";
 
 const PreviewCetakSpt = () => {
-  const { cetakSptState, kontenState, sptDispatch } = useContext(GlobalContext);
+  const { cetakSptState, kontenState } = useContext(GlobalContext);
   const { data: spt } = cetakSptState;
   const { data: dataKonten } = kontenState;
   const componentPrintRef = useRef();
@@ -34,7 +34,7 @@ const PreviewCetakSpt = () => {
       }
     `,
     copyStyles: true,
-    documentTitle: "SPT",
+    documentTitle: spt ? spt.id_spt : "SPT",
   });
 
   const history = useHistory();

@@ -11,7 +11,10 @@ const getPreviewCetakSpt = (dispatch, values, history) => {
     .then((res) => {
       dispatch({
         type: SUCCESS,
-        payload: res.data,
+        payload: {
+          ...values,
+          ...res.data,
+        },
       });
 
       history.push(`/app/spt/preview-cetak`);

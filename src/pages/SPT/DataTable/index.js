@@ -15,6 +15,7 @@ import {
 } from "@windmill/react-ui";
 import { GlobalContext } from "../../../context/Provider";
 import { deleteSpt } from "../../../context/actions/SPT";
+import { handleDelete } from "../../../components/AlertMessages";
 import useSortableData from "../../../helpers/useSortableData";
 import ArrowUp from "../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../components/DataTableIcons/ArrowDown";
@@ -70,24 +71,6 @@ const DataTable = ({
 
     setDataTable(response2);
   }, [pageTable, filterText, response]);
-
-  // Menangani tombol hapus
-  const handleDelete = (id) => {
-    Swal.fire({
-      icon: "warning",
-      title: "Anda yakin ingin menghapus data ini ?",
-      text: "Jika yakin, klik YA",
-      showConfirmButton: true,
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "YA",
-    }).then((res) => {
-      if (res.isConfirmed) {
-        deleteSpt(id, sptDispatch, Swal);
-      }
-    });
-  };
 
   // Menuju halaman cetak
   const goToCetak = (id) => {
@@ -298,7 +281,9 @@ const DataTable = ({
                     </button>
                     <button
                       className="bg-red-400 text-white px-3 py-1 text-sm rounded-md transition duration-100 hover:bg-red-500"
-                      onClick={() => handleDelete(item.id_spt)}
+                      onClick={() =>
+                        handleDelete(item.id_spt, deleteSpt, sptDispatch)
+                      }
                     >
                       Hapus
                     </button>

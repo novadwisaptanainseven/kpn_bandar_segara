@@ -23,6 +23,7 @@ import ArrowUp from "../../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../../components/DataTableIcons/ArrowDown";
 import Interweave from "interweave";
 import ModalKeterangan from "../../../../components/ModalKeterangan";
+import { handleDelete } from "../../../../components/AlertMessages";
 
 const Swal = withReactContent(swal2);
 
@@ -88,24 +89,6 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
 
     setDataTable(response2);
   }, [pageTable, filterText, response]);
-
-  // Menangani tombol hapus
-  const handleDelete = (id) => {
-    Swal.fire({
-      icon: "warning",
-      title: "Anda yakin ingin menghapus data ini ?",
-      text: "Jika yakin, klik YA",
-      showConfirmButton: true,
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "YA",
-    }).then((res) => {
-      if (res.isConfirmed) {
-        deleteTujuan(id, tujuanDispatch, Swal);
-      }
-    });
-  };
 
   const { sortedDatatable, requestSort, sortConfig } =
     useSortableData(dataTable);
@@ -258,7 +241,10 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
                         aria-label="Detail"
                         onClick={(e) => goToDetail(item.id_tujuan)}
                       >
-                        <MenuIcon className="w-5 h-5 text-blue-500" aria-hidden="true" />
+                        <MenuIcon
+                          className="w-5 h-5 text-blue-500"
+                          aria-hidden="true"
+                        />
                       </Button>
                     )}
                     <Button
@@ -267,15 +253,27 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
                       aria-label="Edit"
                       onClick={(e) => goToEdit(item.id_tujuan)}
                     >
-                      <EditIcon className="w-5 h-5 text-lime-600" aria-hidden="true" />
+                      <EditIcon
+                        className="w-5 h-5 text-lime-600"
+                        aria-hidden="true"
+                      />
                     </Button>
                     <Button
                       layout="link"
                       size="icon"
                       aria-label="Delete"
-                      onClick={() => handleDelete(item.id_tujuan)}
+                      onClick={() =>
+                        handleDelete(
+                          item.id_tujuan,
+                          deleteTujuan,
+                          tujuanDispatch
+                        )
+                      }
                     >
-                      <TrashIcon className="w-5 h-5 text-red-600" aria-hidden="true" />
+                      <TrashIcon
+                        className="w-5 h-5 text-red-600"
+                        aria-hidden="true"
+                      />
                     </Button>
                   </div>
                 </TableCell>

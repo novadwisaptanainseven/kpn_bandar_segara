@@ -20,6 +20,7 @@ import ArrowUp from "../../../components/DataTableIcons/ArrowUp";
 import ArrowDown from "../../../components/DataTableIcons/ArrowDown";
 import { format } from "date-fns";
 import { removeArrayByValue } from "../../../helpers/GlobalFunctions";
+import { handleDelete } from "../../../components/AlertMessages";
 
 const Swal = withReactContent(swal2);
 
@@ -72,24 +73,6 @@ const DataTable = ({
 
     setDataTable(response2);
   }, [pageTable, filterText, response]);
-
-  // Menangani tombol hapus
-  const handleDelete = (id) => {
-    Swal.fire({
-      icon: "warning",
-      title: "Anda yakin ingin menghapus data ini ?",
-      text: "Jika yakin, klik YA",
-      showConfirmButton: true,
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "YA",
-    }).then((res) => {
-      if (res.isConfirmed) {
-        deleteNota(id, notaDispatch, Swal);
-      }
-    });
-  };
 
   // Menuju halaman detail
   const goToDetail = (id) => {
@@ -380,7 +363,9 @@ const DataTable = ({
                     </button>
                     <button
                       className="flex-1 bg-red-400 text-white px-3 py-1 rounded-md hover:bg-red-500 transition duration-100"
-                      onClick={() => handleDelete(item.id_nota)}
+                      onClick={() =>
+                        handleDelete(item.id_nota, deleteNota, notaDispatch)
+                      }
                     >
                       Hapus
                     </button>

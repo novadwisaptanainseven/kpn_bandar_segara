@@ -24,7 +24,7 @@ function SidebarContent() {
           alt="logo"
           className="w-12 rounded-full"
         />
-        <div className="">
+        <div className="px-3">
           <a
             className="text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
