@@ -107,7 +107,6 @@ const Edit = () => {
                 handleReset,
                 setFieldValue,
                 touched,
-                dirty,
                 isValid,
               }) => (
                 <form onSubmit={handleSubmit}>

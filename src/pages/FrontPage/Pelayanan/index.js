@@ -1,6 +1,7 @@
 import React from "react";
+import getImage from "../../../context/actions/Files/getImage";
 
-const Pelayanan = ({ dataKonten }) => {
+const Pelayanan = ({ pelayanan }) => {
   return (
     <>
       <div className="section-pelayanan mt-20">
@@ -13,39 +14,31 @@ const Pelayanan = ({ dataKonten }) => {
           </div>
         </div>
 
-        <div className="pelayanan-cards mt-3 flex justify-around gap-10 flex-col md:flex-row">
-          <div className="card bg-white p-4 rounded-md shadow-lg border border-gray-200 text-center text-gray-600 transition duration-200 ease-in-out hover:bg-blue-600 hover:text-white">
+        <div className="pelayanan-cards mt-3 flex justify-center flex-wrap gap-10">
+          {pelayanan.map((item, index) => (
+            <div
+              key={index}
+              className="w-full md:w-64 card bg-white p-4 rounded-md shadow-lg border border-gray-200 text-center text-gray-600 transition duration-200 ease-in-out hover:bg-blue-600 hover:text-white"
+            >
+              <img
+                src={getImage("foto_pelayanan", item.icon)}
+                alt={item.icon}
+                className="w-24 mx-auto mb-6"
+              />
+              <h1 className="font-semibold text-lg mb-3">
+                {item.nm_pelayanan}
+              </h1>
+              <p className="text-md">{item.keterangan}</p>
+            </div>
+          ))}
+          {/* <div className="w-full md:w-64 card bg-white p-4 rounded-md shadow-lg border border-gray-200 text-center text-gray-600 transition duration-200 ease-in-out hover:bg-blue-600 hover:text-white">
             <img src="img/boat.png" alt="boat" className="w-24 mx-auto mb-6" />
             <h1 className="font-semibold text-lg mb-3">Transportasi</h1>
             <p className="text-md">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Assumenda ut consequuntur maxime dolores nesciunt doloremque eum
             </p>
-          </div>
-          <div className="card bg-white p-4 rounded-md shadow-lg border border-gray-200 text-center text-gray-600 transition duration-200 ease-in-out hover:bg-blue-600 hover:text-white">
-            <img
-              src="img/store.png"
-              alt="store"
-              className="w-24 mx-auto mb-6"
-            />
-            <h1 className="font-semibold text-lg mb-3">Toko</h1>
-            <p className="text-md">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Assumenda ut consequuntur maxime dolores nesciunt doloremque eum
-            </p>
-          </div>
-          <div className="card bg-white p-4 rounded-md shadow-lg border border-gray-200 text-center text-gray-600 transition duration-200 ease-in-out hover:bg-blue-600 hover:text-white">
-            <img
-              src="img/coffee-shop.png"
-              alt="coffe-shop"
-              className="w-24 mx-auto mb-6"
-            />
-            <h1 className="font-semibold text-lg mb-3">Warung Kopi</h1>
-            <p className="text-md">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Assumenda ut consequuntur maxime dolores nesciunt doloremque eum
-            </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

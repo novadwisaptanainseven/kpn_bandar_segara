@@ -76,6 +76,18 @@ const Blank = lazy(() => import("../pages/Blank"));
 const Galeri = lazy(() => import("../pages/Galeri"));
 const DetailGaleri = lazy(() => import("../pages/Galeri/Detail"));
 
+// Pelayanan
+const Pelayanan = lazy(() => import("../pages/Pelayanan"));
+const TambahPelayanan = lazy(() => import("../pages/Pelayanan/Tambah"));
+const EditPelayanan = lazy(() => import("../pages/Pelayanan/Edit"));
+const DetailPelayanan = lazy(() => import("../pages/Pelayanan/Detail"));
+
+// Kontak
+const Kontak = lazy(() => import("../pages/Kontak"));
+const TambahKontak = lazy(() => import("../pages/Kontak/Tambah"));
+const EditKontak = lazy(() => import("../pages/Kontak/Edit"));
+const DetailKontak = lazy(() => import("../pages/Kontak/Detail"));
+
 /**
  * ⚠ These are internal routes!
  * They will be rendered inside the app, using the default `containers/Layout`.
@@ -294,6 +306,42 @@ const routes = [
   {
     path: "/galeri/detail/:id",
     component: DetailGaleri,
+  },
+
+  // Route Pelayanan
+  {
+    path: "/pelayanan",
+    component: Pelayanan,
+  },
+  {
+    path: "/pelayanan/tambah",
+    component: TambahPelayanan,
+  },
+  {
+    path: "/pelayanan/edit/:id",
+    component: EditPelayanan,
+  },
+  {
+    path: "/pelayanan/detail/:id",
+    component: DetailPelayanan,
+  },
+
+  // Route Kontak
+  {
+    path: "/kontak",
+    component: Kontak,
+  },
+  {
+    path: "/kontak/tambah",
+    component: TambahKontak,
+  },
+  {
+    path: "/kontak/edit/:id",
+    component: EditKontak,
+  },
+  {
+    path: "/kontak/detail/:id",
+    component: DetailKontak,
   },
 ];
 

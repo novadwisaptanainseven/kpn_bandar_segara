@@ -133,7 +133,7 @@ const Carousel = ({ autoPlay, interval, galeri }) => {
         }
       }, [interval]);
     }
-  }, []);
+  }, [galeri]);
 
   return (
     <>
@@ -179,7 +179,7 @@ const Carousel = ({ autoPlay, interval, galeri }) => {
                   <li
                     key={index}
                     className={`carousel__slide ${
-                      index === 0 && `current-slide`
+                      index === 0 ? `current-slide` : ""
                     }`}
                   >
                     <img

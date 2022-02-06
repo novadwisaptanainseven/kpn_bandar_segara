@@ -59,6 +59,7 @@ const Driver = () => {
             </div>
           </div>
 
+          {/* Loading Skeleton */}
           {!dataDriver && loading && <TableSkeletonLoading />}
 
           {/* Table */}

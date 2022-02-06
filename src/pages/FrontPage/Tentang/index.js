@@ -1,6 +1,7 @@
+import Interweave from "interweave";
 import React from "react";
 
-const Tentang = () => {
+const Tentang = ({ dataKonten }) => {
   return (
     <>
       <div className="section-tentang flex flex-col md:grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 gap-8">
@@ -16,14 +17,7 @@ const Tentang = () => {
             </div>
           </div>
           <p className="text-lg font-thin text-gray-600 line leading-8 text-justify md:text-left">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            amet, quae libero assumenda, debitis illo illum optio tempore omnis
-            praesentium fugiat dignissimos officia aperiam atque officiis dolore
-            reiciendis cumque perspiciatis! Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Repellat hic aliquam quam molestiae,
-            soluta molestias libero tempora nemo numquam recusandae voluptatibus
-            provident quos laboriosam necessitatibus totam suscipit consequatur
-            eaque at?
+            <Interweave content={dataKonten.tentang_kami} />
           </p>
         </div>
         <div className="section-tentang-gambar">

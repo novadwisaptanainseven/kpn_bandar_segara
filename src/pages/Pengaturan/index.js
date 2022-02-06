@@ -66,8 +66,8 @@ const Pengaturan = () => {
     const formData = new FormData();
     formData.append("title_website", values.title_website);
     formData.append("deskripsi_aplikasi", values.deskripsi_aplikasi);
-    formData.append("no_hp", values.no_hp);
-    formData.append("instagram", values.instagram);
+    formData.append("tentang_kami", values.tentang_kami);
+    formData.append("link_map", values.link_map);
     formData.append("alamat", values.alamat);
     formData.append("nm_perusahaan", values.nm_perusahaan);
     if (values.logo) {
@@ -217,59 +217,44 @@ const Pengaturan = () => {
                     )}
                   </Label>
                   <Label className="mt-4">
-                    <span>No. Telp Perusahaan</span>
+                    <span>Link Google Map</span>
                     <Input
                       type="text"
-                      placeholder="No. Telp Perusahaan"
-                      name="no_hp"
-                      value={values.no_hp}
+                      placeholder="Link Google Map"
+                      name="link_map"
+                      value={values.link_map}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className={`mt-1 ${
-                        errors.no_hp && touched.no_hp ? "border-red-500" : null
+                        errors.link_map && touched.link_map
+                          ? "border-red-500"
+                          : null
                       }`}
                     />
-                    {errors.no_hp && touched.no_hp && (
-                      <HelperText valid={false}>{errors.no_hp}</HelperText>
+                    {errors.link_map && touched.link_map && (
+                      <HelperText valid={false}>{errors.link_map}</HelperText>
                     )}
                   </Label>
 
                   <Label className="mt-4">
-                    <span>Instagram</span>
-                    <Input
-                      type="text"
-                      placeholder="Instagram"
-                      name="instagram"
-                      value={values.instagram}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={`mt-1 ${
-                        errors.instagram && touched.instagram
-                          ? "border-red-500"
-                          : null
-                      }`}
-                    />
-                    {errors.instagram && touched.instagram && (
-                      <HelperText valid={false}>{errors.instagram}</HelperText>
-                    )}
-                  </Label>
-                  <Label className="mt-4">
-                    <span>Alamat Perusahaan</span>
+                    <span>Tentang Perusahaan</span>
                     <Textarea
-                      rows={3}
-                      placeholder="Alamat Perusahaan"
-                      name="alamat"
-                      value={values.alamat}
+                      rows={7}
+                      placeholder="Tentang Perusahaan"
+                      name="tentang_kami"
+                      value={values.tentang_kami}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className={`mt-1 ${
-                        errors.alamat && touched.alamat
+                        errors.tentang_kami && touched.tentang_kami
                           ? "border-red-500"
                           : null
                       }`}
                     />
-                    {errors.alamat && touched.alamat && (
-                      <HelperText valid={false}>{errors.alamat}</HelperText>
+                    {errors.tentang_kami && touched.tentang_kami && (
+                      <HelperText valid={false}>
+                        {errors.tentang_kami}
+                      </HelperText>
                     )}
                   </Label>
                   <div className="mt-5 flex-col-reverse md:flex-row justify-end gap-2 flex md:hidden">
