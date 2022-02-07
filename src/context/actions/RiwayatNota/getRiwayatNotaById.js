@@ -4,7 +4,7 @@ const getRiwayatNotaById = (id, setData) => {
   axiosInstance
     .get(`cetak_nota/detail/${id}`)
     .then((res) => {
-      setData(res.data);
+      setData(res.data.data_cetak_nota);
       // console.log(res.data.data_nota);
     })
     .catch((err) => {

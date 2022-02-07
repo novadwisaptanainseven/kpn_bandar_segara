@@ -10,6 +10,7 @@ const Detail = () => {
   const match = useRouteMatch();
   const { params } = match;
   const [riwayatNota, setRiwayatNota] = useState("");
+  console.log(riwayatNota);
 
   // Get detail riwayat nota
   useEffect(() => {
@@ -31,7 +32,7 @@ const Detail = () => {
               </div>
               <div className="grid grid-cols-3 mb-2">
                 <div className="font-semibold">No. Nota</div>
-                <div className="col-span-2">{riwayatNota.no_nota}</div>
+                <div className="col-span-2">{riwayatNota.no_cetak_nota}</div>
               </div>
               <div className="grid grid-cols-3 mb-2">
                 <div className="font-semibold">Pembuat</div>
