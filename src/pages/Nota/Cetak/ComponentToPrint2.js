@@ -93,11 +93,12 @@ export class ComponentToPrint2 extends React.Component {
               <thead>
                 <tr className="border-t-2 border-b-2 border-black text-left">
                   <th>No.</th>
+                  <th>Tanggal</th>
                   <th>Tujuan</th>
                   <th>Driver</th>
                   <th>Marine</th>
                   <th>Harga</th>
-                  <th>Diskon</th>
+                  {/* <th>Diskon</th> */}
                   <th>Potongan</th>
                   <th>Total Harga</th>
                 </tr>
@@ -114,6 +115,7 @@ export class ComponentToPrint2 extends React.Component {
                     >
                       {index + 1}
                     </td>
+                    <td>{format(new Date(item.waktu_buat), "dd-MM-y")}</td>
                     <td>{item.nm_tujuan}</td>
                     <td>{item.nm_driver}</td>
                     <td>{item.nm_marine}</td>
@@ -123,7 +125,7 @@ export class ComponentToPrint2 extends React.Component {
                         currency: "IDR",
                       })}
                     </td>
-                    <td>{item.diskon} %</td>
+                    {/* <td>{item.diskon} %</td> */}
                     <td>
                       {hitungPotonganHarga(item.diskon, item.harga_tujuan)}
                     </td>

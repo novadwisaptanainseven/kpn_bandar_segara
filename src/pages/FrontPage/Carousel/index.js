@@ -137,77 +137,79 @@ const Carousel = ({ autoPlay, interval, galeri }) => {
 
   return (
     <>
-      <div className="section-beranda carousel">
-        <button className="carousel__button carousel__button--left focus:outline-none opacity-50 hover:opacity-100 transition-opacity duration-200 is-hidden">
-          <img src="img/arrow-left.png" alt="arrow left" />
-        </button>
-        <div
-          className="carousel-text absolute z-10 left-0 right-0 text-center px-6 py-3 bg-black bg-opacity-25 md:hidden"
-          style={{ top: "30%" }}
-        >
-          <h1
-            className="text-4xl font-semibold text-white"
-            style={{ textShadow: "1px 3px 6px rgba(0,0,0,0.5)" }}
+      <div className="section-beranda bg-gray-200">
+        <div className="carousel mx-auto ">
+          <button className="carousel__button carousel__button--left focus:outline-none opacity-50 hover:opacity-100 transition-opacity duration-200 is-hidden">
+            <img src="img/arrow-left.png" alt="arrow left" />
+          </button>
+          <div
+            className="carousel-text absolute z-10 left-0 right-0 text-center px-6 py-3 bg-black bg-opacity-25 md:hidden"
+            style={{ top: "30%" }}
           >
-            KPN Bandar Segara
-          </h1>
-        </div>
-        <div className="carousel__track-container">
-          <ul className="carousel__track">
-            {galeri && galeri.length === 0 && (
-              <>
-                {Array.from(new Array(4)).map((item, index) => (
-                  <li
-                    key={index}
-                    className={`carousel__slide ${
-                      index === 0 && `current-slide`
-                    }`}
-                  >
-                    <img
-                      className="carousel__image"
-                      src={`img/img-carousel${index + 1}.jpg`}
-                      alt="img-carousel"
-                    />
-                  </li>
-                ))}
-              </>
-            )}
+            <h1
+              className="text-4xl font-semibold text-white"
+              style={{ textShadow: "1px 3px 6px rgba(0,0,0,0.5)" }}
+            >
+              KPN Bandar Segara
+            </h1>
+          </div>
+          <div className="carousel__track-container">
+            <ul className="carousel__track">
+              {galeri && galeri.length === 0 && (
+                <>
+                  {Array.from(new Array(4)).map((item, index) => (
+                    <li
+                      key={index}
+                      className={`carousel__slide ${
+                        index === 0 && `current-slide`
+                      }`}
+                    >
+                      <img
+                        className="carousel__image"
+                        src={`img/img-carousel${index + 1}.jpg`}
+                        alt="img-carousel"
+                      />
+                    </li>
+                  ))}
+                </>
+              )}
 
-            {galeri && galeri.length > 0 && (
-              <>
-                {galeri.map((item, index) => (
-                  <li
-                    key={index}
-                    className={`carousel__slide ${
-                      index === 0 ? `current-slide` : ""
-                    }`}
-                  >
-                    <img
-                      className="carousel__image"
-                      src={getImage("foto_galeri", item.foto)}
-                      alt={item.foto}
-                    />
-                  </li>
-                ))}
-              </>
-            )}
-          </ul>
-        </div>
-        <button className="carousel__button carousel__button--right focus:outline-none opacity-50 hover:opacity-100 transition-opacity duration-200">
-          <img src="img/arrow-right.png" alt="arrow right" />
-        </button>
+              {galeri && galeri.length > 0 && (
+                <>
+                  {galeri.map((item, index) => (
+                    <li
+                      key={index}
+                      className={`carousel__slide ${
+                        index === 0 ? `current-slide` : ""
+                      }`}
+                    >
+                      <img
+                        className="carousel__image"
+                        src={getImage("foto_galeri", item.foto)}
+                        alt={item.foto}
+                      />
+                    </li>
+                  ))}
+                </>
+              )}
+            </ul>
+          </div>
+          <button className="carousel__button carousel__button--right focus:outline-none opacity-50 hover:opacity-100 transition-opacity duration-200">
+            <img src="img/arrow-right.png" alt="arrow right" />
+          </button>
 
-        <div className="carousel__nav">
-          {Array.from(new Array(galeri.length)).map((item, index) => (
-            <button
-              key={index}
-              className={`carousel__indicator focus:outline-none ${
-                index === 0 && "current-slide"
-              }`}
-            ></button>
-          ))}
-          {/* <button className="carousel__indicator focus:outline-none"></button>
+          <div className="carousel__nav">
+            {Array.from(new Array(galeri.length)).map((item, index) => (
+              <button
+                key={index}
+                className={`carousel__indicator focus:outline-none ${
+                  index === 0 && "current-slide"
+                }`}
+              ></button>
+            ))}
+            {/* <button className="carousel__indicator focus:outline-none"></button>
           <button className="carousel__indicator focus:outline-none"></button> */}
+          </div>
         </div>
       </div>
     </>

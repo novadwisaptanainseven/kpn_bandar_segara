@@ -22,14 +22,14 @@ function SidebarContent() {
         <img
           src={dataKonten ? getImage(dataKonten.logo, "") : ""}
           alt="logo"
-          className="w-12 rounded-full"
+          className="w-32 rounded-full"
         />
         <div className="px-3">
           <a
             className="text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
           >
-            {dataKonten.title_website}
+            {dataKonten.nm_perusahaan}
           </a>
         </div>
       </div>
