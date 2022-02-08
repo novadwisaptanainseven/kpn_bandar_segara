@@ -22,7 +22,7 @@ const Footer = ({ dataKonten, kontak }) => {
                     key={index}
                     className="icon bg-blue-600 w-8 h-8 rounded-md p-1 transition ease-in-out duration-200 transform cursor-pointer hover:scale-110"
                   >
-                    <a href={item.link} target="_blank">
+                    <a href={item.link} target="_blank" title={item.nm_kontak}>
                       <img
                         className="w-full"
                         src={getImage("foto_kontak", item.icon)}
