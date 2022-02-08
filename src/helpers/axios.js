@@ -1,7 +1,6 @@
 import axios from "axios";
+import { baseURL, baseUrlImg } from "./url";
 
-const baseURL = "http://localhost/kpn_bandar_segara_api/api/";
-const baseUrlImg = "http://localhost/kpn_bandar_segara_api/public/images/";
 localStorage.baseURL = baseURL;
 localStorage.baseUrlImg = baseUrlImg;
 let headers = {};

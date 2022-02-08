@@ -11,6 +11,7 @@ import { checkToken, login } from "../context/actions/Auth";
 import swal2 from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { getKonten } from "../context/actions/Konten";
+import getImageLogin from "../context/actions/Files/getImageLogin";
 
 const Swal = withReactContent(swal2);
 
@@ -68,8 +69,8 @@ function Login() {
             <img
               aria-hidden="true"
               className="hidden object-cover w-full h-full dark:block"
-              src={ImageDark}
-              alt="Office"
+              src={getImageLogin(dataKonten.logo)}
+              alt="Logo"
             />
           </div>
           <main className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
