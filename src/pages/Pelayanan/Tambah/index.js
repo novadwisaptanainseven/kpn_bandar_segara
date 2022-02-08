@@ -120,9 +120,9 @@ const Tambah = () => {
                       onBlur={handleBlur}
                       value={values.keterangan || ""}
                       rows={3}
-                      className={`mt-1 ${
-                        errors.keterangan ? "border-red-500" : null
-                      }`}
+                      // className={`mt-1 ${
+                      //   errors.keterangan ? "border-red-500" : null
+                      // }`}
                     />
                     {errors.keterangan && (
                       <HelperText valid={false}>{errors.keterangan}</HelperText>

@@ -6,7 +6,7 @@ const FOTO_SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
 
 const validationSchema = Yup.object().shape({
   nm_pelayanan: Yup.string().required("Nama pelayanan harus diisi"),
-  keterangan: Yup.string().required("Keterangan pelayanan harus diisi"),
+  // keterangan: Yup.string().required("Keterangan pelayanan harus diisi"),
   icon: Yup.mixed()
     .required("Icon harus diisi")
     .test("size", "Kapasitas file maksimal 1 mb", (value) => {
