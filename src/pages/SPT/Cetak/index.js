@@ -24,7 +24,7 @@ const CetakSPT = () => {
       @media print {
         @page {
           size: 105mm 205mm;
-          margin: 0.5cm 0.5cm 0.5cm 0.5cm !important;
+          margin: 5mm 5mm 5mm 5mm !important;
         }
       }
     `,

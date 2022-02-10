@@ -7,6 +7,8 @@ export class ComponentToPrint2 extends React.Component {
   render() {
     let printingPages = [];
     const { spt, dataKonten } = this.props;
+    const fontSize = "text-md";
+
     for (const item of spt) {
       const TempTemplate = () => {
         return (
@@ -25,7 +27,7 @@ export class ComponentToPrint2 extends React.Component {
             </h1> */}
 
                 {/* Body */}
-                <div className="spt-body mx-5 mt-8 text-md">
+                <div className={`spt-body mx-5 mt-8 text-md ${fontSize}`}>
                   <div className="flex justify-between">
                     <span>
                       <b>Tgl. SPT :</b>{" "}
@@ -39,7 +41,7 @@ export class ComponentToPrint2 extends React.Component {
 
                   <div className="mt-8 mb-20">
                     <table
-                      className="w-full text-md"
+                      className={`w-full ${fontSize}`}
                       style={{ lineHeight: "2em" }}
                     >
                       <tr>

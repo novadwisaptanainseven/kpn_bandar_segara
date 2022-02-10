@@ -6,6 +6,7 @@ import getImage from "../../../context/actions/Files/getImage";
 export class ComponentToPrint extends React.Component {
   render() {
     const { dataKonten, spt } = this.props;
+    const fontSize = "text-md";
 
     return (
       <>
@@ -22,7 +23,7 @@ export class ComponentToPrint extends React.Component {
             </h1> */}
 
             {/* Body */}
-            <div className="spt-body mx-5 mt-8 text-md">
+            <div className={`spt-body mx-5 mt-8 text-md ${fontSize}`}>
               <div className="flex justify-between">
                 <span>
                   <b>Tgl. SPT :</b>{" "}
@@ -35,7 +36,10 @@ export class ComponentToPrint extends React.Component {
               </div>
 
               <div className="mt-8 mb-20">
-                <table className="w-full text-md" style={{ lineHeight: "2em" }}>
+                <table
+                  className={`w-full ${fontSize}`}
+                  style={{ lineHeight: "2em" }}
+                >
                   <tr>
                     <th align="left">Pengguna</th>
                     <th align="left">:</th>
