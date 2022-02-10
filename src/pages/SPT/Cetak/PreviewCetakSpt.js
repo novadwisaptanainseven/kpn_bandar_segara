@@ -28,8 +28,8 @@ const PreviewCetakSpt = () => {
     pageStyle: `
       @media print {
         @page {
-          size: 210mm 297mm;
-          margin: 10mm 10mm 10mm 10mm !important;
+          size: 105mm 205mm;
+          margin: 0.5cm 0.5cm 0.5cm 0.5cm !important;
         }
       }
     `,
@@ -85,26 +85,26 @@ const PreviewCetakSpt = () => {
                       <div className="mt-8 mb-20">
                         <table className="w-full" style={{ lineHeight: "2em" }}>
                           <tr>
-                            <th align="left">Nama Pengguna</th>
+                            <th align="left">Pengguna</th>
                             <th align="left">:</th>
                             <td align="left">
                               {item.nm_pelanggan.toUpperCase()}
                             </td>
                           </tr>
                           <tr>
-                            <th align="left">Nama Perusahaan</th>
+                            <th align="left">Perusahaan</th>
                             <th align="left">:</th>
                             <td align="left">
                               {item.nm_perusahaan.toUpperCase()}
                             </td>
                           </tr>
                           <tr>
-                            <th align="left">Kode / Nama Marine</th>
+                            <th align="left">Kode / Marine</th>
                             <th align="left">:</th>
                             <td align="left">{item.nm_marine.toUpperCase()}</td>
                           </tr>
                           <tr>
-                            <th align="left">Kode / Nama Driver</th>
+                            <th align="left">Kode / Driver</th>
                             <th align="left">:</th>
                             <td align="left">{item.nm_driver.toUpperCase()}</td>
                           </tr>
@@ -114,7 +114,7 @@ const PreviewCetakSpt = () => {
                             <td align="left">{item.nm_tujuan.toUpperCase()}</td>
                           </tr>
                           <tr>
-                            <th align="left">Tanggal Keberangkatan</th>
+                            <th align="left">Tanggal</th>
                             <th align="left">:</th>
                             <td align="left">
                               {format(
@@ -124,7 +124,7 @@ const PreviewCetakSpt = () => {
                             </td>
                           </tr>
                           <tr>
-                            <th align="left">Jam Keberangkatan</th>
+                            <th align="left">Jam</th>
                             <th align="left">:</th>
                             <td align="left">
                               {item.waktu_keberangkatan.toUpperCase()}

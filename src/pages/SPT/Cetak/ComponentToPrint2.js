@@ -11,18 +11,21 @@ export class ComponentToPrint2 extends React.Component {
       const TempTemplate = () => {
         return (
           <>
-            <div key={item.id_spt} style={{ width: "279.4mm" }}>
-              <div className="border-2 border-black dark:border-gray-300 py-6">
+            <div
+              key={item.id_spt}
+              // style={{ width: "279.4mm" }}
+            >
+              <div className="pt-32">
                 {/* Header */}
-                <PrintingComponentHeaderSPT dataKonten={dataKonten} />
+                {/* <PrintingComponentHeaderSPT dataKonten={dataKonten} /> */}
 
                 {/* Title */}
-                <h1 className="text-md text-center my-3 font-semibold border-t-2 border-b-2 border-black dark:border-gray-300 w-full">
-                  SURAT PERINTAH TUGAS
-                </h1>
+                {/* <h1 className="text-md text-center my-3 font-semibold border-t-2 border-b-2 border-black dark:border-gray-300 w-full">
+              SURAT PERINTAH TUGAS
+            </h1> */}
 
                 {/* Body */}
-                <div className="spt-body mx-8 mt-8">
+                <div className="spt-body mx-5 mt-8 text-md">
                   <div className="flex justify-between">
                     <span>
                       <b>Tgl. SPT :</b>{" "}
@@ -35,24 +38,27 @@ export class ComponentToPrint2 extends React.Component {
                   </div>
 
                   <div className="mt-8 mb-20">
-                    <table className="w-full" style={{ lineHeight: "2em" }}>
+                    <table
+                      className="w-full text-md"
+                      style={{ lineHeight: "2em" }}
+                    >
                       <tr>
-                        <th align="left">Nama Pengguna</th>
+                        <th align="left">Pengguna</th>
                         <th align="left">:</th>
                         <td align="left">{item.nm_pelanggan.toUpperCase()}</td>
                       </tr>
                       <tr>
-                        <th align="left">Nama Perusahaan</th>
+                        <th align="left">Perusahaan</th>
                         <th align="left">:</th>
                         <td align="left">{item.nm_perusahaan.toUpperCase()}</td>
                       </tr>
                       <tr>
-                        <th align="left">Kode / Nama Marine</th>
+                        <th align="left">Kode / Marine</th>
                         <th align="left">:</th>
                         <td align="left">{item.nm_marine.toUpperCase()}</td>
                       </tr>
                       <tr>
-                        <th align="left">Kode / Nama Driver</th>
+                        <th align="left">Kode / Driver</th>
                         <th align="left">:</th>
                         <td align="left">{item.nm_driver.toUpperCase()}</td>
                       </tr>
@@ -62,14 +68,14 @@ export class ComponentToPrint2 extends React.Component {
                         <td align="left">{item.nm_tujuan.toUpperCase()}</td>
                       </tr>
                       <tr>
-                        <th align="left">Tanggal Keberangkatan</th>
+                        <th align="left">Tanggal</th>
                         <th align="left">:</th>
                         <td align="left">
                           {format(new Date(item.tgl_keberangkatan), "dd-MM-y")}
                         </td>
                       </tr>
                       <tr>
-                        <th align="left">Jam Keberangkatan</th>
+                        <th align="left">Jam</th>
                         <th align="left">:</th>
                         <td align="left">
                           {item.waktu_keberangkatan.toUpperCase()}
@@ -83,18 +89,18 @@ export class ComponentToPrint2 extends React.Component {
                     </table>
                   </div>
 
-                  <div className="flex justify-between text-center">
-                    <div>
-                      <h1 className="mb-12">Mengetahui</h1>
-                      <br />
-                      <p>( .................................. )</p>
-                    </div>
-                    <div>
-                      <h1 className="mb-12">Pengguna</h1>
-                      <br />
-                      <p>( .................................. )</p>
-                    </div>
-                  </div>
+                  {/* <div className="flex justify-between text-center">
+                <div>
+                  <h1 className="mb-12">Mengetahui</h1>
+                  <br />
+                  <p>( .................................. )</p>
+                </div>
+                <div>
+                  <h1 className="mb-12">Pengguna</h1>
+                  <br />
+                  <p>( .................................. )</p>
+                </div>
+              </div> */}
                 </div>
               </div>
             </div>

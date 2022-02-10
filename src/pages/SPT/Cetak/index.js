@@ -23,7 +23,8 @@ const CetakSPT = () => {
     pageStyle: `
       @media print {
         @page {
-          size: 210mm 297mm;
+          size: 105mm 205mm;
+          margin: 0.5cm 0.5cm 0.5cm 0.5cm !important;
         }
       }
     `,
@@ -74,24 +75,24 @@ const CetakSPT = () => {
                     <div className="mt-8 mb-20">
                       <table className="w-full" style={{ lineHeight: "2em" }}>
                         <tr>
-                          <th align="left">Nama Pengguna</th>
+                          <th align="left">Pengguna</th>
                           <th align="left">:</th>
                           <td align="left">{spt.nm_pelanggan.toUpperCase()}</td>
                         </tr>
                         <tr>
-                          <th align="left">Nama Perusahaan</th>
+                          <th align="left">Perusahaan</th>
                           <th align="left">:</th>
                           <td align="left">
                             {spt.nm_perusahaan.toUpperCase()}
                           </td>
                         </tr>
                         <tr>
-                          <th align="left">Kode / Nama Marine</th>
+                          <th align="left">Kode / Marine</th>
                           <th align="left">:</th>
                           <td align="left">{spt.nm_marine.toUpperCase()}</td>
                         </tr>
                         <tr>
-                          <th align="left">Kode / Nama Driver</th>
+                          <th align="left">Kode / Driver</th>
                           <th align="left">:</th>
                           <td align="left">{spt.nm_driver.toUpperCase()}</td>
                         </tr>
@@ -101,14 +102,14 @@ const CetakSPT = () => {
                           <td align="left">{spt.nm_tujuan.toUpperCase()}</td>
                         </tr>
                         <tr>
-                          <th align="left">Tanggal Keberangkatan</th>
+                          <th align="left">Tanggal</th>
                           <th align="left">:</th>
                           <td align="left">
                             {format(new Date(spt.tgl_keberangkatan), "dd-MM-y")}
                           </td>
                         </tr>
                         <tr>
-                          <th align="left">Jam Keberangkatan</th>
+                          <th align="left">Jam</th>
                           <th align="left">:</th>
                           <td align="left">
                             {spt.waktu_keberangkatan.toUpperCase()}
