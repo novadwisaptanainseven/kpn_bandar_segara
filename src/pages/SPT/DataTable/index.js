@@ -150,28 +150,6 @@ const DataTable = ({
                 <div className="flex gap-1 items-center">
                   <a
                     className={`${
-                      sortConfig && sortConfig.key === "tgl_spt"
-                        ? "text-gray-900 dark:text-gray-100"
-                        : ""
-                    }`}
-                    href="."
-                    onClick={(e) => handleSorting(e, "tgl_spt")}
-                  >
-                    Tgl.SPT
-                  </a>
-                  {sortConfig &&
-                    sortConfig.key === "tgl_spt" &&
-                    (sortConfig.direction === "ascending" ? (
-                      <ArrowUp />
-                    ) : (
-                      <ArrowDown />
-                    ))}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex gap-1 items-center">
-                  <a
-                    className={`${
                       sortConfig && sortConfig.key === "no_spt"
                         ? "text-gray-900 dark:text-gray-100"
                         : ""
@@ -183,6 +161,28 @@ const DataTable = ({
                   </a>
                   {sortConfig &&
                     sortConfig.key === "no_spt" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
+                      sortConfig && sortConfig.key === "tgl_spt"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "tgl_spt")}
+                  >
+                    Tgl.SPT
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "tgl_spt" &&
                     (sortConfig.direction === "ascending" ? (
                       <ArrowUp />
                     ) : (
@@ -273,10 +273,10 @@ const DataTable = ({
                   />
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.tgl_spt}</span>
+                  <span className="text-sm">{item.no_spt}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{item.no_spt}</span>
+                  <span className="text-sm">{item.tgl_spt}</span>
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">{item.nm_pelanggan}</span>
