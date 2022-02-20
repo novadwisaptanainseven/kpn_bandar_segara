@@ -20,7 +20,9 @@ import { useHistory } from "react-router-dom";
 const Pengaturan = () => {
   const history = useHistory();
   const [selectedFile, setSelectedFile] = useState();
+  const [selectedFile2, setSelectedFile2] = useState();
   const [preview, setPreview] = useState();
+  const [preview2, setPreview2] = useState();
   const { kontenState, kontenDispatch } = useContext(GlobalContext);
   const [loading, setLoading] = useState(false);
   const { data: dataKonten } = kontenState;
@@ -48,6 +50,26 @@ const Pengaturan = () => {
     };
   }, [selectedFile, dataKonten]);
 
+  // Menangani preview input gambar setelah dipilih
+  const handleSelectedFile2 = useCallback(() => {
+    const logo2 = dataKonten
+      ? getImage("", dataKonten.foto_tentang_kami)
+      : null;
+
+    if (!selectedFile2) {
+      setPreview2(logo2);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile2);
+    setPreview2(objectUrl);
+
+    // Free memory when ever this component is unmounted
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+    };
+  }, [selectedFile2, dataKonten]);
+
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile(undefined);
@@ -57,9 +79,19 @@ const Pengaturan = () => {
     setSelectedFile(e.target.files[0]);
   };
 
+  const onSelectFile2 = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile2(undefined);
+      return;
+    }
+
+    setSelectedFile2(e.target.files[0]);
+  };
+
   useEffect(() => {
     handleSelectedFile();
-  }, [handleSelectedFile]);
+    handleSelectedFile2();
+  }, [handleSelectedFile, handleSelectedFile2]);
 
   const handleFormSubmit = (values) => {
     // alert(JSON.stringify(values));
@@ -70,6 +102,9 @@ const Pengaturan = () => {
     formData.append("link_map", values.link_map);
     formData.append("alamat", values.alamat);
     formData.append("nm_perusahaan", values.nm_perusahaan);
+    if (values.foto_tentang_kami) {
+      formData.append("foto_tentang_kami", values.foto_tentang_kami);
+    }
     if (values.logo) {
       formData.append("logo", values.logo);
     }
@@ -256,6 +291,41 @@ const Pengaturan = () => {
                         {errors.tentang_kami}
                       </HelperText>
                     )}
+                  </Label>
+                  <Label className="mt-4">
+                    <span>Foto Tentang Perusahaan</span>
+                    <Input
+                      type="file"
+                      className="mt-4 mb-3"
+                      onChange={(e) => {
+                        onSelectFile2(e);
+                        setFieldValue("foto_tentang_kami", e.target.files[0]);
+                      }}
+                      onBlur={handleBlur}
+                      name="foto_tentang_kami"
+                      className={`mt-1 ${
+                        errors.foto_tentang_kami && touched.foto_tentang_kami
+                          ? "border-red-500"
+                          : null
+                      }`}
+                    />
+                    {errors.foto_tentang_kami && touched.foto_tentang_kami && (
+                      <HelperText valid={false}>
+                        {errors.foto_tentang_kami} <br />
+                      </HelperText>
+                    )}
+                    {preview && (
+                      <img
+                        src={preview2}
+                        alt={preview2}
+                        classname="w-48"
+                        width={200}
+                      />
+                    )}
+                    <span className="inline-block mt-1 text-xs text-gray-400">
+                      Foto harus bertipe jpg, jpeg, atau png dengan ukuran
+                      kurang dari 1 MB
+                    </span>
                   </Label>
                   <div className="mt-5 flex-col-reverse md:flex-row justify-end gap-2 flex md:hidden">
                     <Button onClick={handleReset} layout="outline">

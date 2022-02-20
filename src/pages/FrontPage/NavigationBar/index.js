@@ -33,7 +33,9 @@ const NavigationBar = ({ dataKonten }) => {
             alt="Logo Brand"
             className="w-12"
           />
-          <h1 className="text-xl font-semibold">{dataKonten.nm_perusahaan}</h1>
+          <h1 className="text-xl text-brand">
+            {dataKonten.nm_perusahaan}
+          </h1>
         </div>
         <div className="navbar-menu flex gap-20 items-center text-gray-500">
           <Link
@@ -50,7 +52,7 @@ const NavigationBar = ({ dataKonten }) => {
             Beranda
           </Link>
           <Link
-           className={`hover:text-gray-900 cursor-pointer ${
+            className={`hover:text-gray-900 cursor-pointer ${
               linkActive === "tentang" && "text-gray-900"
             }`}
             activeClass="active"
@@ -64,7 +66,7 @@ const NavigationBar = ({ dataKonten }) => {
             Tentang
           </Link>
           <Link
-           className={`hover:text-gray-900 cursor-pointer ${
+            className={`hover:text-gray-900 cursor-pointer ${
               linkActive === "pelayanan" && "text-gray-900"
             }`}
             activeClass="active"

@@ -1,5 +1,6 @@
 import Interweave from "interweave";
 import React from "react";
+import getImage from "../../../context/actions/Files/getImage";
 
 const Tentang = ({ dataKonten }) => {
   return (
@@ -21,7 +22,10 @@ const Tentang = ({ dataKonten }) => {
           </p>
         </div>
         <div className="section-tentang-gambar">
-          <img src="img/about.svg" alt="gambar-about" />
+          <img
+            src={getImage("", dataKonten.foto_tentang_kami)}
+            alt={dataKonten.foto_tentang_kami}
+          />
         </div>
       </div>
     </>

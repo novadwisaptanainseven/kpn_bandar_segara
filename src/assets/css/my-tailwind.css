@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap");
+
+.text-brand {
+  font-family: "Montserrat", sans-serif;
+}
+
 /* Style of Time Picker React */
 .react-time-input-picker {
   color: #212121;

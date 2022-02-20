@@ -13,7 +13,24 @@ const validationSchema = Yup.object().shape({
   nm_perusahaan: Yup.string().required("Nama perusahaan harus diisi"),
   tentang_kami: Yup.string().required("Tentang kami harus diisi"),
   link_map: Yup.string().required("Link google map harus diisi"),
-  foto: Yup.mixed()
+  foto_tentang_kami: Yup.mixed()
+    .test("size", "Kapasitas file maksimal 1 mb", (value) => {
+      if (value) {
+        return value && value.size <= FOTO_SIZE;
+      }
+      return true;
+    })
+    .test(
+      "type",
+      "Ekstensi yang diperbolehkan hanya jpg, jpeg, dan png",
+      (value) => {
+        if (value) {
+          return value && FOTO_SUPPORTED_FORMATS.includes(value.type);
+        }
+        return true;
+      }
+    ),
+  logo: Yup.mixed()
     .test("size", "Kapasitas file maksimal 1 mb", (value) => {
       if (value) {
         return value && value.size <= FOTO_SIZE;

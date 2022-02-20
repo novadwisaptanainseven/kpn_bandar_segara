@@ -5,6 +5,7 @@ const initState = (data) => {
     // no_hp: data ? data.no_hp : "",
     // instagram: data ? data.instagram : "",
     alamat: data ? data.alamat : "",
+    foto_tentang_kami: "",
     logo: "",
     nm_perusahaan: data ? data.nm_perusahaan : "",
     tentang_kami: data ? data.tentang_kami : "",
