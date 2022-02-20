@@ -179,7 +179,7 @@ const Pengaturan = () => {
                     )}
                     <span className="inline-block mt-1 text-xs text-gray-400">
                       Foto harus bertipe jpg, jpeg, atau png dengan ukuran
-                      kurang dari 2 MB
+                      kurang dari 1 MB
                     </span>
                   </Label>
                   <div className="mt-5 flex-col-reverse md:flex-row justify-end gap-2 hidden md:flex">

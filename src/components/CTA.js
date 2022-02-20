@@ -8,7 +8,7 @@ function CTA() {
   return (
     <div className="p-4 mb-8 text-sm text-purple-100 bg-purple-600 rounded-lg shadow-md">
       <h1 className="text-4xl mb-2 font-semibold">
-        {dataKonten.title_website}
+        {dataKonten.nm_perusahaan}
       </h1>
       <p className="text-md">
         {dataKonten.deskripsi_aplikasi}

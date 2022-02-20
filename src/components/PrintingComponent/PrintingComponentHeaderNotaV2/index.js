@@ -8,7 +8,7 @@ const PrintingComponentHeaderNotaV2 = ({ dataKonten }) => {
       <div className="font-semibold text-lg">NOTA TRANSAKSI</div>
       <div className="text-right">
         <span className="font-semibold text-md block">
-          {dataKonten.title_website}
+          {dataKonten.nm_perusahaan}
         </span>
         <span className="text-sm">
           <Interweave content={dataKonten.alamat} />

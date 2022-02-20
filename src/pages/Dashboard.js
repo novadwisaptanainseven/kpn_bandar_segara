@@ -28,7 +28,7 @@ function Dashboard() {
       <CTA />
 
       <h1 className="text-3xl text-gray-700 mb-3 dark:text-gray-200">
-        Selamat Datang {dataUser.user.nama}
+        Selamat datang, {dataUser.user.nama}
       </h1>
 
       {/* <!-- Cards --> */}
