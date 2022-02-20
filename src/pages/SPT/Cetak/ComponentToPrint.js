@@ -69,7 +69,7 @@ export class ComponentToPrint extends React.Component {
                     <th align="left">Tanggal</th>
                     <th align="left">:</th>
                     <td align="left">
-                      {format(new Date(spt.tgl_keberangkatan), "dd-MM-y")}
+                      <td align="left">{spt.tgl_keberangkatan}</td>
                     </td>
                   </tr>
                   <tr>

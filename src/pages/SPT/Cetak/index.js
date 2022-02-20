@@ -4,7 +4,6 @@ import { Card, CardBody, Button } from "@windmill/react-ui";
 import { useReactToPrint } from "react-to-print";
 import { ComponentToPrint } from "./ComponentToPrint";
 import { GlobalContext } from "../../../context/Provider";
-import getImage from "../../../context/actions/Files/getImage";
 import { getSptById } from "../../../context/actions/SPT";
 import { useRouteMatch } from "react-router-dom";
 import { format } from "date-fns";
@@ -23,7 +22,7 @@ const CetakSPT = () => {
     pageStyle: `
       @media print {
         @page {
-          size: 105mm 205mm;
+          size: 210mm 297mm;
           margin: 5mm 5mm 5mm 5mm !important;
         }
       }
@@ -63,8 +62,7 @@ const CetakSPT = () => {
                   <div className="spt-body mx-8 mt-8">
                     <div className="flex justify-between">
                       <span>
-                        <b>Tgl. SPT :</b>{" "}
-                        {format(new Date(spt.waktu_buat), "dd/MM/y")}
+                        <b>Tgl. SPT :</b> {spt.tgl_spt}
                       </span>
                       <span>
                         <b>No : </b>
@@ -104,9 +102,7 @@ const CetakSPT = () => {
                         <tr>
                           <th align="left">Tanggal</th>
                           <th align="left">:</th>
-                          <td align="left">
-                            {format(new Date(spt.tgl_keberangkatan), "dd-MM-y")}
-                          </td>
+                          <td align="left">{spt.tgl_keberangkatan}</td>
                         </tr>
                         <tr>
                           <th align="left">Jam</th>

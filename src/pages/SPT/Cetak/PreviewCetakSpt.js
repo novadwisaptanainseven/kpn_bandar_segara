@@ -28,7 +28,7 @@ const PreviewCetakSpt = () => {
     pageStyle: `
       @media print {
         @page {
-          size: 105mm 205mm;
+          size: 210mm 297mm;
           margin: 5mm 5mm 5mm 5mm !important;
         }
       }
