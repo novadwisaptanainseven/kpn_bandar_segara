@@ -66,7 +66,7 @@ const DataTable = ({
         (item) =>
           item.no_nota.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_pelanggan.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.waktu_buat.toLowerCase().includes(filterText.toLowerCase()) ||
+          item.tgl_nota.toLowerCase().includes(filterText.toLowerCase()) ||
           item.nm_status_nota.toLowerCase().includes(filterText.toLowerCase())
       );
     }
@@ -172,17 +172,17 @@ const DataTable = ({
                 <div className="flex gap-1 items-center">
                   <a
                     className={`${
-                      sortConfig && sortConfig.key === "waktu_buat"
+                      sortConfig && sortConfig.key === "tgl_nota"
                         ? "text-gray-900 dark:text-gray-100"
                         : ""
                     }`}
                     href="."
-                    onClick={(e) => handleSorting(e, "waktu_buat")}
+                    onClick={(e) => handleSorting(e, "tgl_nota")}
                   >
                     Tgl. Nota
                   </a>
                   {sortConfig &&
-                    sortConfig.key === "waktu_buat" &&
+                    sortConfig.key === "tgl_nota" &&
                     (sortConfig.direction === "ascending" ? (
                       <ArrowUp />
                     ) : (
@@ -302,10 +302,7 @@ const DataTable = ({
                   <span className="text-sm">{item.no_nota}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">
-                    {item.waktu_buat &&
-                      format(new Date(item.waktu_buat), "dd-MM-y")}
-                  </span>
+                  <span className="text-sm">{item.tgl_nota}</span>
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">{item.nm_pelanggan}</span>

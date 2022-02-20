@@ -150,6 +150,28 @@ const DataTable = ({
                 <div className="flex gap-1 items-center">
                   <a
                     className={`${
+                      sortConfig && sortConfig.key === "tgl_spt"
+                        ? "text-gray-900 dark:text-gray-100"
+                        : ""
+                    }`}
+                    href="."
+                    onClick={(e) => handleSorting(e, "tgl_spt")}
+                  >
+                    Tgl.SPT
+                  </a>
+                  {sortConfig &&
+                    sortConfig.key === "tgl_spt" &&
+                    (sortConfig.direction === "ascending" ? (
+                      <ArrowUp />
+                    ) : (
+                      <ArrowDown />
+                    ))}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex gap-1 items-center">
+                  <a
+                    className={`${
                       sortConfig && sortConfig.key === "no_spt"
                         ? "text-gray-900 dark:text-gray-100"
                         : ""
@@ -216,17 +238,17 @@ const DataTable = ({
                 <div className="flex gap-1 items-center">
                   <a
                     className={`${
-                      sortConfig && sortConfig.key === "waktu_buat"
+                      sortConfig && sortConfig.key === "tgl_keberangkatan"
                         ? "text-gray-900 dark:text-gray-100"
                         : ""
                     }`}
                     href="."
-                    onClick={(e) => handleSorting(e, "waktu_buat")}
+                    onClick={(e) => handleSorting(e, "tgl_keberangkatan")}
                   >
-                    Tanggal SPT
+                    Tgl.Keberangkatan
                   </a>
                   {sortConfig &&
-                    sortConfig.key === "waktu_buat" &&
+                    sortConfig.key === "tgl_keberangkatan" &&
                     (sortConfig.direction === "ascending" ? (
                       <ArrowUp />
                     ) : (
@@ -251,6 +273,9 @@ const DataTable = ({
                   />
                 </TableCell>
                 <TableCell>
+                  <span className="text-sm">{item.tgl_spt}</span>
+                </TableCell>
+                <TableCell>
                   <span className="text-sm">{item.no_spt}</span>
                 </TableCell>
                 <TableCell>
@@ -260,9 +285,7 @@ const DataTable = ({
                   <span className="text-sm">{item.nm_tujuan}</span>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">
-                    {format(new Date(item.tgl_keberangkatan), "dd-MM-y")}
-                  </span>
+                  <span className="text-sm">{item.tgl_keberangkatan}</span>
                 </TableCell>
 
                 <TableCell className="text-xs">

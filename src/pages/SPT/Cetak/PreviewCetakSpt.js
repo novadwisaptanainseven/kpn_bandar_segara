@@ -73,8 +73,7 @@ const PreviewCetakSpt = () => {
                     <div className="spt-body mx-8 mt-8">
                       <div className="flex justify-between">
                         <span>
-                          <b>Tgl. SPT :</b>{" "}
-                          {format(new Date(item.waktu_buat), "dd/MM/y")}
+                          <b>Tgl. SPT :</b> {item.tgl_spt}
                         </span>
                         <span>
                           <b>No : </b>
@@ -114,14 +113,9 @@ const PreviewCetakSpt = () => {
                             <td align="left">{item.nm_tujuan.toUpperCase()}</td>
                           </tr>
                           <tr>
-                            <th align="left">Tanggal</th>
+                            <th align="left">Tgl.Keberangkatan</th>
                             <th align="left">:</th>
-                            <td align="left">
-                              {format(
-                                new Date(item.tgl_keberangkatan),
-                                "dd-MM-y"
-                              )}
-                            </td>
+                            <td align="left">{item.tgl_keberangkatan}</td>
                           </tr>
                           <tr>
                             <th align="left">Jam</th>

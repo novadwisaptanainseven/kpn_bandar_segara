@@ -94,7 +94,7 @@ const SPT = () => {
             className="text-gray-600 bg-gray-200 dark:bg-gray-700 dark:text-gray-100"
           >
             <CardBody>
-              <p className="mb-4 font-semibold">Filter Tanggal</p>
+              <p className="mb-4 font-semibold">Filter Tanggal Keberangkatan</p>
               <div className="grid gap-3 md:grid-cols-2">
                 <Label>
                   <span>Dari tanggal</span>

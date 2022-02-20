@@ -163,7 +163,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                   <span>{item.no_cetak_nota}</span>
                 </TableCell>
                 <TableCell>
-                  <span>{format(new Date(item.waktu_buat), "dd-MM-y")}</span>
+                  <span>{item.tgl_nota}</span>
                 </TableCell>
                 <TableCell className="text-xs">
                   <div className="flex items-center gap-1">

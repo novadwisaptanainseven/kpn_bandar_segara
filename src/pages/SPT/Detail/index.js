@@ -68,9 +68,7 @@ const Detail = () => {
                     <TableCell className="font-semibold">
                       Tanggal Keberangkatan
                     </TableCell>
-                    <TableCell>
-                      {format(new Date(spt.tgl_keberangkatan), "dd-MM-y")}
-                    </TableCell>
+                    <TableCell>{spt.tgl_keberangkatan}</TableCell>
                   </TableRow>
                   <TableRow className="bg-gray-100 dark:bg-gray-800">
                     <TableCell className="font-semibold">

@@ -66,9 +66,9 @@ export class ComponentToPrint extends React.Component {
                   <td>{nota.no_nota}</td>
                 </tr>
                 <tr>
-                  <td>Tanggal</td>
+                  <td>Tanggal Nota</td>
                   <td>:</td>
-                  <td>{format(new Date(nota.tgl_nota), "dd-MM-y")}</td>
+                  <td>{nota.tgl_nota}</td>
                 </tr>
               </table>
             </div>
@@ -114,7 +114,7 @@ export class ComponentToPrint extends React.Component {
                     >
                       {index + 1}
                     </td>
-                    <td>{format(new Date(item.waktu_buat), "dd-MM-y")}</td>
+                    <td>{item.tgl_spt}</td>
                     <td>{item.nm_tujuan}</td>
                     <td>{item.nm_driver}</td>
                     <td>{item.nm_marine}</td>

@@ -5,7 +5,7 @@ import { PrintingComponentHeaderNotaV2 } from "../../../components/PrintingCompo
 
 export class ComponentToPrint2 extends React.Component {
   render() {
-    const {dataKonten, nota} = this.props;
+    const { dataKonten, nota } = this.props;
     const hitungTotalHarga = () => {
       const totHarga = nota.data_spt.reduce(add, 0);
       function add(accumulator, a) {
@@ -65,11 +65,9 @@ export class ComponentToPrint2 extends React.Component {
                   <td>{nota.no_cetak_nota}</td>
                 </tr>
                 <tr>
-                  <td>Tanggal</td>
+                  <td>Tanggal Nota</td>
                   <td>:</td>
-                  <td>
-                    {format(new Date(nota.tgl_nota), "dd-MM-y")}
-                  </td>
+                  <td>{nota.tgl_nota}</td>
                 </tr>
               </table>
             </div>
@@ -108,14 +106,12 @@ export class ComponentToPrint2 extends React.Component {
                   <tr key={item.id_spt} valign="top">
                     <td
                       className={
-                        index + 1 === nota.data_spt.length
-                          ? "pb-2"
-                          : null
+                        index + 1 === nota.data_spt.length ? "pb-2" : null
                       }
                     >
                       {index + 1}
                     </td>
-                    <td>{format(new Date(item.waktu_buat), "dd-MM-y")}</td>
+                    <td>{item.tgl_spt}</td>
                     <td>{item.nm_tujuan}</td>
                     <td>{item.nm_driver}</td>
                     <td>{item.nm_marine}</td>

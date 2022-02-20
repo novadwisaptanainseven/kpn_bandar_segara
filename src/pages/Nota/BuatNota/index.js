@@ -242,7 +242,7 @@ const BuatNota = () => {
                     <TableCell>Tujuan</TableCell>
                     <TableCell>Driver</TableCell>
                     <TableCell>Marine</TableCell>
-                    <TableCell>Tanggal</TableCell>
+                    <TableCell>Tgl.Keberangkatan</TableCell>
                     <TableCell>Jam</TableCell>
                     <TableCell>Keterangan</TableCell>
                     <TableCell>Diskon</TableCell>
@@ -266,9 +266,7 @@ const BuatNota = () => {
                       <TableCell>{item.nm_tujuan}</TableCell>
                       <TableCell>{item.nm_driver}</TableCell>
                       <TableCell>{item.nm_marine}</TableCell>
-                      <TableCell>
-                        {format(new Date(item.tgl_keberangkatan), "dd/MM/y")}
-                      </TableCell>
+                      <TableCell>{item.tgl_keberangkatan}</TableCell>
                       <TableCell>{item.waktu_keberangkatan}</TableCell>
                       <TableCell>
                         <Interweave content={item.keterangan} />
