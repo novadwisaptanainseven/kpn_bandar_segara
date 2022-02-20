@@ -86,7 +86,7 @@ const Cetak = () => {
               <div className="grid md:grid-cols-1">
                 {/* Header */}
                 <PrintingComponentHeaderNota dataKonten={dataKonten} />
-                <div className="nota-sub-header flex justify-between pt-1 px-4 mb-10">
+                <div className="nota-sub-header flex justify-between pt-1 px-4 mb-2">
                   <div>
                     <table className="" style={{ width: 350 }}>
                       <tr>
@@ -172,7 +172,7 @@ const Cetak = () => {
                       <tr className="border-t-2 border-b-2 border-black dark:border-gray-200">
                         <td
                           colSpan={6}
-                          className="font-semibold text-center border-r-2 border-black dark:border-gray-200"
+                          className="font-semibold text-cente dark:border-gray-200"
                         >
                           Total
                         </td>

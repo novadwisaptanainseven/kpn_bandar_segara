@@ -57,7 +57,7 @@ export class ComponentToPrint extends React.Component {
         <div className="grid md:grid-cols-1">
           {/* Header */}
           <PrintingComponentHeaderNotaV2 dataKonten={dataKonten} />
-          <div className="nota-sub-header flex justify-between pt-1 px-4 mb-10">
+          <div className="nota-sub-header flex justify-between pt-1 px-4 mb-2">
             <div>
               <table className="text-sm" style={{ width: 350 }}>
                 <tr>
@@ -140,7 +140,7 @@ export class ComponentToPrint extends React.Component {
                 <tr className="border-t-2 border-b-2 border-black">
                   <td
                     colSpan={6}
-                    className="font-semibold text-center border-r-2 border-black"
+                    className="font-semibold text-center"
                   >
                     Total
                   </td>
