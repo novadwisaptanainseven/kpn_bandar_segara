@@ -179,7 +179,7 @@ const DataTable = ({
                     href="."
                     onClick={(e) => handleSorting(e, "tgl_spt")}
                   >
-                    Tgl.SPT
+                    Tgl. SPT
                   </a>
                   {sortConfig &&
                     sortConfig.key === "tgl_spt" &&
@@ -245,7 +245,7 @@ const DataTable = ({
                     href="."
                     onClick={(e) => handleSorting(e, "tgl_keberangkatan")}
                   >
-                    Tgl.Keberangkatan
+                    Tgl. Keberangkatan
                   </a>
                   {sortConfig &&
                     sortConfig.key === "tgl_keberangkatan" &&
