@@ -1,7 +1,8 @@
 {
-  "name": "windmill-dashboard-react",
+  "name": "kpn-bandar-segara",
   "version": "0.4.0",
-  "description": "A multi theme, completely accessible, with components and pages examples, (almost) ready for production dashboard.",
+  "homepage": "https://kpnbandarsegara.com/",
+  "description": "Aplikasi POS Sewa Kapal merupakan aplikasi kasir yang bertujuan untuk mengolah data penyewaan kapal",
   "private": true,
   "scripts": {
     "tailwind:dev": "tailwindcss build src/assets/css/tailwind.css -o src/assets/css/tailwind.output.css",
