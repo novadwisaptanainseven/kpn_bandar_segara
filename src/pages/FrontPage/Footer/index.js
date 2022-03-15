@@ -41,7 +41,7 @@ const Footer = ({ dataKonten, kontak }) => {
           </div>
         </div>
         <div className="flex-1">
-          <h1 className="text-lg font-semibold text-gray-700 mb-2">MAP</h1>
+          <h1 className="text-lg font-semibold text-gray-700 mb-2">PETA</h1>
           <iframe
             src={dataKonten.link_map}
             width="100%"

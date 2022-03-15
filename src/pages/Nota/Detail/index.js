@@ -43,7 +43,7 @@ const Detail = () => {
   const hitungTotalHarga = () => {
     const totHarga = nota.data_spt.reduce(add, 0);
     function add(accumulator, a) {
-      return accumulator + a.harga;
+      return accumulator + parseInt(a.harga);
     }
 
     return totHarga.toLocaleString("id", {
@@ -101,10 +101,13 @@ const Detail = () => {
                         Total Harga
                       </TableCell>
                       <TableCell>
-                        {nota.data_nota.total_harga.toLocaleString("id", {
-                          style: "currency",
-                          currency: "IDR",
-                        })}
+                        {parseInt(nota.data_nota.total_harga).toLocaleString(
+                          "id",
+                          {
+                            style: "currency",
+                            currency: "IDR",
+                          }
+                        )}
                       </TableCell>
                     </TableRow>
                     <TableRow className="bg-gray-200 dark:bg-gray-700">
@@ -112,7 +115,7 @@ const Detail = () => {
                         Jumlah yg Dibayar
                       </TableCell>
                       <TableCell>
-                        {nota.data_nota.bayar.toLocaleString("id", {
+                        {parseInt(nota.data_nota.bayar).toLocaleString("id", {
                           style: "currency",
                           currency: "IDR",
                         })}
@@ -216,7 +219,7 @@ const Detail = () => {
                         </TableCell>
                         <TableCell>
                           <TableCell>
-                            {item.harga.toLocaleString("id", {
+                            {parseInt(item.harga).toLocaleString("id", {
                               style: "currency",
                               currency: "IDR",
                             })}

@@ -40,7 +40,7 @@ const Cetak = () => {
   const hitungTotalHarga = () => {
     const totHarga = riwayatNota.data_cetak_nota.reduce(add, 0);
     function add(accumulator, a) {
-      return accumulator + a.harga;
+      return accumulator + parseInt(a.harga);
     }
 
     return totHarga.toLocaleString("id", {
@@ -161,7 +161,7 @@ const Cetak = () => {
                             )}
                           </td>
                           <td>
-                            {item.harga.toLocaleString("id", {
+                            {parseInt(item.harga).toLocaleString("id", {
                               style: "currency",
                               currency: "IDR",
                             })}

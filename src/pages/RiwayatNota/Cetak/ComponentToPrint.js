@@ -10,7 +10,7 @@ export class ComponentToPrint extends React.Component {
     const hitungTotalHarga = () => {
       const totHarga = nota.data_cetak_nota.reduce(add, 0);
       function add(accumulator, a) {
-        return accumulator + a.harga;
+        return accumulator + parseInt(a.harga);
       }
 
       return totHarga.toLocaleString("id", {
@@ -129,7 +129,7 @@ export class ComponentToPrint extends React.Component {
                       {hitungPotonganHarga(item.diskon, item.harga_tujuan)}
                     </td>
                     <td>
-                      {item.harga.toLocaleString("id", {
+                      {parseInt(item.harga).toLocaleString("id", {
                         style: "currency",
                         currency: "IDR",
                       })}
@@ -138,10 +138,7 @@ export class ComponentToPrint extends React.Component {
                 ))}
 
                 <tr className="border-t-2 border-b-2 border-black">
-                  <td
-                    colSpan={6}
-                    className="font-semibold text-center"
-                  >
+                  <td colSpan={6} className="font-semibold text-center">
                     Total
                   </td>
                   <td>{hitungTotalPotongan()}</td>

@@ -7,7 +7,7 @@
  */
 const routes = [
   {
-    path: "/app/dashboard", // the url
+    path: "/simantra/dashboard", // the url
     icon: "HomeIcon", // the component being exported from icons/index.js
     name: "Dasbor", // name that appear in Sidebar
   },
@@ -17,44 +17,44 @@ const routes = [
     routes: [
       // submenu
       {
-        path: "/app/perusahaan",
+        path: "/simantra/perusahaan",
         name: "Perusahaan",
       },
       {
-        path: "/app/pelanggan",
+        path: "/simantra/pelanggan",
         name: "Pengguna",
       },
       {
-        path: "/app/tujuan",
+        path: "/simantra/tujuan",
         name: "Tujuan",
       },
       {
-        path: "/app/marine",
+        path: "/simantra/marine",
         name: "Marine",
       },
       {
-        path: "/app/driver",
+        path: "/simantra/driver",
         name: "Driver",
       },
     ],
   },
   {
-    path: "/app/nota",
+    path: "/simantra/nota",
     icon: "MoneyIcon",
     name: "Nota Transaksi",
   },
   {
-    path: "/app/spt",
+    path: "/simantra/spt",
     icon: "MailIcon",
     name: "SPT",
   },
   {
-    path: "/app/riwayat-nota",
+    path: "/simantra/riwayat-nota",
     icon: "MoneyIcon",
     name: "Riwayat Cetak Nota",
   },
   {
-    path: "/app/users",
+    path: "/simantra/users",
     icon: "PeopleIcon",
     name: "Data Admin",
   },
@@ -64,19 +64,19 @@ const routes = [
     routes: [
       // submenu
       {
-        path: "/app/pengaturan",
+        path: "/simantra/pengaturan",
         name: "Informasi Umum",
       },
       {
-        path: "/app/galeri",
+        path: "/simantra/galeri",
         name: "Foto Galeri",
       },
       {
-        path: "/app/pelayanan",
+        path: "/simantra/pelayanan",
         name: "Pelayanan",
       },
       {
-        path: "/app/kontak",
+        path: "/simantra/kontak",
         name: "Kontak",
       },
     ],

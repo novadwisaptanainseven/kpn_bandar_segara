@@ -7,7 +7,7 @@ const logout = () => {
       // console.log(res.data);
 
       localStorage.clear();
-      window.location.href = "/login";
+      window.location.href = "/simantra/login";
     })
     .catch((err) => {
       // console.log(err.response.data);

@@ -209,7 +209,10 @@ const TableUsers = ({ resultsPerPage, response, filterText }) => {
                       aria-label="Detail"
                       onClick={(e) => goToDetail(item.id_user)}
                     >
-                      <MenuIcon className="w-5 h-5" aria-hidden="true" />
+                      <MenuIcon
+                        className="w-5 h-5 text-blue-500"
+                        aria-hidden="true"
+                      />
                     </Button>
                   )}
                   <Button
@@ -218,7 +221,10 @@ const TableUsers = ({ resultsPerPage, response, filterText }) => {
                     aria-label="Edit"
                     onClick={(e) => goToEdit(item.id_user)}
                   >
-                    <EditIcon className="w-5 h-5" aria-hidden="true" />
+                    <EditIcon
+                      className="w-5 h-5 text-lime-600"
+                      aria-hidden="true"
+                    />
                   </Button>
                   <Button
                     layout="link"
@@ -226,7 +232,10 @@ const TableUsers = ({ resultsPerPage, response, filterText }) => {
                     aria-label="Delete"
                     onClick={() => handleDelete(item.id_user)}
                   >
-                    <TrashIcon className="w-5 h-5" aria-hidden="true" />
+                    <TrashIcon
+                      className="w-5 h-5 text-red-600"
+                      aria-hidden="true"
+                    />
                   </Button>
                 </div>
               </TableCell>

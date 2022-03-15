@@ -40,7 +40,7 @@ const PreviewCetakSpt = () => {
   const history = useHistory();
 
   if (!spt) {
-    history.push(`/app/spt`);
+    history.push(`/simantra/spt`);
   }
 
   return (

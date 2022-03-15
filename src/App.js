@@ -21,12 +21,12 @@ function App() {
         <Router>
           <AccessibleNavigationAnnouncer />
           <Switch>
-            <Route path="/login" component={Login} />
+            <Route path="/simantra/login" component={Login} />
             <Route path="/create-account" component={CreateAccount} />
             <Route path="/forgot-password" component={ForgotPassword} />
 
             {/* Place new routes over this */}
-            <Route path="/app" component={Layout} />
+            <Route path="/simantra" component={Layout} />
 
             <Route path="/" component={FrontPage} />
             {/* If you have an index page, you can remothis Redirect */}

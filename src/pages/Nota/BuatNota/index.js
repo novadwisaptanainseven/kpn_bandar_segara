@@ -110,7 +110,7 @@ const BuatNota = () => {
   const hitungTotalHarga = () => {
     const totHarga = sptTemp.reduce(add, 0);
     function add(accumulator, a) {
-      return accumulator + a.harga;
+      return accumulator + parseInt(a.harga);
     }
 
     return totHarga.toLocaleString("id", {
@@ -171,7 +171,7 @@ const BuatNota = () => {
 
     const totHarga = sptTemp.reduce(add, 0);
     function add(accumulator, a) {
-      return accumulator + a.harga;
+      return accumulator + parseInt(a.harga);
     }
 
     if (e.target.value >= totHarga) {
@@ -280,7 +280,7 @@ const BuatNota = () => {
                       </TableCell>
                       <TableCell>
                         <TableCell>
-                          {item.harga.toLocaleString("id", {
+                          {parseInt(item.harga).toLocaleString("id", {
                             style: "currency",
                             currency: "IDR",
                           })}

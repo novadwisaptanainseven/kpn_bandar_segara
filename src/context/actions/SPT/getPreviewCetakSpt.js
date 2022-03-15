@@ -17,7 +17,7 @@ const getPreviewCetakSpt = (dispatch, values, history) => {
         },
       });
 
-      history.push(`/app/spt/preview-cetak`);
+      history.push(`/simantra/spt/preview-cetak`);
       console.log(res.data);
     })
     .catch((err) => {

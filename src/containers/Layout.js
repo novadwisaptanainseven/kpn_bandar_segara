@@ -43,17 +43,17 @@ function Layout() {
 
   return (
     <>
-      <div
-        className={`flex h-screen bg-gray-50 dark:bg-gray-900 ${
-          isSidebarOpen && "overflow-hidden"
-        }`}
-      >
-        <Sidebar />
+      {isLogin && (
+        <div
+          className={`flex h-screen bg-gray-50 dark:bg-gray-900 ${
+            isSidebarOpen && "overflow-hidden"
+          }`}
+        >
+          <Sidebar />
 
-        <div className="flex flex-col flex-1 w-full">
-          <Header />
-          {/* Cek jika sudah login, maka tampilkan render main */}
-          {isLogin && (
+          <div className="flex flex-col flex-1 w-full">
+            <Header />
+            {/* Cek jika sudah login, maka tampilkan render main */}
             <Main>
               <Suspense fallback={<ThemedSuspense />}>
                 <Switch>
@@ -62,19 +62,19 @@ function Layout() {
                       <Route
                         key={i}
                         exact={true}
-                        path={`/app${route.path}`}
+                        path={`/simantra${route.path}`}
                         render={(props) => <route.component {...props} />}
                       />
                     ) : null;
                   })}
-                  <Redirect exact from="/app" to="/app/dashboard" />
+                  <Redirect exact from="/simantra" to="/simantra/login" />
                   <Route component={Page404} />
                 </Switch>
               </Suspense>
             </Main>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

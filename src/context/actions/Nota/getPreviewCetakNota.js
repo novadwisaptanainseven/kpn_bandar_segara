@@ -22,7 +22,7 @@ const getPreviewCetakNota = (
         type: SUCCESS,
         payload: values,
       });
-      history.push(`/app/nota/preview-cetak`);
+      history.push(`/simantra/nota/preview-cetak`);
       console.log(res.data);
     })
     .catch((err) => {

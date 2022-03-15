@@ -14,7 +14,7 @@ const simpanCetakNota = (values, history, dispatch) => {
     .post(`spt/nota_checklist_cetak`, values)
     .then((res) => {
       // showAlertSuccess(messageSuccess, "nota", history);
-      history.push(`/app/nota`);
+      history.push(`/simantra/nota`);
       getNota(dispatch);
     })
     .catch((err) => {

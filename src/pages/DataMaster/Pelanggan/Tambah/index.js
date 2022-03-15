@@ -46,7 +46,7 @@ const Tambah = () => {
       showConfirmButton: false,
       timer: 1500,
     }).then((res) => {
-      history.push("/app/pelanggan");
+      history.push("/simantra/pelanggan");
     });
   };
 

@@ -42,7 +42,7 @@ const PreviewCetakNota = () => {
   const history = useHistory();
 
   if (!nota) {
-    history.push(`/app/nota`);
+    history.push(`/simantra/nota`);
   }
 
   return (
@@ -133,7 +133,7 @@ const PreviewCetakNota = () => {
                             )}
                           </td>
                           <td>
-                            {item.harga.toLocaleString("id", {
+                            {parseInt(item.harga).toLocaleString("id", {
                               style: "currency",
                               currency: "IDR",
                             })}

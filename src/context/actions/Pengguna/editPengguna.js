@@ -21,7 +21,7 @@ const editPengguna = (id, values, setLoading, history, dispatch) => {
       setLoading(false);
       showAlertSuccess(messageSuccess, "users", history);
       getPengguna(dispatch);
-      document.location.href = "/app/users";
+      document.location.href = "/simantra/users";
     })
     .catch((err) => {
       setLoading(false);

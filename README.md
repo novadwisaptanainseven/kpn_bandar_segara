@@ -75,7 +75,7 @@ If you want to add a route to, let's say, a landing page, you should add it to t
 2. Add it to the global router (`src/routes/index.js`)
 
 ```js
-const MyPage = lazy(() => import('../pages/MyPage'))
+const MyPage = lazy(() => import("../pages/MyPage"));
 ```
 
 Then add it to the `routes` array:
@@ -113,10 +113,10 @@ Then add it to the `routes` array:
     },
 ```
 
-If you're asking where does this `/app` come from, it is from this line inside `src/App.js`, that renders the app:
+If you're asking where does this "/simantra`come from, it is from this line inside`src/App.js`, that renders the app:
 
 ```jsx
-<Route path="/app" component={Layout} />
+<Route path="/simantra" component={Layout} />
 ```
 
 ---

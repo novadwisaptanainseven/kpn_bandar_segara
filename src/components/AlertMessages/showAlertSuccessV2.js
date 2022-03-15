@@ -9,7 +9,7 @@ const showAlertSuccessV2 = (title) => {
     showConfirmButton: false,
     timer: 1500,
   }).then((res) => {
-    // history.push(`/app/${path}`);
+    // history.push("/simantra/${path}`);
   });
 };
 

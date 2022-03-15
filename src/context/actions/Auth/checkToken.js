@@ -11,7 +11,7 @@ export const checkToken = (history, Swal) => {
         showConfirmButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
-          window.location.href = "/app/";
+          window.location.href = "/simantra/dashboard";
         }
       });
     })

@@ -9,7 +9,7 @@ const Tentang = ({ dataKonten }) => {
         <div className="section-tentang-description">
           <div className="title flex flex-col items-center md:block">
             <h1 className="text-center md:text-left text-2xl font-semibold mb-3">
-              TENTANG KAMI
+              TENTANG
             </h1>
             <div className="line-container flex gap-5 mb-5">
               <span className="w-2 h-2 bg-blue-600 rounded-full inline-block"></span>

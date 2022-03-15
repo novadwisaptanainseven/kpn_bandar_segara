@@ -19,7 +19,7 @@ const login = (values, dispatch) => {
       });
 
       // Redirect to dashboard
-      window.location.href = "/app/dashboard";
+      window.location.href = "/simantra/dashboard";
 
       // console.log(res.data);
     })

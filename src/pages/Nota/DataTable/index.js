@@ -310,7 +310,7 @@ const DataTable = ({
                 <TableCell>
                   <span className="text-sm">
                     {item.total_harga &&
-                      item.total_harga.toLocaleString("id", {
+                      parseInt(item.total_harga).toLocaleString("id", {
                         style: "currency",
                         currency: "IDR",
                       })}
@@ -319,7 +319,7 @@ const DataTable = ({
                 <TableCell>
                   <span className="text-sm">
                     {item.bayar &&
-                      item.bayar.toLocaleString("id", {
+                      parseInt(item.bayar).toLocaleString("id", {
                         style: "currency",
                         currency: "IDR",
                       })}
@@ -327,17 +327,17 @@ const DataTable = ({
                 </TableCell>
 
                 <TableCell>
-                  {item.id_status_nota === 3 && (
+                  {item.id_status_nota === "3" && (
                     <span className="text-sm text-white bg-red-500 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                       {item.nm_status_nota}
                     </span>
                   )}
-                  {item.id_status_nota === 2 && (
+                  {item.id_status_nota === "2" && (
                     <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                       {item.nm_status_nota}
                     </span>
                   )}
-                  {item.id_status_nota === 1 && (
+                  {item.id_status_nota === "1" && (
                     <span className="text-sm bg-lime-400 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                       {item.nm_status_nota}
                     </span>

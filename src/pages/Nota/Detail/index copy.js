@@ -96,7 +96,7 @@ const Detail = () => {
                   <TableRow className="bg-gray-100 dark:bg-gray-800">
                     <TableCell className="font-semibold">Total Harga</TableCell>
                     <TableCell>
-                      {nota.harga.toLocaleString("id", {
+                      {parseInt(nota.harga).toLocaleString("id", {
                         style: "currency",
                         currency: "IDR",
                       })}

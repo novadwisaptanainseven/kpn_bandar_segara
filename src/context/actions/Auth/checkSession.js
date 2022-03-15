@@ -19,7 +19,7 @@ const checkSession = (history, Swal, setIsLogin, profileUserDispatch) => {
         text: "Anda belum login!",
         showConfirmButton: true,
       }).then((result) => {
-        history.push("/login");
+        history.push("/simantra/login");
       });
     });
 };

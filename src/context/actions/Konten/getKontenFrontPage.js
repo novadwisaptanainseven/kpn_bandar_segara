@@ -1,11 +1,12 @@
 import axiosInstance from "../../../helpers/axios";
 import { LOADING, SUCCESS } from "../../actionTypes";
+import { baseUrlImg } from "../../../helpers/url";
 
 const getKontenFrontPage = (dispatch) => {
   dispatch({
     type: LOADING,
   });
-  const baseUrlImg = "http://localhost/kpn_bandar_segara_api/public/images/";
+  // const baseUrlImg = "http://localhost/kpn_bandar_segara_api/public/images/";
   const logoApp = document.getElementById("logoApp");
 
   axiosInstance

@@ -33,12 +33,12 @@ function Header() {
 
   // Go to pengaturan page
   const goToPengaturan = () => {
-    history.push("/app/pengaturan");
+    history.push("/simantra/pengaturan");
   };
 
   // Go to edit user
   const goToEditUser = (id) => {
-    history.push("/app/users/edit/" + id);
+    history.push("/simantra/users/edit/" + id);
   };
 
   const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);

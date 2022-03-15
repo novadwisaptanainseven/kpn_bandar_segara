@@ -278,7 +278,7 @@ const DataTable = ({ resultsPerPage, response, filterText }) => {
                 <TableCell>
                   <span className="text-sm">
                     {item.harga &&
-                      item.harga.toLocaleString("id", {
+                      parseInt(item.harga).toLocaleString("id", {
                         style: "currency",
                         currency: "IDR",
                       })}

@@ -83,7 +83,7 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
       response2 = response.filter(
         (item) =>
           item.nm_tujuan.toLowerCase().includes(filterText.toLowerCase()) ||
-          item.harga.toString().includes(filterText)
+          parseInt(item.harga).toString().includes(filterText)
       );
     }
 
@@ -207,7 +207,7 @@ const TableTujuan = ({ resultsPerPage, response, filterText }) => {
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">
-                    {item.harga.toLocaleString("id", {
+                    {parseInt(item.harga).toLocaleString("id", {
                       style: "currency",
                       currency: "IDR",
                     })}
