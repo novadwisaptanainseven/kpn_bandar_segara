@@ -295,7 +295,7 @@ const DataTable = ({
                     onChange={(e) =>
                       handleCheckBox(e, item.id_nota, item.id_pelanggan)
                     }
-                    disabled={item.id_status_nota === 2 ? false : true}
+                    disabled={item.id_status_nota === "2" ? false : true}
                   />
                 </TableCell>
                 <TableCell>
