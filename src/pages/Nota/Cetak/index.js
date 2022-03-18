@@ -129,7 +129,7 @@ const Cetak = () => {
                         <th>Driver</th>
                         <th>Marine</th>
                         <th>Harga</th>
-                        <th>Diskon</th>
+                        <th>Potongan</th>
                         {/* <th>Potongan</th> */}
                         <th>Total Harga</th>
                       </tr>

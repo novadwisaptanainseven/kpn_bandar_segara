@@ -9,7 +9,6 @@ import {
   hitungTotalHarga,
   hitungTotalPotongan,
 } from "../../../helpers/GlobalFunctions";
-import Interweave from "interweave";
 import { useReactToPrint } from "react-to-print";
 import { ComponentToPrint2 } from "./ComponentToPrint2";
 import { simpanCetakNota } from "../../../context/actions/Nota";
