@@ -119,7 +119,7 @@ export class ComponentToPrint extends React.Component {
                     <td>{item.nm_driver}</td>
                     <td>{item.nm_marine}</td>
                     <td>
-                      {item.harga_tujuan.toLocaleString("id", {
+                      {parseInt(item.harga_tujuan).toLocaleString("id", {
                         style: "currency",
                         currency: "IDR",
                       })}
