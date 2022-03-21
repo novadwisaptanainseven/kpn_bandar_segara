@@ -12,7 +12,10 @@ import {
 import { useReactToPrint } from "react-to-print";
 import { ComponentToPrint2 } from "./ComponentToPrint2";
 import { simpanCetakNota } from "../../../context/actions/Nota";
-import { PrintingComponentHeaderNota } from "../../../components/PrintingComponent";
+import {
+  FooterNota,
+  PrintingComponentHeaderNota,
+} from "../../../components/PrintingComponent";
 
 const PreviewCetakNota = () => {
   const { cetakNotaState, kontenState, listCetakNotaState, notaDispatch } =
@@ -153,22 +156,7 @@ const PreviewCetakNota = () => {
                     </tbody>
                   </table>
                 </div>
-                <div className="nota-ttd flex justify-between mt-3 px-10">
-                  <div className="text-center w-48">
-                    <h1 className="font-semibold">Tanda Terima</h1>
-                    <br />
-                    <br />
-                    <br />
-                    <span>.......................................</span>
-                  </div>
-                  <div className="text-center w-48">
-                    <h1 className="font-semibold">Hormat Kami</h1>
-                    <br />
-                    <br />
-                    <br />
-                    <span>.......................................</span>
-                  </div>
-                </div>
+                <FooterNota />
               </div>
             </>
           )}

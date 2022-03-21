@@ -7,7 +7,10 @@ import { useRouteMatch } from "react-router-dom";
 import { format } from "date-fns";
 import { getNotaById } from "../../../context/actions/Nota";
 import { ComponentToPrint } from "./ComponentToPrint";
-import { PrintingComponentHeaderNota } from "../../../components/PrintingComponent";
+import {
+  FooterNota,
+  PrintingComponentHeaderNota,
+} from "../../../components/PrintingComponent";
 
 const Cetak = () => {
   const match = useRouteMatch();
@@ -185,22 +188,7 @@ const Cetak = () => {
                     </tbody>
                   </table>
                 </div>
-                <div className="nota-ttd flex justify-between mt-3 px-10">
-                  <div className="text-center w-48">
-                    <h1 className="font-semibold">Tanda Terima</h1>
-                    <br />
-                    <br />
-                    <br />
-                    <span>.......................................</span>
-                  </div>
-                  <div className="text-center w-48">
-                    <h1 className="font-semibold">Hormat Kami</h1>
-                    <br />
-                    <br />
-                    <br />
-                    <span>.......................................</span>
-                  </div>
-                </div>
+                <FooterNota />
               </div>
             </>
           )}

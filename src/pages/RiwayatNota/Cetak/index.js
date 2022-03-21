@@ -6,7 +6,10 @@ import { cetakRiwayatNotaById } from "../../../context/actions/RiwayatNota";
 import { GlobalContext } from "../../../context/Provider";
 import { Card, CardBody, Button } from "@windmill/react-ui";
 import { format } from "date-fns";
-import { PrintingComponentHeaderNota } from "../../../components/PrintingComponent";
+import {
+  FooterNota,
+  PrintingComponentHeaderNota,
+} from "../../../components/PrintingComponent";
 import { ComponentToPrint } from "./ComponentToPrint";
 
 const Cetak = () => {
@@ -148,7 +151,7 @@ const Cetak = () => {
                           <td>{item.nm_driver}</td>
                           <td>{item.nm_marine}</td>
                           <td>
-                            {item.harga_tujuan.toLocaleString("id", {
+                            {parseInt(item.harga_tujuan).toLocaleString("id", {
                               style: "currency",
                               currency: "IDR",
                             })}
@@ -172,7 +175,7 @@ const Cetak = () => {
                       <tr className="border-t-2 border-b-2 border-black dark:border-gray-200">
                         <td
                           colSpan={6}
-                          className="font-semibold text-cente dark:border-gray-200"
+                          className="font-semibold text-center dark:border-gray-200"
                         >
                           Total
                         </td>
@@ -182,22 +185,7 @@ const Cetak = () => {
                     </tbody>
                   </table>
                 </div>
-                <div className="nota-ttd flex justify-between mt-3 px-10">
-                  <div className="text-center w-48">
-                    <h1 className="font-semibold">Tanda Terima</h1>
-                    <br />
-                    <br />
-                    <br />
-                    <span>.......................................</span>
-                  </div>
-                  <div className="text-center w-48">
-                    <h1 className="font-semibold">Hormat Kami</h1>
-                    <br />
-                    <br />
-                    <br />
-                    <span>.......................................</span>
-                  </div>
-                </div>
+                <FooterNota />
               </div>
             </>
           )}

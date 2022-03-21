@@ -1,7 +1,10 @@
 import React from "react";
 import format from "date-fns/format";
 import Interweave from "interweave";
-import { PrintingComponentHeaderNotaV2 } from "../../../components/PrintingComponent";
+import {
+  FooterNota,
+  PrintingComponentHeaderNotaV2,
+} from "../../../components/PrintingComponent";
 
 export class ComponentToPrint extends React.Component {
   render() {
@@ -147,22 +150,7 @@ export class ComponentToPrint extends React.Component {
               </tbody>
             </table>
           </div>
-          <div className="nota-ttd flex justify-between mt-3 px-10 text-sm">
-            <div className="text-center w-48">
-              <h1 className="font-semibold">Tanda Terima</h1>
-              <br />
-              <br />
-              <br />
-              <span>.......................................</span>
-            </div>
-            <div className="text-center w-48">
-              <h1 className="font-semibold">Hormat Kami</h1>
-              <br />
-              <br />
-              <br />
-              <span>.......................................</span>
-            </div>
-          </div>
+          <FooterNota />
         </div>
       </>
     );

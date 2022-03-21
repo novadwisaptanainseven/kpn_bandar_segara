@@ -4,9 +4,9 @@ import getImage from "../../../context/actions/Files/getImage";
 
 const PrintingComponentHeaderNota = ({ dataKonten }) => {
   return (
-    <div className="nota-header flex gap-5 justify-between items-center border-t-4 border-b-4 border-black dark:border-gray-200 py-2 px-4 ">
+    <div className="nota-header flex flex-row-reverse gap-5 justify-between items-center border-t-4 border-b-4 border-black dark:border-gray-200 py-2 px-4 ">
       <div className="font-semibold text-xl">NOTA TRANSAKSI</div>
-      <div className="text-right flex items-center gap-5">
+      <div className="text-left flex flex-row-reverse items-center gap-5">
         <div>
           <span className="font-semibold text-lg block">
             {dataKonten.nm_perusahaan}
