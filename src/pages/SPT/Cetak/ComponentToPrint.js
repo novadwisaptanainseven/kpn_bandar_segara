@@ -27,7 +27,8 @@ export class ComponentToPrint extends React.Component {
               <div className="flex justify-between">
                 <span>
                   <b>Tgl. SPT :</b>{" "}
-                  {format(new Date(spt.waktu_buat), "dd/MM/y")}
+                  {/* {format(new Date(spt.waktu_buat), "dd/MM/y")} */}
+                  {spt.tgl_spt}
                 </span>
                 <span>
                   <b>No : </b>
@@ -69,7 +70,7 @@ export class ComponentToPrint extends React.Component {
                     <th align="left">Tanggal</th>
                     <th align="left">:</th>
                     <td align="left">
-                      <td align="left">{spt.tgl_keberangkatan}</td>
+                      {format(new Date(spt.tgl_keberangkatan), "dd-MM-y")}
                     </td>
                   </tr>
                   <tr>

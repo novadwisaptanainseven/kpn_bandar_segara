@@ -87,7 +87,10 @@ const Detail = () => {
                         Tanggal Nota
                       </TableCell>
                       <TableCell>
-                        {format(new Date(nota.data_nota.waktu_buat), "dd-MM-y")}
+                        {format(
+                          new Date(nota.data_nota.waktu_buat),
+                          "dd-MMM-y"
+                        )}
                       </TableCell>
                     </TableRow>
                     <TableRow className="bg-gray-200 dark:bg-gray-700">
@@ -126,17 +129,17 @@ const Detail = () => {
                         Status Pembayaran
                       </TableCell>
                       <TableCell className="space-x-2">
-                        {nota.data_nota.id_status_nota === 3 && (
+                        {nota.data_nota.id_status_nota === "3" && (
                           <span className="text-sm bg-red-500 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                             {nota.data_nota.nm_status_nota}
                           </span>
                         )}
-                        {nota.data_nota.id_status_nota === 2 && (
+                        {nota.data_nota.id_status_nota === "2" && (
                           <span className="text-sm bg-yellow-300 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                             {nota.data_nota.nm_status_nota}
                           </span>
                         )}
-                        {nota.data_nota.id_status_nota === 1 && (
+                        {nota.data_nota.id_status_nota === "1" && (
                           <span className="text-sm bg-lime-500 px-5 py-2 font-semibold rounded-sm dark:text-gray-900">
                             {nota.data_nota.nm_status_nota}
                           </span>
@@ -201,7 +204,7 @@ const Detail = () => {
                         <TableCell>{item.nm_driver}</TableCell>
                         <TableCell>{item.nm_marine}</TableCell>
                         <TableCell>
-                          {format(new Date(item.tgl_keberangkatan), "dd/MM/y")}
+                          {format(new Date(item.tgl_keberangkatan), "dd-MMM-y")}
                         </TableCell>
                         <TableCell>{item.waktu_keberangkatan}</TableCell>
                         <TableCell>

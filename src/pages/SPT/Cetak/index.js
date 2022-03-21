@@ -22,7 +22,7 @@ const CetakSPT = () => {
     pageStyle: `
       @media print {
         @page {
-          size: 210mm 297mm;
+          size: 100mm 150mm;
           margin: 5mm 5mm 5mm 5mm !important;
         }
       }
@@ -102,7 +102,9 @@ const CetakSPT = () => {
                         <tr>
                           <th align="left">Tanggal</th>
                           <th align="left">:</th>
-                          <td align="left">{spt.tgl_keberangkatan}</td>
+                          <td align="left">
+                            {format(new Date(spt.tgl_keberangkatan), "dd-MM-y")}
+                          </td>
                         </tr>
                         <tr>
                           <th align="left">Jam</th>

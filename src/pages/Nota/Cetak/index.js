@@ -101,7 +101,7 @@ const Cetak = () => {
                         <td>
                           {format(
                             new Date(nota.data_nota.waktu_buat),
-                            "dd-MM-y"
+                            "dd-MMM-y"
                           )}
                         </td>
                       </tr>
@@ -147,9 +147,7 @@ const Cetak = () => {
                           >
                             {index + 1}
                           </td>
-                          <td>
-                            {format(new Date(item.waktu_buat), "dd-MM-y")}
-                          </td>
+                          <td>{item.tgl_spt}</td>
                           <td>{item.nm_tujuan}</td>
                           <td>{item.nm_driver}</td>
                           <td>{item.nm_marine}</td>

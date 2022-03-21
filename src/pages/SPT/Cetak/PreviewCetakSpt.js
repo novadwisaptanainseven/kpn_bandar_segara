@@ -28,7 +28,7 @@ const PreviewCetakSpt = () => {
     pageStyle: `
       @media print {
         @page {
-          size: 210mm 297mm;
+          size: 100mm 150mm;
           margin: 5mm 5mm 5mm 5mm !important;
         }
       }
@@ -115,7 +115,12 @@ const PreviewCetakSpt = () => {
                           <tr>
                             <th align="left">Tgl.Keberangkatan</th>
                             <th align="left">:</th>
-                            <td align="left">{item.tgl_keberangkatan}</td>
+                            <td align="left">
+                              {format(
+                                new Date(item.tgl_keberangkatan),
+                                "dd-MM-y"
+                              )}
+                            </td>
                           </tr>
                           <tr>
                             <th align="left">Jam</th>
