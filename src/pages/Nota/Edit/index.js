@@ -351,9 +351,7 @@ const Edit = () => {
                         <TableCell>{item.nm_tujuan}</TableCell>
                         <TableCell>{item.nm_driver}</TableCell>
                         <TableCell>{item.nm_marine}</TableCell>
-                        <TableCell>
-                          {format(new Date(item.tgl_keberangkatan), "dd/MM/y")}
-                        </TableCell>
+                        <TableCell>{item.tgl_keberangkatan}</TableCell>
                         <TableCell>{item.waktu_keberangkatan}</TableCell>
                         <TableCell>
                           <Interweave content={item.keterangan} />

@@ -199,13 +199,11 @@ const Detail = () => {
                     {nota.data_spt.map((item, index) => (
                       <TableRow key={index}>
                         <TableCell>{index + 1}</TableCell>
-                        <TableCell>{item.no_spt}</TableCell>
+                        <TableCell>{item.no_spt}1</TableCell>
                         <TableCell>{item.nm_tujuan}</TableCell>
                         <TableCell>{item.nm_driver}</TableCell>
                         <TableCell>{item.nm_marine}</TableCell>
-                        <TableCell>
-                          {format(new Date(item.tgl_keberangkatan), "dd-MMM-y")}
-                        </TableCell>
+                        <TableCell>{item.tgl_keberangkatan}</TableCell>
                         <TableCell>{item.waktu_keberangkatan}</TableCell>
                         <TableCell>
                           <Interweave content={item.keterangan} />

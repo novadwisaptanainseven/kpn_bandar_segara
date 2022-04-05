@@ -114,7 +114,7 @@ export class ComponentToPrint2 extends React.Component {
                     >
                       {index + 1}
                     </td>
-                    <td>{item.tgl_spt}</td>
+                    <td>{item.tgl_keberangkatan}</td>
                     <td>{item.nm_tujuan}</td>
                     <td>{item.nm_driver}</td>
                     <td>{item.nm_marine}</td>
