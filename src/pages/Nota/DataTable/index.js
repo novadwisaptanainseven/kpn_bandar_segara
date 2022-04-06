@@ -21,6 +21,7 @@ import ArrowDown from "../../../components/DataTableIcons/ArrowDown";
 import { format } from "date-fns";
 import { removeArrayByValue } from "../../../helpers/GlobalFunctions";
 import { handleDelete } from "../../../components/AlertMessages";
+import { SUCCESS } from "../../../context/actionTypes";
 
 const Swal = withReactContent(swal2);
 
@@ -36,7 +37,7 @@ const DataTable = ({
   const history = useHistory();
   const match = useRouteMatch();
   const { path } = match;
-  const { notaDispatch } = useContext(GlobalContext);
+  const { notaDispatch, listCetakNotaDispatch } = useContext(GlobalContext);
 
   // Setup pages control for every table
   const [pageTable, setPageTable] = useState(1);
@@ -85,8 +86,17 @@ const DataTable = ({
   };
 
   // Menuju halaman cetak
-  const goToCetak = (id) => {
-    history.push(`${path}/cetak/${id}`);
+  const goToCetak = (idNota, idPelanggan) => {
+    const values = {
+      id_nota: idNota,
+      id_pelanggan: idPelanggan,
+    };
+    listCetakNotaDispatch({
+      type: SUCCESS,
+      payload: values,
+    });
+
+    history.push(`${path}/cetak/${idNota}`);
   };
 
   const { sortedDatatable, requestSort, sortConfig } =
@@ -369,7 +379,7 @@ const DataTable = ({
                   </div>
                   <div className="flex items-center mt-1">
                     <button
-                      onClick={() => goToCetak(item.id_nota)}
+                      onClick={() => goToCetak(item.id_nota, item.id_pelanggan)}
                       className="w-full bg-gray-500 text-white px-3 py-1 rounded-md hover:bg-gray-600 transition duration-100"
                     >
                       Cetak Nota
