@@ -5,18 +5,22 @@ import { useReactToPrint } from "react-to-print";
 import { GlobalContext } from "../../../context/Provider";
 import { useRouteMatch } from "react-router-dom";
 import { format } from "date-fns";
-import { getNotaById } from "../../../context/actions/Nota";
+import { getNotaById, simpanCetakNota } from "../../../context/actions/Nota";
 import { ComponentToPrint } from "./ComponentToPrint";
 import {
   FooterNota,
   PrintingComponentHeaderNota,
 } from "../../../components/PrintingComponent";
+import { useHistory } from "react-router-dom";
 
 const Cetak = () => {
+  const history = useHistory();
   const match = useRouteMatch();
   const { params } = match;
-  const { kontenState } = useContext(GlobalContext);
+  const { kontenState, notaDispatch, listCetakNotaState } =
+    useContext(GlobalContext);
   const { data: dataKonten } = kontenState;
+  const { data: listCetakNota } = listCetakNotaState;
   const [nota, setNota] = useState("");
   const componentPrintRef = useRef();
   // Handle print nota
@@ -32,6 +36,7 @@ const Cetak = () => {
     `,
     copyStyles: true,
     documentTitle: nota && nota.data_nota.id_nota,
+    onAfterPrint: () => simpanCetakNota(listCetakNota, history, notaDispatch),
   });
 
   // Get data Nota by ID

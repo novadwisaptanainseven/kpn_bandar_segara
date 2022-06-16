@@ -96,6 +96,8 @@ const Nota = () => {
     );
   };
 
+  
+
   // Fungsi untuk menghilangkan alert error
   const handleCloseAlert = () => {
     const alertError = document.getElementById("alertError");
