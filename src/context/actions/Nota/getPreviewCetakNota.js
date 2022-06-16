@@ -23,14 +23,14 @@ const getPreviewCetakNota = (
         payload: values,
       });
       history.push(`/simantra/nota/preview-cetak`);
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((err) => {
       dispatch({
         type: ERROR,
         payload: err.response.data,
       });
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

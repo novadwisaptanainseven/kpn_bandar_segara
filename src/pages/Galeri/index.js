@@ -76,7 +76,7 @@ const Galeri = () => {
     formData.append("foto", foto.value);
 
     for (let pair of formData.entries()) {
-      console.log(pair);
+      // console.log(pair);
     }
 
     insertGaleri(formData, setLoadingUpload, galeriDispatch);

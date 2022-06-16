@@ -64,7 +64,7 @@ const Tambah = () => {
     formData.append("icon", values.icon);
 
     for (let pair of formData.entries()) {
-      console.log(pair);
+      // console.log(pair);
     }
 
     insertKontak(formData, setLoading, kontakDispatch, history);

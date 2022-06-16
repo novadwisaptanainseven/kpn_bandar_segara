@@ -80,7 +80,7 @@ const Edit = () => {
     }
 
     for (let pair of formData.entries()) {
-      console.log(pair);
+      // console.log(pair);
     }
 
     editPelayanan(params.id, formData, setLoading, history, pelayananDispatch);

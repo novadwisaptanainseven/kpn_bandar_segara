@@ -10,7 +10,7 @@ const Detail = () => {
   const match = useRouteMatch();
   const { params } = match;
   const [riwayatNota, setRiwayatNota] = useState("");
-  console.log(riwayatNota);
+  // console.log(riwayatNota);
 
   // Get detail riwayat nota
   useEffect(() => {

@@ -76,7 +76,7 @@ const Edit = () => {
     }
 
     for (let pair of formData.entries()) {
-      console.log(pair);
+      // console.log(pair);
     }
 
     editKontak(params.id, formData, setLoading, history, kontakDispatch);

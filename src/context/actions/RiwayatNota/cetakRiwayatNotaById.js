@@ -8,7 +8,7 @@ const cetakRiwayatNotaById = (id, setData) => {
       // console.log(res.data.data_nota);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 

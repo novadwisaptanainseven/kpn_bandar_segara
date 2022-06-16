@@ -16,7 +16,7 @@ const getRiwayatNota = (dispatch) => {
       // console.log(res.data);
     })
     .catch((err) => {
-      console.log(err.response.data);
+      // console.log(err.response.data);
     });
 };
 
