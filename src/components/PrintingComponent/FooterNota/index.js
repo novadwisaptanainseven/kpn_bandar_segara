@@ -15,7 +15,7 @@ const FooterNota = () => {
         <br />
         <br />
         <br />
-        <span>.......................................</span>
+        <span>Thania</span>
       </div>
     </div>
   );

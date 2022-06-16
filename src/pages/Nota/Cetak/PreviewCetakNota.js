@@ -99,7 +99,8 @@ const PreviewCetakNota = () => {
                         <th>No.</th>
                         <th>Tanggal</th>
                         <th>Tujuan</th>
-                        <th>Driver</th>
+                        {/* <th>Driver</th> */}
+                        <th>Keterangan</th>
                         <th>Marine</th>
                         <th>Harga</th>
                         {/* <th>Diskon</th> */}
@@ -119,7 +120,7 @@ const PreviewCetakNota = () => {
                           </td>
                           <td>{item.tgl_keberangkatan}</td>
                           <td>{item.nm_tujuan}</td>
-                          <td>{item.nm_driver}</td>
+                          <td>{item.keterangan}</td>
                           <td>{item.nm_marine}</td>
                           <td>
                             {item.harga_tujuan.toLocaleString("id", {

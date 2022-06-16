@@ -99,7 +99,7 @@ export class ComponentToPrint extends React.Component {
                   <th>No.</th>
                   <th>Tanggal</th>
                   <th>Tujuan</th>
-                  <th>Driver</th>
+                  <th>Keterangan</th>
                   <th>Marine</th>
                   <th>Harga</th>
                   {/* <th>Diskon</th> */}
@@ -120,7 +120,7 @@ export class ComponentToPrint extends React.Component {
                     {/* <td>{format(new Date(item.waktu_buat), "dd-MM-y")}</td> */}
                     <td>{item.tgl_keberangkatan}</td>
                     <td>{item.nm_tujuan}</td>
-                    <td>{item.nm_driver}</td>
+                    <td>{item.keterangan}</td>
                     <td>{item.nm_marine}</td>
                     <td>
                       {parseInt(item.harga_tujuan).toLocaleString("id", {
